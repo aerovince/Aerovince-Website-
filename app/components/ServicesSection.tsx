@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -21,6 +21,8 @@ import {
   Megaphone,
   LineChart,
   Code,
+  Sparkles,
+  CheckCircle,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -32,6 +34,7 @@ const services = [
       "High-performance mobile applications that users love. Native and cross-platform expertise.",
     badge: "Popular",
     color: "blue",
+    stat: "+500% Growth",
   },
   {
     title: "Web Development",
@@ -39,7 +42,8 @@ const services = [
     description:
       "Scalable, fast, and secure websites that convert visitors into customers.",
     badge: "Essential",
-    color: "cyan",
+    color: "black",
+    stat: "99.9% Uptime",
   },
   {
     title: "Market Research",
@@ -48,6 +52,7 @@ const services = [
       "Deep insights into your market, competitors, and customers for data-driven decisions.",
     badge: "Strategic",
     color: "blue",
+    stat: "95% Accuracy",
   },
   {
     title: "Marketing Strategy",
@@ -55,7 +60,8 @@ const services = [
     description:
       "Comprehensive growth plans with clear roadmaps and measurable KPIs.",
     badge: "Core",
-    color: "purple",
+    color: "yellow",
+    stat: "10x ROI",
   },
   {
     title: "Performance Marketing",
@@ -64,6 +70,7 @@ const services = [
       "ROI-focused campaigns across Google, Meta, and emerging platforms.",
     badge: "High Impact",
     color: "blue",
+    stat: "200% Avg ROI",
   },
   {
     title: "SEO & Analytics",
@@ -71,7 +78,8 @@ const services = [
     description:
       "Dominate search rankings with actionable data insights and continuous optimization.",
     badge: "Essential",
-    color: "cyan",
+    color: "black",
+    stat: "#1 Rankings",
   },
   {
     title: "Lead Generation",
@@ -79,7 +87,8 @@ const services = [
     description:
       "Qualified leads delivered consistently through multi-channel strategies.",
     badge: "Growth",
-    color: "purple",
+    color: "yellow",
+    stat: "50k+ Leads",
   },
   {
     title: "Video Content",
@@ -88,6 +97,7 @@ const services = [
       "Story-driven videos that capture attention and drive engagement.",
     badge: "Creative",
     color: "blue",
+    stat: "1M+ Views",
   },
   {
     title: "Reputation Management",
@@ -95,7 +105,8 @@ const services = [
     description:
       "Protect and enhance your brand image across all digital platforms.",
     badge: "Trust",
-    color: "cyan",
+    color: "black",
+    stat: "4.95 Rating",
   },
 ];
 
@@ -104,7 +115,7 @@ const containerVariants = {
   show: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.08,
+      staggerChildren: 0.05,
     },
   },
 };
@@ -115,12 +126,19 @@ const itemVariants = {
 };
 
 export default function ServicesSection() {
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+
   return (
-    <section
-      className="py-24 bg-gradient-to-b from-white to-gray-50 overflow-hidden"
-      id="services"
-    >
-      <div className="container mx-auto px-6 max-w-7xl">
+    <section className="relative py-24 lg:py-32 bg-white overflow-hidden" id="services">
+      {/* Background Effects */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-blue-50/30 to-transparent" />
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-100/30 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-yellow-100/30 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gray-50/50 rounded-full blur-3xl" />
+      </div>
+
+      <div className="container mx-auto px-6 max-w-7xl relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -128,17 +146,21 @@ export default function ServicesSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="w-12 h-[1px] bg-blue-500" />
-            <span className="text-blue-600 font-body font-bold uppercase tracking-[0.2em] text-sm">
-              What We Deliver
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 border border-blue-200 rounded-full mb-6"
+          >
+            <Sparkles className="w-4 h-4 text-blue-600" />
+            <span className="text-blue-700 font-semibold text-sm tracking-wide">
+              WHAT WE DELIVER
             </span>
-            <div className="w-12 h-[1px] bg-blue-500" />
-          </div>
+          </motion.div>
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-black mb-4">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-4 leading-[1.2]">
             Everything you need to
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 block mt-2">
+            <span className="block text-blue-600 mt-2">
               scale your business
             </span>
           </h2>
@@ -161,50 +183,103 @@ export default function ServicesSection() {
             <motion.div
               key={index}
               variants={itemVariants}
-              whileHover={{ y: -8 }}
-              className="group relative bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden"
+              onMouseEnter={() => setHoveredCard(index)}
+              onMouseLeave={() => setHoveredCard(null)}
+              className="group relative bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden cursor-pointer"
             >
-              {/* Animated Border Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/0 to-blue-500/0 group-hover:from-blue-500/10 group-hover:via-blue-500/5 group-hover:to-cyan-500/10 transition-all duration-500" />
+              {/* Animated Background Gradient */}
+              <div className={`absolute inset-0 bg-gradient-to-r ${
+                service.color === 'blue' ? 'from-blue-600/0 via-blue-600/0 to-blue-600/0 group-hover:from-blue-600/5' :
+                service.color === 'yellow' ? 'from-yellow-500/0 via-yellow-500/0 to-yellow-500/0 group-hover:from-yellow-500/5' :
+                'from-black/0 via-black/0 to-black/0 group-hover:from-black/5'
+              } group-hover:via-transparent group-hover:to-transparent transition-all duration-500`} />
 
               {/* Badge */}
-              <div className="absolute top-4 right-4 z-10">
-                <span
-                  className={`px-2.5 py-1 text-xs font-bold rounded-full bg-${service.color === "blue" ? "blue" : service.color === "cyan" ? "cyan" : service.color === "purple" ? "purple" : "blue"}-100 text-${service.color === "blue" ? "blue" : service.color === "cyan" ? "cyan" : service.color === "purple" ? "purple" : "blue"}-700`}
-                >
+              <motion.div 
+                className="absolute top-4 right-4 z-10"
+                initial={{ x: 20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: index * 0.05 }}
+              >
+                <span className={`px-2.5 py-1 text-xs font-bold rounded-full ${
+                  service.color === 'blue' ? 'bg-blue-100 text-blue-700' :
+                  service.color === 'yellow' ? 'bg-yellow-100 text-yellow-700' :
+                  'bg-gray-100 text-gray-700'
+                }`}>
                   {service.badge}
                 </span>
-              </div>
+              </motion.div>
 
               {/* Icon Container */}
               <div className="p-6 pb-0">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <service.icon className="text-blue-600" size={32} />
-                </div>
+                <motion.div 
+                  className={`w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-300 ${
+                    hoveredCard === index 
+                      ? service.color === 'blue' ? 'bg-blue-600' : service.color === 'yellow' ? 'bg-yellow-500' : 'bg-black'
+                      : 'bg-gray-100'
+                  }`}
+                  animate={{
+                    scale: hoveredCard === index ? 1.1 : 1,
+                    rotate: hoveredCard === index ? [0, -5, 5, 0] : 0,
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <service.icon className={`w-8 h-8 transition-colors duration-300 ${
+                    hoveredCard === index ? 'text-white' : service.color === 'blue' ? 'text-blue-600' : service.color === 'yellow' ? 'text-yellow-600' : 'text-black'
+                  }`} />
+                </motion.div>
               </div>
 
               {/* Content */}
               <div className="p-6">
-                <h3 className="text-xl font-heading font-bold text-black mb-3 group-hover:text-blue-600 transition-colors">
+                <h3 className={`text-xl font-bold text-black mb-3 transition-colors duration-300 ${
+                  hoveredCard === index ? 'text-blue-600' : ''
+                }`}>
                   {service.title}
                 </h3>
 
-                <p className="text-gray-600 font-body leading-relaxed mb-4">
+                <p className="text-gray-500 leading-relaxed mb-4">
                   {service.description}
                 </p>
 
-                {/* Learn More Link */}
-                <Link
-                  href="/services"
-                  className="inline-flex items-center gap-2 text-blue-600 font-semibold text-sm uppercase tracking-wider group-hover:gap-3 transition-all"
+                {/* Stat Badge - Appears on Hover */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{
+                    opacity: hoveredCard === index ? 1 : 0,
+                    y: hoveredCard === index ? 0 : 10,
+                  }}
+                  transition={{ duration: 0.2 }}
+                  className="mb-3"
                 >
-                  Learn More
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
+                  <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-green-50">
+                    <TrendingUp className="w-3 h-3 text-green-600" />
+                    <span className="text-xs font-semibold text-green-600">{service.stat}</span>
+                  </div>
+                </motion.div>
+
+                {/* Learn More Link */}
+                <motion.div
+                  animate={{
+                    x: hoveredCard === index ? 5 : 0,
+                  }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Link
+                    href="/services"
+                    className="inline-flex items-center gap-2 font-semibold text-sm uppercase tracking-wider transition-all group-hover:gap-3"
+                    style={{ color: service.color === 'blue' ? '#2563EB' : service.color === 'yellow' ? '#EAB308' : '#000000' }}
+                  >
+                    Learn More
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </motion.div>
               </div>
 
               {/* Bottom Accent Line */}
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+              <div className={`absolute bottom-0 left-0 right-0 h-1 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left ${
+                service.color === 'blue' ? 'bg-blue-600' : service.color === 'yellow' ? 'bg-yellow-500' : 'bg-black'
+              }`} />
             </motion.div>
           ))}
         </motion.div>
@@ -215,29 +290,65 @@ export default function ServicesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4, duration: 0.6 }}
-          className="mt-16 flex flex-wrap justify-center gap-8"
+          className="mt-16 flex flex-wrap justify-center gap-4"
         >
           {[
             { icon: Award, label: "Award Winning Agency", color: "blue" },
-            { icon: Users, label: "150+ Happy Clients", color: "cyan" },
-            { icon: Rocket, label: "200% Avg Growth", color: "purple" },
-            { icon: Zap, label: "Fast Delivery", color: "blue" },
+            { icon: Users, label: "150+ Happy Clients", color: "yellow" },
+            { icon: Rocket, label: "200% Avg Growth", color: "blue" },
+            { icon: Zap, label: "Fast Delivery", color: "black" },
+            { icon: CheckCircle, label: "98% Retention", color: "blue" },
           ].map((badge, idx) => (
-            <div
+            <motion.div
               key={idx}
-              className="flex items-center gap-3 px-4 py-2 bg-white rounded-full shadow-sm"
+              whileHover={{ y: -5, scale: 1.05 }}
+              className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer"
             >
-              <badge.icon className={`w-5 h-5 text-${badge.color}-500`} />
-              <span className="text-sm font-semibold text-gray-700">
+              <div className={`w-6 h-6 rounded-full ${
+                badge.color === 'blue' ? 'bg-blue-100' : badge.color === 'yellow' ? 'bg-yellow-100' : 'bg-gray-100'
+              } flex items-center justify-center`}>
+                <badge.icon className={`w-3.5 h-3.5 ${
+                  badge.color === 'blue' ? 'text-blue-600' : badge.color === 'yellow' ? 'text-yellow-600' : 'text-black'
+                }`} />
+              </div>
+              <span className="text-xs md:text-sm font-semibold text-gray-700">
                 {badge.label}
               </span>
-            </div>
+            </motion.div>
           ))}
         </motion.div>
 
-        
-        {/* Floating Element */}
-        <div className="absolute -z-10 top-1/2 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
+        {/* CTA Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+          className="mt-20"
+        >
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-600 to-blue-700 p-8 md:p-12 text-center">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-yellow-500/20 rounded-full blur-3xl" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
+            
+            <div className="relative z-10">
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
+                Ready to scale your business?
+              </h3>
+              <p className="text-blue-100 mb-6 max-w-xl mx-auto">
+                Let's create a custom growth strategy tailored to your brand.
+              </p>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-white text-blue-600 font-semibold rounded-xl hover:shadow-lg transition-all"
+                >
+                  Get Started Now
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </motion.div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

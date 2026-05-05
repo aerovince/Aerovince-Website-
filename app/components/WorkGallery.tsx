@@ -16,16 +16,21 @@ import {
   BarChart3,
   Shield,
   Rocket,
-  Users,
   Globe,
-  ChevronRight,
+  CheckCircle,
+  MapPin,
+  Clock,
+  Heart,
+  Users,
+  DollarSign,
 } from "lucide-react";
 
 const workItems = [
   {
     id: "delhi059",
     title: "Delhi059",
-    category: "Restaurant - Canada",
+    category: "Restaurant",
+    location: "Canada",
     description:
       "From zero to Canada's culinary icon with 650+ Google reviews—all without spending a rupee on performance marketing.",
     image: "/delhi059-logo.jpg",
@@ -37,7 +42,8 @@ const workItems = [
   {
     id: "local-ride",
     title: "Local Ride",
-    category: "Transportation - Canada",
+    category: "Transportation",
+    location: "Canada",
     description:
       "Engineered from the ground up into a thriving Canadian rideshare powerhouse.",
     image: "/Feature_logos/localride.jpg",
@@ -49,7 +55,8 @@ const workItems = [
   {
     id: "bg-foods",
     title: "BG Foods",
-    category: "E-commerce - Canada/USA",
+    category: "E-commerce",
+    location: "Canada/USA",
     description:
       "Building a thriving food e-commerce platform across North America.",
     image: "https://www.marktaleworld.com/clients/bgfoods.png",
@@ -62,6 +69,7 @@ const workItems = [
     id: "dee-cee-accessories",
     title: "Dee Cee Accessories",
     category: "Jewelry",
+    location: "India",
     description:
       "Digital setup from scratch. Products photography, SEO based listings.",
     image: "/Feature_logos/deecee.jpg",
@@ -74,6 +82,7 @@ const workItems = [
     id: "cabtale",
     title: "CabTale",
     category: "Transportation",
+    location: "India",
     description:
       "Building the future of urban mobility with seamless booking experiences.",
     image: "/Feature_logos/cabtale.jpg",
@@ -86,6 +95,7 @@ const workItems = [
     id: "last-mile-care",
     title: "Last Mile Care",
     category: "NGO",
+    location: "India",
     description: "Supporting communities with compassionate care.",
     image: "https://www.marktaleworld.com/clients/lastmilecare.png",
     tags: ["Non-profit"],
@@ -97,61 +107,83 @@ const workItems = [
 
 const categories = [
   "All",
+  "Featured",
   "Hospitality",
-  "App Development",
+  "Transportation",
   "E-commerce",
   "Non-profit",
 ];
 
 export default function WorkGallery() {
   const [filter, setFilter] = useState("All");
-  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const [activeCard, setActiveCard] = useState<string | null>(null);
+  const [imageLoaded, setImageLoaded] = useState<Record<string, boolean>>({});
 
   const filteredItems =
     filter === "All"
       ? workItems
-      : workItems.filter((item) => item.tags.includes(filter));
+      : filter === "Featured"
+        ? workItems.filter((item) => item.featured)
+        : workItems.filter((item) => item.tags.includes(filter));
 
   const stats = [
-    { value: "150+", label: "Brands Scaled", icon: Briefcase, change: "+42%" },
-    { value: "200%", label: "Avg. Growth", icon: TrendingUp, change: "+15%" },
-    { value: "4.95", label: "Client Rating", icon: Star, change: "5★" },
-    { value: "98%", label: "Retention", icon: Shield, change: "+8%" },
+    {
+      value: "150+",
+      label: "Brands Scaled",
+      icon: Briefcase,
+      change: "+42%",
+      color: "blue",
+    },
+    {
+      value: "200%",
+      label: "Avg. Growth",
+      icon: TrendingUp,
+      change: "+15%",
+      color: "yellow",
+    },
+    {
+      value: "4.95",
+      label: "Client Rating",
+      icon: Star,
+      change: "5★",
+      color: "blue",
+    },
+    {
+      value: "98%",
+      label: "Retention Rate",
+      icon: Heart,
+      change: "+8%",
+      color: "yellow",
+    },
   ];
 
   return (
-    <section className="relative py-32 bg-white overflow-hidden" id="work">
-      {/* Animated Background Elements */}
+    <section
+      className="relative py-24 lg:py-32 bg-white overflow-hidden"
+      id="work"
+    >
+      {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
-        <motion.div
-          className="absolute top-0 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"
-          animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
-          transition={{ duration: 15, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute bottom-0 right-0 w-96 h-96 bg-yellow-500/5 rounded-full blur-3xl"
-          animate={{ x: [0, -50, 0], y: [0, -30, 0] }}
-          transition={{ duration: 12, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-black/5 rounded-full blur-3xl"
-          animate={{ scale: [1, 1.2, 1] }}
-          transition={{ duration: 10, repeat: Infinity }}
-        />
+        <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-blue-50/50 to-transparent" />
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-100/30 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-yellow-100/30 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gray-50/50 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         {/* Section Header */}
         <motion.div
-          className="text-center mb-20"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
+          className="text-center mb-20"
         >
           <motion.div
-            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600/10 to-cyan-500/10 rounded-full border border-blue-500/20 mb-6 shadow-sm"
-            whileHover={{ scale: 1.05 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 border border-blue-200 rounded-full mb-6"
           >
             <Sparkles className="w-4 h-4 text-blue-600" />
             <span className="text-blue-700 font-semibold text-sm tracking-wide">
@@ -161,12 +193,7 @@ export default function WorkGallery() {
 
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-black mb-6 leading-[1.15] tracking-tight">
             Digital empires
-            <span className="relative ml-4 inline-block">
-              <span className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-500 blur-2xl opacity-30" />
-              <span className="relative bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-                built to last.
-              </span>
-            </span>
+            <span className="block text-blue-600 mt-2">built to last.</span>
           </h2>
 
           <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
@@ -180,27 +207,48 @@ export default function WorkGallery() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-28"
+          transition={{ delay: 0.1, duration: 0.5 }}
+          className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-28"
         >
           {stats.map((stat, idx) => (
             <motion.div
               key={idx}
-              whileHover={{ y: -8 }}
-              className="relative group"
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="group"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-2xl blur opacity-0 group-hover:opacity-20 transition duration-500" />
-              <div className="relative bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 flex items-center justify-center mb-4 shadow-lg">
-                  <stat.icon className="w-6 h-6 text-white" />
+              <div className="relative bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300">
+                {/* Animated Border on Hover */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-600/0 via-blue-600/0 to-blue-600/0 group-hover:from-blue-600/10 group-hover:via-blue-600/5 group-hover:to-transparent transition-all duration-500" />
+
+                <div
+                  className={`w-12 h-12 rounded-xl ${
+                    stat.color === "blue" ? "bg-blue-600" : "bg-yellow-500"
+                  } flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300`}
+                >
+                  <stat.icon
+                    className={`w-6 h-6 ${stat.color === "yellow" ? "text-black" : "text-white"}`}
+                  />
                 </div>
                 <div className="flex items-baseline gap-2">
                   <p className="text-3xl font-bold text-black">{stat.value}</p>
-                  <span className="text-xs font-semibold text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded">
+                  <span
+                    className={`text-xs font-semibold px-1.5 py-0.5 rounded ${
+                      stat.color === "blue"
+                        ? "bg-blue-100 text-blue-700"
+                        : "bg-yellow-100 text-yellow-700"
+                    }`}
+                  >
                     {stat.change}
                   </span>
                 </div>
-                <p className="text-sm text-gray-500 mt-1">{stat.label}</p>
+                <p className="text-gray-500 text-sm mt-1">{stat.label}</p>
+
+                {/* Decorative Line */}
+                <div
+                  className={`absolute bottom-0 left-0 right-0 h-0.5 rounded-b-2xl transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left ${
+                    stat.color === "blue" ? "bg-blue-600" : "bg-yellow-500"
+                  }`}
+                />
               </div>
             </motion.div>
           ))}
@@ -214,160 +262,263 @@ export default function WorkGallery() {
           className="flex flex-wrap justify-center gap-3 mb-16"
         >
           {categories.map((cat) => (
-            <button
+            <motion.button
               key={cat}
               onClick={() => setFilter(cat)}
-              className={`relative px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
                 filter === cat
-                  ? "text-white"
-                  : "text-gray-600 hover:text-black hover:bg-gray-100"
+                  ? "bg-blue-600 text-white shadow-lg shadow-blue-600/30"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-gray-900"
               }`}
             >
-              {filter === cat && (
-                <motion.span
-                  layoutId="activeFilter"
-                  className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full shadow-lg"
-                  transition={{ type: "spring", duration: 0.5 }}
-                />
-              )}
-              <span className="relative z-10">{cat}</span>
-            </button>
+              {cat}
+            </motion.button>
           ))}
         </motion.div>
 
-        {/* Projects Grid - Modern Card Design */}
+        {/* Projects Grid - Premium Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <AnimatePresence mode="popLayout">
             {filteredItems.map((item, index) => (
               <motion.div
                 key={item.id}
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-                onMouseEnter={() => setHoveredCard(item.id)}
-                onMouseLeave={() => setHoveredCard(null)}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -50 }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
+                onMouseEnter={() => setActiveCard(item.id)}
+                onMouseLeave={() => setActiveCard(null)}
               >
-                <Link href={`/projects/${item.id}`} className="block h-full">
-                  <motion.div
-                    className="relative h-full bg-white rounded-2xl overflow-hidden shadow-lg"
-                    whileHover={{ y: -8 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {/* Image Section */}
-                    <div className="relative h-64 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        fill
-                        className={`object-cover transition-transform duration-700 ${
-                          hoveredCard === item.id ? "scale-110" : "scale-100"
-                        }`}
-                      />
+                <div className="block h-full group">
+                  <div className="relative h-full bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500">
+                    {/* Image Container with Parallax Effect */}
+                    <div className="relative h-64 overflow-hidden bg-gray-100">
+                      <motion.div
+                        className="w-full h-full"
+                        animate={{
+                          scale: activeCard === item.id ? 1.1 : 1,
+                        }}
+                        transition={{ duration: 0.6 }}
+                      >
+                        <Image
+                          src={item.image}
+                          alt={item.title}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          onLoad={() =>
+                            setImageLoaded((prev) => ({
+                              ...prev,
+                              [item.id]: true,
+                            }))
+                          }
+                        />
+                      </motion.div>
 
                       {/* Gradient Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
+                        animate={{
+                          opacity: activeCard === item.id ? 1 : 0.6,
+                        }}
+                        transition={{ duration: 0.3 }}
+                      />
 
                       {/* Category Badge */}
-                      <div className="absolute top-4 left-4">
-                        <span className="px-3 py-1.5 bg-gradient-to-r from-blue-600 to-cyan-500 text-white text-xs font-bold rounded-lg shadow-lg">
-                          {item.category.split(" - ")[0]}
+                      <motion.div
+                        className="absolute top-4 left-4"
+                        initial={{ x: -20, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ delay: 0.1 }}
+                      >
+                        <span className="px-3 py-1.5 bg-blue-600 text-white text-xs font-bold rounded-lg shadow-lg">
+                          {item.category}
                         </span>
-                      </div>
+                      </motion.div>
 
                       {/* Featured Badge */}
                       {item.featured && (
-                        <div className="absolute top-4 right-4">
-                          <div className="px-3 py-1.5 bg-white/95 backdrop-blur-sm rounded-lg border border-yellow-400 shadow-lg">
-                            <div className="flex items-center gap-1">
-                              <Zap className="w-3 h-3 text-yellow-500" />
-                              <span className="text-xs font-bold text-yellow-600">
-                                Featured
-                              </span>
-                            </div>
+                        <motion.div
+                          className="absolute top-4 right-4"
+                          initial={{ x: 20, opacity: 0 }}
+                          animate={{ x: 0, opacity: 1 }}
+                          transition={{ delay: 0.15 }}
+                        >
+                          <div className="px-3 py-1.5 bg-yellow-500 text-black text-xs font-bold rounded-lg shadow-lg flex items-center gap-1">
+                            <Zap className="w-3 h-3" />
+                            Featured
                           </div>
-                        </div>
+                        </motion.div>
                       )}
 
-                      {/* Growth Badge on Hover */}
+                      {/* Location Badge */}
                       <motion.div
-                        className="absolute bottom-4 left-4 right-4"
-                        initial={{ opacity: 0, y: 20 }}
+                        className="absolute bottom-4 left-4"
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.2 }}
+                      >
+                        <div className="px-2 py-1 bg-black/60 backdrop-blur-sm rounded-lg flex items-center gap-1">
+                          <MapPin className="w-3 h-3 text-white/80" />
+                          <span className="text-white/80 text-xs font-medium">
+                            {item.location}
+                          </span>
+                        </div>
+                      </motion.div>
+
+                      {/* Quick View Overlay with Slide Up Effect */}
+                      <motion.div
+                        className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+                        initial={{ opacity: 0 }}
                         animate={{
-                          opacity: hoveredCard === item.id ? 1 : 0,
-                          y: hoveredCard === item.id ? 0 : 20,
+                          opacity: activeCard === item.id ? 1 : 0,
                         }}
                         transition={{ duration: 0.3 }}
                       >
-                        <div className="bg-white/95 backdrop-blur-sm rounded-lg p-2 flex items-center justify-between shadow-lg">
-                          <div className="flex items-center gap-2">
-                            <TrendingUp className="w-4 h-4 text-blue-600" />
-                            <span className="text-xs font-bold text-gray-900">
-                              Growth
-                            </span>
-                          </div>
-                          <span className="text-sm font-bold text-blue-600">
-                            {item.growth}
+                        <motion.div
+                          className="bg-white rounded-full px-6 py-3 flex items-center gap-2 shadow-2xl"
+                          initial={{ y: 20, opacity: 0 }}
+                          animate={{
+                            y: activeCard === item.id ? 0 : 20,
+                            opacity: activeCard === item.id ? 1 : 0,
+                          }}
+                          transition={{ duration: 0.3, delay: 0.1 }}
+                        >
+                          <Eye className="w-4 h-4 text-blue-600" />
+                          <span className="text-sm font-semibold text-blue-600">
+                            Quick View
                           </span>
-                        </div>
+                        </motion.div>
                       </motion.div>
                     </div>
 
                     {/* Content Section */}
                     <div className="p-6">
                       <div className="flex items-start justify-between gap-3 mb-3">
-                        <h3 className="text-xl font-bold text-black leading-tight group-hover:text-blue-600 transition-colors">
-                          {item.title}
-                        </h3>
-                        <motion.div
-                          animate={{
-                            x: hoveredCard === item.id ? 5 : 0,
-                          }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-cyan-500 transition-all">
-                            <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-white" />
+                        <div>
+                          <motion.h3
+                            className="text-xl font-bold text-black mb-1 group-hover:text-blue-600 transition-colors duration-300"
+                            animate={{
+                              x: activeCard === item.id ? 5 : 0,
+                            }}
+                          >
+                            {item.title}
+                          </motion.h3>
+                          <div className="flex items-center gap-2 text-xs text-gray-400">
+                            <span>{item.category}</span>
+                            <span>•</span>
+                            <span>{item.location}</span>
                           </div>
+                        </div>
+                        <motion.div
+                          className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-blue-600 transition-all duration-300"
+                          animate={{
+                            x: activeCard === item.id ? 5 : 0,
+                            backgroundColor:
+                              activeCard === item.id ? "#2563EB" : "#F3F4F6",
+                          }}
+                        >
+                          <ArrowRight
+                            className={`w-4 h-4 transition-all duration-300 ${
+                              activeCard === item.id
+                                ? "text-white translate-x-0.5"
+                                : "text-gray-400"
+                            }`}
+                          />
                         </motion.div>
                       </div>
 
-                      <p className="text-gray-500 text-sm leading-relaxed line-clamp-2 mb-4">
+                      <motion.p
+                        className="text-gray-500 text-sm leading-relaxed line-clamp-2 mb-4"
+                        animate={{
+                          opacity: activeCard === item.id ? 0.8 : 0.6,
+                        }}
+                      >
                         {item.description}
-                      </p>
+                      </motion.p>
 
-                      {/* Result Badge */}
-                      <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                        <div className="flex items-center gap-1.5">
-                          <div className="w-6 h-6 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 flex items-center justify-center">
-                            <Award className="w-3.5 h-3.5 text-white" />
-                          </div>
+                      {/* Metrics Row with Animated Border */}
+                      <motion.div
+                        className="flex items-center justify-between pt-4 border-t border-gray-100"
+                        animate={{
+                          borderColor:
+                            activeCard === item.id ? "#2563EB20" : "#E5E7EB",
+                        }}
+                      >
+                        <div className="flex items-center gap-2">
+                          <motion.div
+                            className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center"
+                            animate={{
+                              scale: activeCard === item.id ? 1.1 : 1,
+                              backgroundColor:
+                                activeCard === item.id ? "#2563EB" : "#DBEAFE",
+                            }}
+                          >
+                            <Award
+                              className={`w-3.5 h-3.5 transition-colors duration-300 ${
+                                activeCard === item.id
+                                  ? "text-white"
+                                  : "text-blue-600"
+                              }`}
+                            />
+                          </motion.div>
                           <span className="text-xs font-semibold text-gray-700">
                             {item.result}
                           </span>
                         </div>
-                        <div className="flex items-center gap-1">
-                          <BarChart3 className="w-3 h-3 text-blue-600" />
-                          <span className="text-xs font-bold text-blue-600">
+                        <div className="flex items-center gap-1.5">
+                          <motion.div
+                            className="w-6 h-6 rounded-full bg-yellow-100 flex items-center justify-center"
+                            animate={{
+                              scale: activeCard === item.id ? 1.1 : 1,
+                              backgroundColor:
+                                activeCard === item.id ? "#EAB308" : "#FEF3C7",
+                            }}
+                          >
+                            <TrendingUp
+                              className={`w-3.5 h-3.5 transition-colors duration-300 ${
+                                activeCard === item.id
+                                  ? "text-white"
+                                  : "text-yellow-600"
+                              }`}
+                            />
+                          </motion.div>
+                          <span className="text-xs font-bold text-yellow-600">
                             {item.growth}
                           </span>
                         </div>
-                      </div>
+                      </motion.div>
                     </div>
 
-                    {/* Hover Border Effect */}
+                    {/* Card Border Animation on Hover */}
                     <motion.div
                       className="absolute inset-0 rounded-2xl pointer-events-none"
                       initial={{ opacity: 0 }}
                       animate={{
-                        opacity: hoveredCard === item.id ? 1 : 0,
+                        opacity: activeCard === item.id ? 1 : 0,
+                        boxShadow:
+                          activeCard === item.id ? "0 0 0 2px #2563EB" : "none",
                       }}
                       transition={{ duration: 0.3 }}
                     >
                       <div className="absolute inset-0 rounded-2xl ring-2 ring-blue-500/50" />
                     </motion.div>
-                  </motion.div>
-                </Link>
+
+                    {/* Shine Effect on Hover */}
+                    <motion.div
+                      className="absolute inset-0 pointer-events-none overflow-hidden rounded-2xl"
+                      initial={{ opacity: 0 }}
+                      animate={{
+                        opacity: activeCard === item.id ? 1 : 0,
+                      }}
+                    >
+                      <div className="absolute -inset-full top-0 left-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 animate-shine" />
+                    </motion.div>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </AnimatePresence>
@@ -376,44 +527,48 @@ export default function WorkGallery() {
         {/* Empty State */}
         {filteredItems.length === 0 && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-20 bg-white rounded-2xl border border-gray-100 shadow-sm"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="text-center py-20 bg-gray-50 rounded-2xl border border-gray-200"
           >
-            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 flex items-center justify-center shadow-lg">
-              <Briefcase className="w-8 h-8 text-white" />
-            </div>
+            <motion.div
+              animate={{ rotate: [0, 10, -10, 0] }}
+              transition={{ duration: 0.5 }}
+              className="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-100 flex items-center justify-center"
+            >
+              <Briefcase className="w-8 h-8 text-blue-600" />
+            </motion.div>
             <p className="text-gray-500 font-medium">
               No projects found in "{filter}" category.
             </p>
             <button
               onClick={() => setFilter("All")}
-              className="mt-3 text-blue-600 hover:text-blue-700 text-sm font-semibold inline-flex items-center gap-1"
+              className="mt-3 text-blue-600 hover:text-blue-700 text-sm font-semibold inline-flex items-center gap-1 group"
             >
               View all projects
-              <ArrowRight className="w-3 h-3" />
+              <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
             </button>
           </motion.div>
         )}
 
-        {/* CTA Section - Premium Design */}
+        {/* CTA Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.3, duration: 0.6 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
           className="mt-28"
         >
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-gray-900 via-gray-800 to-black p-12 shadow-2xl">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 p-12 shadow-2xl">
             {/* Animated Background Elements */}
             <motion.div
-              className="absolute top-0 right-0 w-80 h-80 bg-blue-600/30 rounded-full blur-3xl"
-              animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+              className="absolute top-0 right-0 w-80 h-80 bg-yellow-500/20 rounded-full blur-3xl"
+              animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
               transition={{ duration: 5, repeat: Infinity }}
             />
             <motion.div
-              className="absolute bottom-0 left-0 w-80 h-80 bg-yellow-500/20 rounded-full blur-3xl"
-              animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.4, 0.2] }}
+              className="absolute bottom-0 left-0 w-80 h-80 bg-white/10 rounded-full blur-3xl"
+              animate={{ scale: [1, 1.3, 1], opacity: [0.1, 0.3, 0.1] }}
               transition={{ duration: 7, repeat: Infinity }}
             />
 
@@ -422,7 +577,7 @@ export default function WorkGallery() {
                 whileHover={{ scale: 1.05 }}
                 className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 backdrop-blur rounded-full border border-white/20 mb-6"
               >
-                <Rocket className="w-4 h-4 text-blue-400" />
+                <Rocket className="w-4 h-4 text-yellow-400" />
                 <span className="text-white/90 text-sm font-medium">
                   Ready to scale?
                 </span>
@@ -430,12 +585,12 @@ export default function WorkGallery() {
 
               <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
                 Let's build your
-                <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent ml-2">
+                <span className="block text-yellow-400 mt-2">
                   digital empire
                 </span>
               </h3>
 
-              <p className="text-gray-300 max-w-xl mx-auto mb-8">
+              <p className="text-blue-100 max-w-xl mx-auto mb-8">
                 Join 150+ successful brands that trusted us with their growth
                 journey.
               </p>
@@ -447,7 +602,7 @@ export default function WorkGallery() {
                 >
                   <Link
                     href="/contact"
-                    className="group inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold rounded-xl hover:shadow-xl hover:shadow-blue-600/25 transition-all duration-300"
+                    className="group inline-flex items-center gap-2 px-8 py-3.5 bg-white text-blue-600 font-semibold rounded-xl hover:shadow-xl transition-all duration-300"
                   >
                     Start Your Project
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -470,24 +625,39 @@ export default function WorkGallery() {
 
               <div className="flex flex-wrap justify-center gap-4 mt-8 pt-6 border-t border-white/10">
                 <div className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-blue-400" />
-                  <p className="text-xs text-gray-400">No retainer fees</p>
+                  <CheckCircle className="w-4 h-4 text-yellow-400" />
+                  <p className="text-xs text-blue-100">No retainer fees</p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-                  <p className="text-xs text-gray-400">
+                  <CheckCircle className="w-4 h-4 text-yellow-400" />
+                  <p className="text-xs text-blue-100">
                     Strategy-first approach
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-yellow-500" />
-                  <p className="text-xs text-gray-400">Data-driven results</p>
+                  <CheckCircle className="w-4 h-4 text-yellow-400" />
+                  <p className="text-xs text-blue-100">Data-driven results</p>
                 </div>
               </div>
             </div>
           </div>
         </motion.div>
       </div>
+
+      {/* Add this to your global CSS or component style */}
+      <style jsx>{`
+        @keyframes shine {
+          0% {
+            left: -100%;
+          }
+          100% {
+            left: 100%;
+          }
+        }
+        .animate-shine {
+          animation: shine 1.5s ease-in-out infinite;
+        }
+      `}</style>
     </section>
   );
 }
