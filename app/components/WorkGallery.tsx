@@ -59,7 +59,7 @@ const workItems = [
     location: "Canada/USA",
     description:
       "Building a thriving food e-commerce platform across North America.",
-    image: "https://www.marktaleworld.com/clients/bgfoods.png",
+    image: "/Feature_logos/bgfoods.jpeg",
     tags: ["E-commerce", "Featured"],
     result: "50k+ Orders",
     growth: "1000%",
@@ -97,7 +97,9 @@ const workItems = [
     category: "NGO",
     location: "India",
     description: "Supporting communities with compassionate care.",
-    image: "https://www.marktaleworld.com/clients/lastmilecare.png",
+    // image: "https://www.marktaleworld.com/clients/lastmilecare.png",
+    image: "/Feature_logos/lastmilecare.jpeg",
+
     tags: ["Non-profit"],
     result: "50k+ Reached",
     growth: "200%",
