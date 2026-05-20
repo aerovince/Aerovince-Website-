@@ -28,13 +28,13 @@ export default function TeamCTA() {
     {
       icon: Phone,
       label: "Call Us",
-      value: "+1 (555) 123-4567",
+      value: "+91 85878 70707",
       color: "blue",
     },
     {
       icon: Mail,
       label: "Email Us",
-      value: "hello@marktale.com",
+      value: "teammarktaleworld@gmail.com",
       color: "yellow",
     },
     {

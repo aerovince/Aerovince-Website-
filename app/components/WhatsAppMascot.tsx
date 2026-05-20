@@ -25,7 +25,7 @@ export default function WhatsAppMascot() {
     };
 
     const handleClick = () => {
-        window.open('https://wa.me/918527664228?text=Hi! I need help with my marketing needs.', '_blank');
+        window.open('https://wa.me/918587870707?text=Hi! I need help with my marketing needs.', '_blank');
     };
 
     return (

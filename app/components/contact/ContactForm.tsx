@@ -322,8 +322,8 @@ export default function ContactForm() {
                 </div>
                 <div>
                   <h4 className="text-lg font-bold text-kestone-black mb-1">Call Us</h4>
-                  <a href="tel:+918527664228" className="text-gray-600 hover:text-kestone-red transition-colors">
-                    +91-8527664228
+                  <a href="tel:+9185878 70707" className="text-gray-600 hover:text-kestone-red transition-colors">
+                    +91-85878 70707
                   </a>
                 </div>
               </div>
@@ -348,7 +348,7 @@ export default function ContactForm() {
                   <h4 className="text-lg font-bold text-kestone-black mb-1">Visit Us</h4>
                   <p className="text-gray-600 mb-4">
                     Plot no. 141, Sec. 14, Dwarka,<br />
-                    New Delhi – 110078
+                    New Delhi – 110078 Bharat
                   </p>
                   <div className="w-full h-48 rounded-lg overflow-hidden border border-gray-200">
                     <iframe
@@ -368,7 +368,7 @@ export default function ContactForm() {
 
             <div className="mt-12">
               <a
-                href="https://wa.me/918527664228"
+                href="https://wa.me/9185878 70707"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-8 py-3 bg-[#25D366] text-white font-bold rounded-full hover:bg-green-600 transition-colors"

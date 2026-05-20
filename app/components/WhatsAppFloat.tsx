@@ -5,9 +5,22 @@ import { motion } from 'framer-motion';
 import { MessageCircle } from 'lucide-react';
 
 export default function WhatsAppFloat() {
+    // const handleClick = () => {
+    //     window.open('https://wa.me/9185878 70707?text=Hi! I would like to know more about your services.', '_blank');
+    // };
+
     const handleClick = () => {
-        window.open('https://wa.me/918527664228?text=Hi! I would like to know more about your services.', '_blank');
-    };
+    const phone = "918587870707";
+
+    const message = encodeURIComponent(
+        "Hi! I would like to know more about your services."
+    );
+
+    window.open(
+        `https://wa.me/${phone}?text=${message}`,
+        "_blank"
+    );
+};
 
     return (
         <motion.button

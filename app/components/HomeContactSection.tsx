@@ -431,7 +431,7 @@ export default function HomeContactSection() {
                 Click the button below to start a conversation
               </p>
               <motion.a
-                href="https://wa.me/918527664228"
+                href="https://wa.me/9185878 70707"
                 target="_blank"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
