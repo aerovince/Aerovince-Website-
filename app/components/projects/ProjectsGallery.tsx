@@ -35,7 +35,9 @@ const workItems = [
         title: 'Last Mile Care',
         category: 'NGO',
         description: 'Supporting communities with compassionate care and digital outreach strategies to amplify their mission.',
-        image: 'https://www.marktaleworld.com/clients/lastmilecare.png',
+        // image: 'https://www.marktaleworld.com/clients/lastmilecare.png',
+            image: "/Feature_logos/lastmilecare.jpeg",
+
         tags: ['Non-profit']
     },
     {
@@ -59,7 +61,9 @@ const workItems = [
         title: 'BG Foods',
         category: 'E-commerce - Canada/USA',
         description: 'Everything from scratch. Building a thriving food e-commerce platform across North America.',
-        image: 'https://www.marktaleworld.com/clients/bgfoods.png',
+        // image: 'https://www.marktaleworld.com/clients/bgfoods.png',
+            image: "/Feature_logos/bgfoods.jpeg",
+
         tags: ['E-commerce']
     },
     {

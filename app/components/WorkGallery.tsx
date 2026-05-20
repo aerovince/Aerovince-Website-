@@ -26,6 +26,19 @@ import {
 } from "lucide-react";
 
 const workItems = [
+    {
+    id: "mentorleap",
+    title: "MentorLeap",
+    category: "EdTech",
+    location: "India",
+    description:
+      "Transforming professionals into confident communicators and strategic leaders through AI-powered mentorship and structured learning programs.",
+    image: "/Feature_logos/mentorleep.png",
+    tags: ["EdTech", "Featured"],
+    result: "10k+ Professionals",
+    growth: "400%",
+    featured: true,
+  },
   {
     id: "delhi059",
     title: "Delhi059",
@@ -106,16 +119,15 @@ const workItems = [
     featured: false,
   },
 ];
-
 const categories = [
   "All",
   "Featured",
+  "EdTech",        // ← add this
   "Hospitality",
   "Transportation",
   "E-commerce",
   "Non-profit",
 ];
-
 export default function WorkGallery() {
   const [filter, setFilter] = useState("All");
   const [activeCard, setActiveCard] = useState<string | null>(null);
