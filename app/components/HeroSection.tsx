@@ -4633,7 +4633,7 @@ const founderData: FounderData[] = [
   },
   {
     id: 2,
-    name: "Kavya Singh",
+    name: "Kautilya Kalyan",
     title: "Chief Disruptor",
     quote: "The biggest risk is playing it safe. Disrupt or be disrupted — there's no middle ground.",
     image: "/founder/founderimage.png",
