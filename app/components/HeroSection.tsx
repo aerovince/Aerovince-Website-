@@ -4621,7 +4621,7 @@ const founderData: FounderData[] = [
     name: "Kautilya Kalyan",
     title: "Founder & CEO",
     quote: "Great brands aren't built in comfort zones. They're forged in decisive action.",
-    image: "/founder/founderimage.png",
+    image: "/founder/founderimage.jpeg",
     video: "/founder/foundervideo.mp4",
     video2: "/founder/foundervideo2.mp4",
     colorScheme: colorSchemes.blue,
