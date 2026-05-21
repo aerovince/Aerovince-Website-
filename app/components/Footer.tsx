@@ -295,7 +295,7 @@ export default function Footer() {
                   href="mailto:info@marktaleworld.com"
                   className="text-white/50 hover:text-blue-400 transition-colors text-sm"
                 >
-                  info@marktaleworld.com
+                  hello@marktaleworld.com
                 </a>
               </li>
             </ul>
