@@ -283,7 +283,7 @@ export default function Footer() {
                   href="tel:+918527664228"
                   className="text-white/50 hover:text-blue-400 transition-colors text-sm"
                 >
-                  +91-8527-664-228
+                  +91-8587870707
                 </a>
               </li>
               <li className="flex items-center gap-3 group">

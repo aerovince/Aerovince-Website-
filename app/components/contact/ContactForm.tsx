@@ -334,8 +334,8 @@ export default function ContactForm() {
                 </div>
                 <div>
                   <h4 className="text-lg font-bold text-kestone-black mb-1">Email Us</h4>
-                  <a href="mailto:teammarktaleworld@gmail.com" className="text-gray-600 hover:text-kestone-red transition-colors">
-                    teammarktaleworld@gmail.com
+                  <a href="mailto:hello@marktaleworld.com" className="text-gray-600 hover:text-kestone-red transition-colors">
+                    hello@marktaleworld.com
                   </a>
                 </div>
               </div>
