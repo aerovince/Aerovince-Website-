@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import BehavioralPopups from "./components/BehavioralPopups";
+import GoogleAnalytics from "./components/GoogleAnalytics";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -35,9 +36,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      {/* <body
+        className={`${montserrat.variable} ${roboto.variable} antialiased font-body overflow-x-hidden flex flex-col min-h-screen`}
+      >
+        <BehavioralPopups />
+        <Navbar />
+        {children}
+        <Footer />
+      </body> */}
+
+
       <body
         className={`${montserrat.variable} ${roboto.variable} antialiased font-body overflow-x-hidden flex flex-col min-h-screen`}
       >
+        <GoogleAnalytics />
         <BehavioralPopups />
         <Navbar />
         {children}
