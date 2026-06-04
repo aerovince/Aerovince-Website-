@@ -117,23 +117,11 @@
 //   }
 // }
 
-
-
-
-
-
-
-
-
-
-
-
-
 // app/api/contact/route.ts
-import { NextRequest, NextResponse } from 'next/server';
-import { initializeApp, getApps, getApp, cert } from 'firebase-admin/app';
-import { getFirestore } from 'firebase-admin/firestore';
-import nodemailer from 'nodemailer';
+import { NextRequest, NextResponse } from "next/server";
+import { initializeApp, getApps, getApp, cert } from "firebase-admin/app";
+import { getFirestore } from "firebase-admin/firestore";
+import nodemailer from "nodemailer";
 
 // ── Firebase Admin (server-side, uses service account) ──────────────────────
 function getAdminDb() {
@@ -142,7 +130,10 @@ function getAdminDb() {
       credential: cert({
         projectId: process.env.FIREBASE_ADMIN_PROJECT_ID,
         clientEmail: process.env.FIREBASE_ADMIN_CLIENT_EMAIL,
-        privateKey: process.env.FIREBASE_ADMIN_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+        privateKey: process.env.FIREBASE_ADMIN_PRIVATE_KEY?.replace(
+          /\\n/g,
+          "\n",
+        ),
       }),
     });
   }
@@ -152,12 +143,12 @@ function getAdminDb() {
 // ── Nodemailer transporter (Custom SMTP) ─────────────────────────────────────
 function getTransporter() {
   return nodemailer.createTransport({
-    host: process.env.SMTP_HOST,        // mail.marktaleworld.com
+    host: process.env.SMTP_HOST, // mail.marktaleworld.com
     port: Number(process.env.SMTP_PORT), // 465
-    secure: true,                        // true for port 465 (SSL)
+    secure: true, // true for port 465 (SSL)
     auth: {
-      user: process.env.SMTP_USER,       // hello@marktaleworld.com
-      pass: process.env.SMTP_PASS,       // kautilya@123
+      user: process.env.SMTP_USER, // hello@marktaleworld.com
+      pass: process.env.SMTP_PASS, // kautilya@123
     },
   });
 }
@@ -170,8 +161,8 @@ export async function POST(req: NextRequest) {
     // ── 1. Validate ───────────────────────────────────────────────────────────
     if (!name || !phone || !email) {
       return NextResponse.json(
-        { success: false, error: 'Name, phone and email are required.' },
-        { status: 400 }
+        { success: false, error: "Name, phone and email are required." },
+        { status: 400 },
       );
     }
 
@@ -179,15 +170,15 @@ export async function POST(req: NextRequest) {
       name,
       phone,
       email,
-      service: service || 'Not specified',
-      message: message || '',
+      service: service || "Not specified",
+      message: message || "",
       createdAt: new Date().toISOString(),
-      status: 'new',
+      status: "new",
     };
 
     // ── 2. Save to Firestore ──────────────────────────────────────────────────
     const db = getAdminDb();
-    const docRef = await db.collection('enquiries').add(enquiry);
+    const docRef = await db.collection("enquiries").add(enquiry);
 
     // ── 3. Send email to team ─────────────────────────────────────────────────
     const transporter = getTransporter();
@@ -203,7 +194,7 @@ export async function POST(req: NextRequest) {
             <tr><td style="padding:10px 0;font-weight:bold;color:#555;">Phone</td><td style="padding:10px 0;color:#111;">${phone}</td></tr>
             <tr><td style="padding:10px 0;font-weight:bold;color:#555;">Email</td><td style="padding:10px 0;color:#111;"><a href="mailto:${email}" style="color:#e31e24;">${email}</a></td></tr>
             <tr><td style="padding:10px 0;font-weight:bold;color:#555;">Service</td><td style="padding:10px 0;color:#111;">${service}</td></tr>
-            <tr><td style="padding:10px 0;font-weight:bold;color:#555;vertical-align:top;">Message</td><td style="padding:10px 0;color:#111;">${message || '—'}</td></tr>
+            <tr><td style="padding:10px 0;font-weight:bold;color:#555;vertical-align:top;">Message</td><td style="padding:10px 0;color:#111;">${message || "—"}</td></tr>
             <tr><td style="padding:10px 0;font-weight:bold;color:#555;">Firestore ID</td><td style="padding:10px 0;color:#999;font-size:12px;">${docRef.id}</td></tr>
           </table>
         </div>
@@ -213,18 +204,27 @@ export async function POST(req: NextRequest) {
       </div>
     `;
 
-    await transporter.sendMail({
+    // await transporter.sendMail({
+    //   from: `"MarkTale Website" <${process.env.SMTP_USER}>`,
+    //   to: 'hello@marktaleworld.com',
+    //   subject: `New Enquiry from ${name} — ${service}`,
+    //   html: htmlBody,
+    // });
+
+    const adminMail = await transporter.sendMail({
       from: `"MarkTale Website" <${process.env.SMTP_USER}>`,
-      to: 'hello@marktaleworld.com',
+      to: "hello@marktaleworld.com",
       subject: `New Enquiry from ${name} — ${service}`,
       html: htmlBody,
     });
 
+    console.log("Admin mail sent:", adminMail);
+
     // ── 4. Send confirmation email to the enquirer ────────────────────────────
-    await transporter.sendMail({
+    const customerMail = await transporter.sendMail({
       from: `"MarkTale World" <${process.env.SMTP_USER}>`,
       to: email,
-      subject: 'We received your enquiry — MarkTale World',
+      subject: "We received your enquiry — MarkTale World",
       html: `
         <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;border:1px solid #e5e5e5;border-radius:8px;overflow:hidden;">
           <div style="background:#111;padding:24px 32px;">
@@ -239,12 +239,14 @@ export async function POST(req: NextRequest) {
       `,
     });
 
+    console.log("Customer mail:", customerMail);
+
     return NextResponse.json({ success: true, id: docRef.id }, { status: 200 });
   } catch (err: any) {
-    console.error('[/api/contact] Error:', err);
+    console.error("[/api/contact] Error:", err);
     return NextResponse.json(
-      { success: false, error: err.message ?? 'Internal server error' },
-      { status: 500 }
+      { success: false, error: err.message ?? "Internal server error" },
+      { status: 500 },
     );
   }
 }
