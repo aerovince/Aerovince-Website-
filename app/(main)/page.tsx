@@ -37,6 +37,7 @@ export default async function Home() {
       <CertificationsSection />
       <ReviewsSection />
       <HomeContactSection />
+      
 
       {/* Floating WhatsApp Components */}
       <WhatsAppMascot />
