@@ -85,7 +85,7 @@ export default function ContactForm() {
             </p>
 
             <div className="space-y-8">
-              <div className="flex items-start">
+              {/* <div className="flex items-start">
                 <div className="w-12 h-12 bg-neutral-100 rounded-lg flex items-center justify-center text-kestone-black mr-6 shrink-0">
                   <Phone size={24} />
                 </div>
@@ -94,8 +94,8 @@ export default function ContactForm() {
                   <a href="tel:+9185878 70707" className="text-gray-600 hover:text-kestone-red transition-colors">
                     +91-85878 70707
                   </a>
-                </div>
-              </div>
+                </div> */}
+              
 
               <div className="flex items-start">
                 <div className="w-12 h-12 bg-neutral-100 rounded-lg flex items-center justify-center text-kestone-black mr-6 shrink-0">
@@ -294,3 +294,16 @@ export default function ContactForm() {
     </section>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
