@@ -259,10 +259,10 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <h4 className="text-lg font-bold mb-6 uppercase tracking-wider text-white flex items-center gap-2">
+            {/* <h4 className="text-lg font-bold mb-6 uppercase tracking-wider text-white flex items-center gap-2">
               <Sparkles size={16} className="text-blue-400" />
               Contact Us
-            </h4>
+            </h4> */}
             <ul className="space-y-4 mb-6">
               <li className="flex items-start gap-3 group">
                 <MapPin
@@ -293,6 +293,7 @@ export default function Footer() {
                 <a
                   // href="mailto:info@marktaleworld.com"
                   href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL}`}
+                  
 
                   className="text-white/50 hover:text-blue-400 transition-colors text-sm"
                 >
