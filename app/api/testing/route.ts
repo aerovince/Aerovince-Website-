@@ -7,7 +7,8 @@ export async function GET() {
       port: 465,
       secure: true,
       auth: {
-        user: "info@marktaleworld.com",
+        // user: "info@marktaleworld.com",
+        user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
       },
     });

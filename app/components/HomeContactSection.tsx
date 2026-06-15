@@ -81,16 +81,18 @@ export default function HomeContactSection() {
   };
 
   const contactInfo = [
-    {
-      icon: Phone,
-      text: "+91 85878 70707",
-      href: "tel:+9185878 70707",
-      color: "blue",
-    },
+    // {
+    //   icon: Phone,
+    //   text: "+91 85878 70707",
+    //   href: "tel:+9185878 70707",
+    //   color: "blue",
+    // },
     {
       icon: Mail,
-      text: "hello@marktaleworld.com",
-      href: "mailto:hello@marktaleworld.com",
+      // text: "hello@marktaleworld.com",
+      // href: "mailto:hello@marktaleworld.com",
+      text: process.env.NEXT_PUBLIC_CONTACT_EMAIL,
+href: `mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL}`,
       color: "yellow",
     },
     { icon: MapPin, text: "Dwarka, New Delhi Bharat", href: "#", color: "black" },
@@ -480,7 +482,8 @@ export default function HomeContactSection() {
                 Click the button below to start a conversation
               </p>
               <motion.a
-                href="https://wa.me/918587870707"
+                // href="https://wa.me/918587870707"
+                href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}`}
                 target="_blank"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}

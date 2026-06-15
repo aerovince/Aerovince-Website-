@@ -174,7 +174,8 @@ export async function POST(req: NextRequest) {
     const transporter = getTransporter();
     await transporter.sendMail({
       from:    `"MarkTale Website" <${process.env.SMTP_USER}>`,
-      to:      "hello@marktaleworld.com",
+      // to:      "hello@marktaleworld.com",
+      to: process.env.CONTACT_RECEIVER_EMAIL,
       subject: `New Enquiry from ${name} — ${service}`,
       html: `
         <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;border:1px solid #e5e5e5;border-radius:8px;overflow:hidden;">

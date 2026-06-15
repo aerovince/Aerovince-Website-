@@ -10,7 +10,8 @@ export default function WhatsAppFloat() {
     // };
 
     const handleClick = () => {
-    const phone = "918587870707";
+    // const phone = "918587870707";
+    const phone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "918587870707";
 
     const message = encodeURIComponent(
         "Hi! I would like to know more about your services."

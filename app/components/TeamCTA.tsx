@@ -25,16 +25,17 @@ export default function TeamCTA() {
   const [hoveredStat, setHoveredStat] = useState<number | null>(null);
 
   const contactMethods = [
-    {
-      icon: Phone,
-      label: "Call Us",
-      value: "+91 85878 70707",
-      color: "blue",
-    },
+    // {
+    //   icon: Phone,
+    //   label: "Call Us",
+    //   value: "+91 85878 70707",
+    //   color: "blue",
+    // },
     {
       icon: Mail,
       label: "Email Us",
-      value: "teammarktaleworld@gmail.com",
+      // value: "teammarktaleworld@gmail.com",
+      value: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "teammarktaleworld@gmail.com", 
       color: "yellow",
     },
     {

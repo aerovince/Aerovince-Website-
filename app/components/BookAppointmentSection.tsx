@@ -45,7 +45,8 @@ export default function BookAppointmentSection() {
         const message = `Hi! I would like to book a strategy call.%0A%0AName: ${formData.name}%0AEmail: ${formData.email}%0APhone: ${formData.phone}%0APreferred Date & Time: ${formData.preferredDate ? new Date(formData.preferredDate).toLocaleString() : 'Not specified'}%0AMessage: ${formData.message || 'No additional message'}`;
 
         // Redirect to WhatsApp with the form details
-        window.open(`https://wa.me/918527664228?text=${message}`, '_blank');
+        // window.open(`https://wa.me/918527664228?text=${message}`, '_blank');
+        window.open(`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}?text=${message}`, '_blank');
     };
 
     // Get the current date in the format required by datetime-local input (YYYY-MM-DDTHH:mm)
