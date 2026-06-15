@@ -37,8 +37,8 @@ export default function MeetingCard() {
               Book a Free Strategy Call
             </h3>
             <p className="text-sm text-gray-500 leading-relaxed mb-4 font-body">
-              We'll audit your current marketing setup and show you exactly what's holding
-              your growth back — no fluff, no sales pitch. Just a real, actionable plan.
+               We&apos;ll audit your current marketing setup and show you exactly what&apos;s holding
+  your growth back — no fluff, no sales pitch. Just a real, actionable plan.
             </p>
             <div className="flex flex-wrap gap-2 mb-5">
               {['30 Minutes', 'Google Meet', '100% Free', 'No Obligation'].map((tag) => (
