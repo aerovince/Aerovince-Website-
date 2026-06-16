@@ -80,7 +80,7 @@ export default function BookAppointmentSection() {
                         className="space-y-8"
                     >
                         <h3 className="text-2xl font-heading font-bold text-kestone-black mb-6">
-                            What You'll Get:
+                            What You &apos;ll Get:
                         </h3>
                         {benefits.map((benefit, index) => (
                             <motion.div

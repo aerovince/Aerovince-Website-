@@ -508,6 +508,7 @@ import {
   Send,
   Sparkles,
   CheckCircle,
+  Phone,
   Mail,
   MapPin,
   Clock,
@@ -587,6 +588,13 @@ export default function HomeContactSection() {
     //   href: "tel:+9185878 70707",
     //   color: "blue",
     // },
+    {
+  icon: Phone,
+  text: process.env.NEXT_PUBLIC_CONTACT_PHONE!,
+  href: `tel:${process.env.NEXT_PUBLIC_CONTACT_PHONE_RAW}`,
+  color: "blue",
+},
+
     {
       icon: Mail,
       // text: "hello@marktaleworld.com",

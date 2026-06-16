@@ -22,22 +22,26 @@
 'use client';
 
 import React from 'react';
-import ContactHero from '@/components/contact/ContactHero';
-import ContactCards from '@/components/contact/ContactCards';
-import ContactForm from '@/components/contact/ContactForm';
-import StatsSection from '@/components/contact/StateSection';
-import MeetingCard from '@/components/contact/MeetingCard';
-import FAQSection from '@/components/contact/FAQSection';
+// import ContactHero from '@/components/contact/ContactHero';
+// import ContactCards from '@/components/contact/ContactCards';
+// import ContactForm from '@/components/contact/ContactForm';
+// import StatsSection from '@/components/contact/StateSection';
+// import MeetingCard from '@/components/contact/MeetingCard';
+// import FAQSection from '@/components/contact/FAQSection';
+
+import Contactpagecontent  from '@/components/contact/Contactpagecontent';
+
 
 export default function ContactPage() {
   return (
     <main className="bg-black">
-      <ContactHero />
+      {/* <ContactHero />
       <ContactCards />
       <ContactForm />
       <StatsSection />
       <MeetingCard />
-      <FAQSection />
+      <FAQSection /> */}
+      <Contactpagecontent/>
     </main>
   );
 }

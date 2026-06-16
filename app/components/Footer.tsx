@@ -10,6 +10,7 @@ import {
   Linkedin,
   Instagram,
   Mail,
+  Phone,
   MapPin,  
   Sparkles,
   ArrowRight,
@@ -259,10 +260,10 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            {/* <h4 className="text-lg font-bold mb-6 uppercase tracking-wider text-white flex items-center gap-2">
+            <h4 className="text-lg font-bold mb-6 uppercase tracking-wider text-white flex items-center gap-2">
               <Sparkles size={16} className="text-blue-400" />
               Contact Us
-            </h4> */}
+            </h4>
             <ul className="space-y-4 mb-6">
               <li className="flex items-start gap-3 group">
                 <MapPin
@@ -273,18 +274,15 @@ export default function Footer() {
                   Plot no. 141, Sec. 14, Dwarka, New Delhi – 110078
                 </span>
               </li>
-              {/* <li className="flex items-center gap-3 group">
-                <Phone
-                  size={18}
-                  className="text-blue-400 group-hover:scale-110 transition-transform"
-                />
-                <a
-                  href="tel:+918527664228"
+              <li className="flex items-center gap-3 group">
+                <Phone size={18} className="text-blue-400 group-hover:scale-110 transition-transform" />
+                
+                 <a href={`tel:${process.env.NEXT_PUBLIC_CONTACT_PHONE_RAW}`}
                   className="text-white/50 hover:text-blue-400 transition-colors text-sm"
-                >
-                  +91-8587870707
+                > 
+                  {process.env.NEXT_PUBLIC_CONTACT_PHONE}
                 </a>
-              </li> */}
+              </li>
               <li className="flex items-center gap-3 group">
                 <Mail
                   size={18}
