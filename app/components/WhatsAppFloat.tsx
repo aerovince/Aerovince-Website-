@@ -9,6 +9,9 @@ export default function WhatsAppFloat() {
     //     window.open('https://wa.me/9185878 70707?text=Hi! I would like to know more about your services.', '_blank');
     // };
 
+
+    // add space priya 
+    
     const handleClick = () => {
     // const phone = "918587870707";
     const phone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "918587870707";
