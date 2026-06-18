@@ -8,7 +8,7 @@ export default function AnnouncementBar() {
     const items = [...Array(10)].map((_, i) => (
         <div key={i} className="flex items-center px-8 gap-4 shrink-0">
             <span className="flex items-center gap-2 font-bold text-sm tracking-wide">
-                🔥 Startup Building Plans starting at ₹15,000/month
+                {/* 🔥 Startup Building Plans starting at ₹15,000/month */}
             </span>
             <span className="text-white/40">|</span>
             <span className="flex items-center gap-2 font-medium text-sm">

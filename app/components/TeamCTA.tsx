@@ -28,13 +28,14 @@ export default function TeamCTA() {
     {
       icon: Phone,
       label: "Call Us",
-      value: "+91 85878 70707",
+      value: process.env.NEXT_PUBLIC_CONTACT_PHONE!,
       color: "blue",
     },
     {
       icon: Mail,
       label: "Email Us",
-      value: "teammarktaleworld@gmail.com",
+      // value: "teammarktaleworld@gmail.com",
+      value: process.env.NEXT_PUBLIC_CONTACT_EMAIL!,
       color: "yellow",
     },
     {
@@ -113,7 +114,7 @@ export default function TeamCTA() {
           >
             <Sparkles className="w-4 h-4 text-blue-600" />
             <span className="text-blue-700 font-semibold text-sm tracking-wide">
-              LET'S WORK TOGETHER
+              LET &apos;S WORK TOGETHER
             </span>
           </motion.div>
 

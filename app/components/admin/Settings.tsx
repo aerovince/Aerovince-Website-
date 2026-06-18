@@ -160,7 +160,7 @@ type SettingsState = {
   siteName: string;
   tagline: string;
   email: string;
-  phone: string;
+  // phone: string;
   address: string;
   growth: string;
   brands: string;
@@ -171,8 +171,8 @@ export default function Settings() {
   const [settings, setSettings] = useState<SettingsState>({
     siteName: "MarkTale",
     tagline: "Powered by AI",
-    email: "hello@marktaleworld.com",
-    phone: "+91-8587870707",
+    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "teammarktaleworld@gmail.com",
+    // phone: "",
     address: "Plot no. 141, Sec. 14, Dwarka, New Delhi – 110078",
     growth: "10x",
     brands: "150+",
@@ -222,7 +222,7 @@ export default function Settings() {
             <span style={S.cardTitle}>Contact Details</span>
           </div>
           <div style={{ padding: "20px" }}>
-            {(["email", "phone"] as const).map((key) => (
+            {(["email"] as const).map((key) => (
               <div key={key} style={S.formGroup}>
                 <label style={S.label}>{key === "email" ? "Email" : "Phone"}</label>
                 <input
