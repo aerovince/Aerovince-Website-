@@ -410,6 +410,12 @@ import { useRouter } from "next/navigation";
 import type { ReactElement } from "react";
 
 const icons: Record<string, ReactElement> = {
+  applications: (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+    </svg>
+  ),
   dashboard: (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
       <rect x="3" y="3" width="7" height="7" rx="1" />
@@ -432,9 +438,10 @@ const icons: Record<string, ReactElement> = {
 };
 
 const MENU = [
-  { id: "dashboard", label: "Dashboard",    group: "Main",    path: "/admin/dashboard/dashboard" },
-  { id: "blogs",     label: "Blog Manager", group: "Content", path: "/admin/dashboard/blogs" },
-  { id: "enquiries", label: "Enquiries",    group: "Content", path: "/admin/dashboard/enquiries" },
+  { id: "applications", label: "Applications", group: "Content", path: "/admin/dashboard/applications" },
+  { id: "dashboard", label: "Dashboard", group: "Main", path: "/admin/dashboard/dashboard" },
+  { id: "blogs", label: "Blog Manager", group: "Content", path: "/admin/dashboard/blogs" },
+  { id: "enquiries", label: "Enquiries", group: "Content", path: "/admin/dashboard/enquiries" },
 ];
 
 type Props = { active?: string };
@@ -548,21 +555,21 @@ export default function Sidebar({ active = "dashboard" }: Props) {
         {filtered
           ? filtered.map(renderItem)
           : Object.entries(groups).map(([group, items]) => (
-              <div key={group} style={{ marginBottom: 20 }}>
-                <div style={{
-                  fontSize: 10,
-                  fontWeight: 700,
-                  color: "#334155",
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  padding: "0 6px",
-                  marginBottom: 6,
-                }}>
-                  {group}
-                </div>
-                {items.map(renderItem)}
+            <div key={group} style={{ marginBottom: 20 }}>
+              <div style={{
+                fontSize: 10,
+                fontWeight: 700,
+                color: "#334155",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                padding: "0 6px",
+                marginBottom: 6,
+              }}>
+                {group}
               </div>
-            ))}
+              {items.map(renderItem)}
+            </div>
+          ))}
       </nav>
 
       {/* Footer */}
