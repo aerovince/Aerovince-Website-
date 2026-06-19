@@ -444,7 +444,7 @@ export default function Navbar() {
     { name: 'Home',       href: '/' },
     { name: 'About Us',   href: '/about' },
     { name: 'Services',   href: '/services' },
-    { name: 'Projects',   href: '/projects' },
+    { name: 'Portfolio',   href: '/portfolio' },
     { name: 'Awards',     href: '/awards' },
     { name: 'Careers',    href: '/careers' },
     { name: 'Blogs',      href: '/blog' },
