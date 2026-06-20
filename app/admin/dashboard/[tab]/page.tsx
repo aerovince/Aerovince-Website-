@@ -190,9 +190,15 @@ import { useParams } from "next/navigation";
 import DashboardView from "@/components/admin/Dashboardview";
 import EnquiriesView from "@/components/admin/Enquiriesview";
 import BlogsView from "@/components/admin/BlogsView";
+import ApplicationsView from "@/components/admin/ApplicationsView";
 
 function renderPage(tab: string) {
   switch (tab) {
+
+
+    case "applications":
+      return <ApplicationsView />;
+
     case "enquiries":
       return <EnquiriesView />;
 

@@ -169,8 +169,8 @@ type SettingsState = {
 
 export default function Settings() {
   const [settings, setSettings] = useState<SettingsState>({
-    siteName: "MarkTale",
-    tagline: "Powered by AI",
+    siteName: "MarkTale (Marktale World Private Limited)",
+    tagline: "Turning Your Tale into Sales",
     email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "teammarktaleworld@gmail.com",
     // phone: "",
     address: "Plot no. 141, Sec. 14, Dwarka, New Delhi – 110078",

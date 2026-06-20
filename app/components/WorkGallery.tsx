@@ -2200,11 +2200,10 @@ export default function WorkGallery() {
               onClick={() => setFilter(cat)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
-                filter === cat
-                  ? "bg-blue-600 text-white shadow-lg shadow-blue-600/30"
-                  : "bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-gray-900"
-              }`}
+              className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${filter === cat
+                ? "bg-blue-600 text-white shadow-lg shadow-blue-600/30"
+                : "bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-gray-900"
+                }`}
             >
               {cat}
             </motion.button>

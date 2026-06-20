@@ -31,7 +31,8 @@ export default function Manifesto() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 1, ease: "easeOut" }}
                 >
-                    Mark<span className="text-kestone-red">Tale</span> – AI Powered Marketing Agency
+                    Mark<span className="text-kestone-red">Tale</span> – Turning Your Tale into Sales
+
                 </motion.h1>
 
                 <motion.div

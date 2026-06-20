@@ -144,8 +144,7 @@ function ContactHero() {
       >
         <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
         <span className="text-blue-400 text-xs font-bold tracking-widest uppercase">
-          AI-Powered Marketing Agency
-        </span>
+          MarkTale - Turning Your Tale into Sales        </span>
       </motion.div>
 
       <motion.h1
@@ -326,12 +325,11 @@ function ContactForm() {
           <span className="text-kestone-red font-bold tracking-widest uppercase text-xs mb-4 block">
             Get In Touch
           </span>
-          <h2 className="text-3xl md:text-4xl font-heading font-black text-kestone-black mb-4 leading-tight">
-            Start Your Growth Journey
+          <h2 className="text-3xl md:text-4xl font-black text-black mb-4 leading-tight">
+            Start Your Growth Journey with MarkTale
           </h2>
           <p className="text-gray-500 leading-relaxed mb-10 font-body text-sm">
-            Fill in the details. Our team will review your project and respond
-            with a custom strategy within 24 hours guaranteed.
+            Fill in the details of your project. MarkTale (Marktale World Private Limited) will review your requirements and respond with a custom strategy within 24 hours.
           </p>
           {/* add a space  */}
 
@@ -373,7 +371,12 @@ function ContactForm() {
               <div>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-0.5">Visit Us</p>
                 <p className="text-sm font-semibold text-kestone-black leading-relaxed">
-                  Plot no. 141, Sec. 14, Dwarka, New Delhi - 110078
+                  Head Office: Plot no. 141, Sector 14, Dwarka, New Delhi - 110078
+
+                  Branch Office: BB Ganj, Muzaffarpur, Bihar - 842001
+
+                  Branch Office: NRI Apartment, Sector 58, Seawoods, Navi Mumbai, Maharashtra 400706
+
                 </p>
               </div>
             </div>
@@ -638,9 +641,8 @@ function FAQSection() {
             <motion.div key={i}
               initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ delay: i * 0.07 }}
-              className={`border rounded-2xl overflow-hidden transition-colors ${
-                openIndex === i ? 'border-kestone-black' : 'border-gray-100'
-              }`}>
+              className={`border rounded-2xl overflow-hidden transition-colors ${openIndex === i ? 'border-kestone-black' : 'border-gray-100'
+                }`}>
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 className="w-full flex items-center justify-between p-6 text-left bg-white hover:bg-neutral-50 transition-colors">
