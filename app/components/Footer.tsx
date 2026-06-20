@@ -104,10 +104,10 @@ export default function Footer() {
             >
               <badge.icon
                 className={`w-3.5 h-3.5 ${badge.color === "blue"
-                    ? "text-blue-400"
-                    : badge.color === "yellow"
-                      ? "text-yellow-500"
-                      : "text-white"
+                  ? "text-blue-400"
+                  : badge.color === "yellow"
+                    ? "text-yellow-500"
+                    : "text-white"
                   }`}
               />
               <span className="text-xs text-white/70">{badge.label}</span>
@@ -135,7 +135,7 @@ export default function Footer() {
             </Link>
 
             <p className="text-white/50 mb-6 leading-relaxed text-sm">
-              MarkTale - Turning Your Tale into Sales
+              MarkTale - Turning Your Tale into Sales   priya
               <br />A Unit of MarkTale World Private Limited
             </p>
 
@@ -149,19 +149,19 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   whileHover={{ y: -3, scale: 1.05 }}
                   className={`w-9 h-9 flex items-center justify-center rounded-full transition-all duration-300 group ${social.color === "blue"
-                      ? "bg-blue-600/20 hover:bg-blue-600"
-                      : social.color === "yellow"
-                        ? "bg-yellow-500/20 hover:bg-yellow-500"
-                        : "bg-white/10 hover:bg-white"
+                    ? "bg-blue-600/20 hover:bg-blue-600"
+                    : social.color === "yellow"
+                      ? "bg-yellow-500/20 hover:bg-yellow-500"
+                      : "bg-white/10 hover:bg-white"
                     }`}
                 >
                   <social.icon
                     size={16}
                     className={`transition-colors ${social.color === "blue"
-                        ? "text-blue-400 group-hover:text-white"
-                        : social.color === "yellow"
-                          ? "text-yellow-500 group-hover:text-black"
-                          : "text-white/70 group-hover:text-black"
+                      ? "text-blue-400 group-hover:text-white"
+                      : social.color === "yellow"
+                        ? "text-yellow-500 group-hover:text-black"
+                        : "text-white/70 group-hover:text-black"
                       }`}
                   />
                 </motion.a>
