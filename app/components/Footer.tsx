@@ -135,7 +135,7 @@ export default function Footer() {
             </Link>
 
             <p className="text-white/50 mb-6 leading-relaxed text-sm">
-              MarkTale - Turning Your Tale into Sales   priya
+              MarkTale - Turning Your Tale into Sales
               <br />A Unit of MarkTale World Private Limited
             </p>
 
