@@ -11,7 +11,7 @@ import {
   Instagram,
   Mail,
   Phone,
-  MapPin,  
+  MapPin,
   Sparkles,
   ArrowRight,
   Send,
@@ -103,13 +103,12 @@ export default function Footer() {
               className="flex items-center gap-2 px-3 py-1.5 bg-white/5 rounded-full border border-white/10 hover:bg-white/10 transition-all"
             >
               <badge.icon
-                className={`w-3.5 h-3.5 ${
-                  badge.color === "blue"
+                className={`w-3.5 h-3.5 ${badge.color === "blue"
                     ? "text-blue-400"
                     : badge.color === "yellow"
                       ? "text-yellow-500"
                       : "text-white"
-                }`}
+                  }`}
               />
               <span className="text-xs text-white/70">{badge.label}</span>
             </motion.div>
@@ -136,7 +135,7 @@ export default function Footer() {
             </Link>
 
             <p className="text-white/50 mb-6 leading-relaxed text-sm">
-              MarkTale – Powered by AI
+              MarkTale - Turning Your Tale into Sales
               <br />A Unit of MarkTale World Private Limited
             </p>
 
@@ -149,23 +148,21 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ y: -3, scale: 1.05 }}
-                  className={`w-9 h-9 flex items-center justify-center rounded-full transition-all duration-300 group ${
-                    social.color === "blue"
+                  className={`w-9 h-9 flex items-center justify-center rounded-full transition-all duration-300 group ${social.color === "blue"
                       ? "bg-blue-600/20 hover:bg-blue-600"
                       : social.color === "yellow"
                         ? "bg-yellow-500/20 hover:bg-yellow-500"
                         : "bg-white/10 hover:bg-white"
-                  }`}
+                    }`}
                 >
                   <social.icon
                     size={16}
-                    className={`transition-colors ${
-                      social.color === "blue"
+                    className={`transition-colors ${social.color === "blue"
                         ? "text-blue-400 group-hover:text-white"
                         : social.color === "yellow"
                           ? "text-yellow-500 group-hover:text-black"
                           : "text-white/70 group-hover:text-black"
-                    }`}
+                      }`}
                   />
                 </motion.a>
               ))}
@@ -276,10 +273,10 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3 group">
                 <Phone size={18} className="text-blue-400 group-hover:scale-110 transition-transform" />
-                
-                 <a href={`tel:${process.env.NEXT_PUBLIC_CONTACT_PHONE_RAW}`}
+
+                <a href={`tel:${process.env.NEXT_PUBLIC_CONTACT_PHONE_RAW}`}
                   className="text-white/50 hover:text-blue-400 transition-colors text-sm"
-                > 
+                >
                   {process.env.NEXT_PUBLIC_CONTACT_PHONE}
                 </a>
               </li>
@@ -291,11 +288,11 @@ export default function Footer() {
                 <a
                   // href="mailto:info@marktaleworld.com"
                   href={`mailto:${process.env.NEXT_PUBLIC_CONTACT_EMAIL}`}
-                  
+
 
                   className="text-white/50 hover:text-blue-400 transition-colors text-sm"
                 >
-{process.env.NEXT_PUBLIC_CONTACT_EMAIL}                </a>
+                  {process.env.NEXT_PUBLIC_CONTACT_EMAIL}                </a>
               </li>
             </ul>
 

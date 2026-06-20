@@ -90,7 +90,7 @@
 // //                     +91-85878 70707
 // //                   </a>
 // //                 </div> */}
-              
+
 
 // //               <div className="flex items-start">
 // //                 <div className="w-12 h-12 bg-neutral-100 rounded-lg flex items-center justify-center text-kestone-black mr-6 shrink-0">
@@ -680,6 +680,7 @@ export default function ContactForm() {
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-0.5">Email</p>
                 <a
                   href={`mailto:${CONTACT_EMAIL}?subject=Project Inquiry - MarkTale World`}
+
                   className="text-sm font-semibold text-kestone-black hover:text-kestone-red transition-colors"
                 >
                   {CONTACT_EMAIL}
@@ -709,8 +710,11 @@ export default function ContactForm() {
               <div>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-0.5">Visit Us</p>
                 <p className="text-sm font-semibold text-kestone-black leading-relaxed">
-                  Plot no. 141, Sec. 14, Dwarka, New Delhi - 110078
-                </p>
+                  Head Office: Plot No. 141, Sector 14, Dwarka, New Delhi - 110078
+
+                  Branch Office: BB Ganj, Muzaffarpur, Bihar - 842001
+
+                  Branch Office: NRI Apartment, Sector 58, Seawoods, Navi Mumbai, Maharashtra 400706            </p>
               </div>
             </div>
 

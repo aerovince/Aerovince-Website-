@@ -585,7 +585,7 @@ export default async function ProjectPage({
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
 
         {/* Back link — top-28 clears fixed navbar + announcement bar */}
-        <div className="absolute top-28 left-6 z-10">
+        <div className="absolute top-14 left-1 z-10">
           <Link
             href="/portfolio"
             className="inline-flex items-center gap-2 px-4 py-2 bg-white/15 backdrop-blur-sm border border-white/25 rounded-full text-white text-sm font-semibold hover:bg-white/25 transition-colors duration-200"
