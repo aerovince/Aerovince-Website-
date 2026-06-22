@@ -168,7 +168,8 @@ export default function ReelsShowcase() {
                 </motion.div>
 
                 {/* Reels Grid */}
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+                {/* <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"> */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
                     {reels.slice(1).map((reel, idx) => (
                         <motion.div
                             key={reel.id}

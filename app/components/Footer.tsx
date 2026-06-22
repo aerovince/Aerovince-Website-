@@ -193,7 +193,8 @@ export default function Footer() {
                 { name: "Home", href: "/" },
                 { name: "About Us", href: "/about" },
                 { name: "Events & Awards", href: "/awards" },
-                { name: "Projects", href: "/projects" },
+                // { name: "Projects", href: "/projects" },
+                { name: "Portfolio", href: "/portfolio" },
                 { name: "Blogs", href: "/blogs" },
                 { name: "Contact", href: "/contact" },
               ].map((item) => (

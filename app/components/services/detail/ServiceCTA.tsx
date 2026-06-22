@@ -22,7 +22,8 @@ export default function ServiceCTA() {
                         Start Your Project <ArrowRight size={20} />
                     </Link>
                     <Link
-                        href="/projects"
+                        // href="/projects"
+                        href="/portfolio"
                         className="px-10 py-4 rounded-full font-bold text-lg uppercase tracking-wider border border-white hover:bg-white hover:text-black transition-all"
                     >
                         View Our Work
