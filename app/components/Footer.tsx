@@ -24,6 +24,8 @@ import {
 } from "lucide-react";
 import { services } from "@/lib/servicesData";
 
+
+//add space
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   const [email, setEmail] = useState("");
