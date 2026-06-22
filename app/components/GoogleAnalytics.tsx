@@ -8,6 +8,10 @@ const GA_ID = 'G - 559TPJ9KF6';
 export default function GoogleAnalytics() {
   return (
     <>
+      {/* add a space       */}
+
+
+
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
         strategy="afterInteractive"
