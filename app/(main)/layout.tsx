@@ -1,7 +1,15 @@
-// C:\New-Marktale-website\app\(main)\layout.tsx
+
+
+
+
+
+
+
+// app/(main)/layout.tsx
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import BehavioralPopups from "@/components/BehavioralPopups";
 
 export default function MainLayout({
   children,
@@ -17,6 +25,16 @@ export default function MainLayout({
       </main>
 
       <Footer />
+
+      {/*
+        BehavioralPopups — lives here so it runs on every route in (main).
+        Renders:
+          1. Grow Your Brand popup — 8s after every load, repeats every hour
+          2. Email newsletter popup — 20s delay, once per calendar day
+          3. Floating "See what we do" button → agency showcase drawer
+        Admin routes are outside (main) so they stay popup-free.
+      */}
+      <BehavioralPopups />
     </>
   );
 }
