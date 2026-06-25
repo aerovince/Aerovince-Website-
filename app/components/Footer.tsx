@@ -199,8 +199,10 @@ export default function Footer() {
                 { name: "Events & Awards", href: "/awards" },
                 // { name: "Projects", href: "/projects" },
                 { name: "Portfolio", href: "/portfolio" },
-                { name: "Blogs", href: "/blogs" },
+                { name: "Blogs", href: "/blog" },
                 { name: "Contact", href: "/contact" },
+                { name: 'Startup', href: '/startup-growth' },
+
               ].map((item) => (
                 <li key={item.name}>
                   <Link

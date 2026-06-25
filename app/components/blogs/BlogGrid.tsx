@@ -88,7 +88,7 @@
 
 
 
-
+//C:\New-Marktale-website\app\components\blogs\BlogGrid.tsx
 
 
 "use client";
@@ -108,7 +108,7 @@ import Link from "next/link";
 import { db } from "../../lib/firebase";
 import { collection, getDocs } from "firebase/firestore";
 
-const FALLBACK_IMAGE ="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&q=80";
+const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&q=80";
 
 function getImage(url: string | undefined | null): string {
   if (!url || typeof url !== "string" || url.trim() === "")
@@ -239,9 +239,9 @@ export default function BlogGrid() {
                 style={
                   activeCategory === cat
                     ? {
-                        background: cat === "All" ? "#000" : catColor(cat),
-                        color: "#fff",
-                      }
+                      background: cat === "All" ? "#000" : catColor(cat),
+                      color: "#fff",
+                    }
                     : { background: "#f4f4f5", color: "#71717a" }
                 }
               >
