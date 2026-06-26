@@ -647,7 +647,7 @@ export default function TeamCTA() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.5 }}
-            className="mt-8"
+            className="mt-8  mb-10"
           >
             <p className="text-xs text-gray-400">
               🚀 Ready to start? Get a free consultation within 24 hours
