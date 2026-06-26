@@ -129,7 +129,7 @@ export default function Footer() {
           >
             <Link href="/" className="relative block w-40 h-12 mb-6">
               <Image
-                src="/images/image.png"
+                src="/images/Marktale logo white.png"
                 alt="MarkTale"
                 fill
                 className="object-contain"

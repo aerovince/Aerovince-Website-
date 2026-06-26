@@ -53,16 +53,18 @@ export default function Manifesto() {
                     transition={{ duration: 1, delay: 0.8 }}
                 >
                     <p>
-                        MarkTale is an AI powered pioneering advertising and marketing company dedicated
-                        to helping businesses of all sizes achieve their maximum potential through innovative
-                        and effective marketing strategies. We are committed to driving brand visibility,
-                        customer engagement, and lead generation for its clients.
-                    </p>
-                    <p className="text-white font-medium">
-                        What sets us apart is our unwavering dedication to our craft. With specialized
-                        departments focused on their respective areas of expertise, we delve deep into
-                        each project to ensure every detail is meticulously crafted.
-                    </p>
+  MarkTale is a full-service digital marketing and branding agency dedicated
+  to helping startups, businesses, and growing brands achieve sustainable growth
+  through innovative marketing strategies, website development, SEO, performance
+  marketing, and creative branding solutions.
+</p>
+
+<p className="text-white font-medium">
+  What sets us apart is our commitment to delivering measurable results.
+  Our team combines creativity, strategy, and technology to build brands,
+  generate quality leads, and create digital experiences that drive long-term
+  business growth.
+</p>
                 </motion.div>
 
                 <motion.div
