@@ -76,8 +76,7 @@ import WhyChooseAerovince from "../components/Whychooseaerovince";
 import Testimonials from "../components/Testimonials";
 import FAQSection from "../components/Faqsection";
 import HomeContactSection from "../components/HomeContactSection";
-import WhatsAppMascot from "../components/WhatsAppMascot";
-import WhatsAppFloat from "../components/WhatsAppFloat";
+
 
 export default async function Home() {
   return (
@@ -128,8 +127,8 @@ export default async function Home() {
       <HomeContactSection />
 
       {/* Floating, always-available conversion paths — fine to keep global */}
-      <WhatsAppMascot />
-      <WhatsAppFloat />
+      {/* <WhatsAppMascot /> */}
+ 
     </main>
   );
 }
