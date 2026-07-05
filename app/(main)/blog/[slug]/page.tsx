@@ -10,85 +10,422 @@
 
 
 
-// app/blog/[slug]/page.tsx
+// // app/blog/[slug]/page.tsx
+// import { notFound } from "next/navigation";
+// import { db } from "@/lib/firebase";
+// import { collection, getDocs, query, where } from "firebase/firestore";
+// import Link from "next/link";
+// import { Clock, User, Calendar, ArrowLeft, ChevronRight } from "lucide-react";
+
+// // ── Types ─────────────────────────────────────────────────────────────
+// type Props = { params: Promise<{ slug: string }> };
+
+// interface BlogPost {
+//   id: string;
+//   slug: string;
+//   title: string;
+//   status?: string;
+//   excerpt?: string;
+//   content?: string;
+//   image?: string;
+//   category?: string;
+//   author?: string;
+//   date?: string | number | Date;
+//   readTime?: string;
+// }
+
+// // ── Constants & Helpers ───────────────────────────────────────────────
+// const CAT_COLORS: Record<string, { bg: string; text: string; border: string; dot: string }> = {
+//   Leadership:      { bg: "#EEF2FF", text: "#4F46E5", border: "#C7D2FE", dot: "#6366F1" },
+//   "Career Growth": { bg: "#ECFDF5", text: "#059669", border: "#A7F3D0", dot: "#10B981" },
+//   Productivity:    { bg: "#FFFBEB", text: "#D97706", border: "#FDE68A", dot: "#F59E0B" },
+//   Mindset:         { bg: "#FDF2F8", text: "#DB2777", border: "#FBCFE8", dot: "#EC4899" },
+//   Technology:      { bg: "#EFF6FF", text: "#2563EB", border: "#BFDBFE", dot: "#3B82F6" },
+//   Business:        { bg: "#F5F3FF", text: "#7C3AED", border: "#DDD6FE", dot: "#8B5CF6" },
+//   Wellness:        { bg: "#F0FDFA", text: "#0D9488", border: "#99F6E4", dot: "#14B8A6" },
+//   Finance:         { bg: "#FFF7ED", text: "#EA580C", border: "#FED7AA", dot: "#F97316" },
+// };
+
+// function formatDate(dateValue?: string | number | Date | null) {
+//   if (!dateValue) return null;
+//   try {
+//     return new Date(dateValue).toLocaleDateString("en-US", {
+//       month: "long",
+//       day: "numeric",
+//       year: "numeric",
+//     });
+//   } catch {
+//     return String(dateValue);
+//   }
+// }
+
+// // ── Data Fetching ─────────────────────────────────────────────────────
+// async function getBlogBySlug(slug: string): Promise<BlogPost | null> {
+//   try {
+//     const q = query(collection(db, "blogs"), where("slug", "==", slug));
+//     const snap = await getDocs(q);
+    
+//     if (snap.empty) return null;
+    
+//     const d = snap.docs[0];
+//     return { id: d.id, ...d.data() } as BlogPost;
+//   } catch (err) {
+//     console.error("Error fetching blog:", err);
+//     return null;
+//   }
+// }
+
+// export async function generateMetadata({ params }: Props) {
+//   const { slug } = await params;
+//   const blog = await getBlogBySlug(slug);
+  
+//   if (!blog) return { title: "Article Not Found" };
+  
+//   return {
+//     title: blog.title,
+//     description: blog.excerpt || "Read this article on our blog.",
+//     openGraph: {
+//       title: blog.title,
+//       description: blog.excerpt || "",
+//       images: blog.image ? [{ url: blog.image }] : [],
+//     },
+//   };
+// }
+
+// export async function generateStaticParams() {
+//   try {
+//     const snap = await getDocs(collection(db, "blogs"));
+//     return snap.docs
+//       .filter((d) => d.data().status?.toLowerCase() === "published" && d.data().slug)
+//       .map((d) => ({ slug: d.data().slug as string }));
+//   } catch {
+//     return [];
+//   }
+// }
+
+// // ── Components ────────────────────────────────────────────────────────
+// function CategoryBadge({ category }: { category: string }) {
+//   const col = CAT_COLORS[category] ?? { bg: "#F8FAFC", text: "#475569", border: "#E2E8F0", dot: "#64748B" };
+  
+//   return (
+//     <span
+//       className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest border"
+//       style={{ background: col.bg, color: col.text, borderColor: col.border }}
+//     >
+//       <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: col.dot }} />
+//       {category}
+//     </span>
+//   );
+// }
+
+// // ── Main Page ─────────────────────────────────────────────────────────
+// export default async function BlogPostPage({ params }: Props) {
+//   const { slug } = await params;
+//   const blog = await getBlogBySlug(slug);
+
+//   if (!blog) notFound();
+//   if (blog.status?.toLowerCase() !== "published") notFound();
+
+//   const formattedDate = formatDate(blog.date);
+//   const accentColor = blog.category ? (CAT_COLORS[blog.category]?.dot ?? "#2563eb") : "#2563eb";
+
+//   return (
+//     <div className="min-h-screen bg-[#F8FAFC]">
+//       {/* Top Accent Line */}
+//       <div
+//         className="fixed top-0 left-0 h-[3px] w-full z-50"
+//         style={{ background: `linear-gradient(90deg, ${accentColor}, #06b6d4 60%, transparent)` }}
+//       />
+
+//       {/* Main Container - pt-32 prevents navbar collision */}
+//       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-24">
+        
+//         {/* Breadcrumb */}
+//         <nav className="pb-8" aria-label="Breadcrumb">
+//           <Link
+//             href="/blog"
+//             className="group inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-gray-400 hover:text-gray-700 transition-colors"
+//           >
+//             <ArrowLeft size={12} className="group-hover:-translate-x-0.5 transition-transform" />
+//             All Articles
+//           </Link>
+//         </nav>
+
+//         {/* ── HERO SECTION ── */}
+//         <header className="max-w-4xl mb-12">
+//           {blog.category && (
+//             <div className="mb-5">
+//               <CategoryBadge category={blog.category} />
+//             </div>
+//           )}
+
+//           <div className="flex flex-wrap items-center gap-5 mb-6">
+//             {blog.author && (
+//               <div className="flex items-center gap-2">
+//                 <div
+//                   className="w-8 h-8 rounded-full flex items-center justify-center text-white text-[11px] font-black flex-shrink-0 shadow-sm"
+//                   style={{ background: `linear-gradient(135deg, ${accentColor}, #06b6d4)` }}
+//                 >
+//                   {blog.author.charAt(0).toUpperCase()}
+//                 </div>
+//                 <span className="text-sm font-semibold text-gray-600">{blog.author}</span>
+//               </div>
+//             )}
+            
+//             {formattedDate && (
+//               <span className="flex items-center gap-1.5 text-sm text-gray-400 font-medium">
+//                 <Calendar size={14} /> {formattedDate}
+//               </span>
+//             )}
+            
+//             {blog.readTime && (
+//               <span className="flex items-center gap-1.5 text-sm text-gray-400 font-medium">
+//                 <Clock size={14} /> {blog.readTime}
+//               </span>
+//             )}
+//           </div>
+
+//           <h1
+//             className="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 leading-[1.1] mb-6 text-balance"
+//             style={{ letterSpacing: "-0.02em" }}
+//           >
+//             {blog.title}
+//           </h1>
+
+//           {blog.excerpt && (
+//             <div className="flex gap-4 mb-10 max-w-2xl">
+//               <div
+//                 className="w-[4px] rounded-full flex-shrink-0"
+//                 style={{ background: `linear-gradient(180deg, ${accentColor}, #06b6d4)` }}
+//               />
+//               <p className="text-lg text-gray-500 leading-relaxed font-medium text-pretty">
+//                 {blog.excerpt}
+//               </p>
+//             </div>
+//           )}
+//         </header>
+
+//         {/* Hero Image - Natural Size & No Cropping */}
+//         {blog.image && (
+//           <div className="mb-16 rounded-2xl overflow-hidden shadow-lg w-full bg-gray-100 flex items-center justify-center">
+//             <img
+//               src={blog.image}
+//               alt={blog.title}
+//               loading="eager"
+//               decoding="async"
+//               className="w-full h-auto max-h-[600px] object-contain"
+//             />
+//           </div>
+//         )}
+
+//         {/* ── BODY & SIDEBAR (Switched to CSS Grid to prevent squishing) ── */}
+//         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          
+//           {/* Article Content (Spans 8 columns) */}
+//           <article className="lg:col-span-8 w-full min-w-0 overflow-hidden break-words">
+//             {blog.content ? (
+//               <div
+//                 className="
+//                   prose prose-lg max-w-none prose-slate
+//                   prose-headings:font-black prose-headings:tracking-tight prose-headings:text-gray-900
+//                   prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
+//                   prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
+//                   prose-p:text-gray-700 prose-p:leading-loose prose-p:mb-6
+//                   prose-a:font-semibold prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
+//                   prose-strong:text-gray-900 prose-strong:font-bold
+//                   prose-li:text-gray-700 prose-li:leading-relaxed
+//                   prose-ul:space-y-2 prose-ol:space-y-2
+//                   prose-blockquote:not-italic prose-blockquote:font-semibold prose-blockquote:text-gray-700
+//                   prose-blockquote:border-l-[4px] prose-blockquote:border-blue-500 prose-blockquote:bg-gray-50 prose-blockquote:py-3 prose-blockquote:px-5 prose-blockquote:rounded-r-xl
+//                   prose-img:rounded-xl prose-img:shadow-md
+//                   prose-hr:border-gray-200 prose-hr:my-12
+//                   [&>p]:mb-6 [&>p]:leading-relaxed /* Fallback just in case typography plugin fails */
+//                 "
+//                 dangerouslySetInnerHTML={{ __html: blog.content }}
+//               />
+//             ) : (
+//               <p className="text-gray-400 italic text-base">No content available.</p>
+//             )}
+
+//             {/* Footer CTAs */}
+//             <div className="mt-16 pt-10 border-t border-gray-200 flex flex-col sm:flex-row gap-4">
+//               <Link
+//                 href="/blogs"
+//                 className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white border border-gray-200 text-sm text-gray-600 hover:text-gray-900 hover:border-gray-300 hover:shadow-sm transition-all font-semibold"
+//               >
+//                 <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+//                 Browse All Articles
+//               </Link>
+//               <Link
+//                 href="/contact"
+//                 className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-white text-sm font-bold shadow-md hover:shadow-lg transition-all hover:-translate-y-0.5"
+//                 style={{ background: `linear-gradient(135deg, ${accentColor}, #06b6d4)` }}
+//               >
+//                 Work With Us <ChevronRight size={16} />
+//               </Link>
+//             </div>
+//           </article>
+
+//           {/* Sidebar (Spans 4 columns) */}
+//           <aside className="lg:col-span-4 w-full">
+//             {/* Added max-h and overflow-y-auto to prevent clipping on shorter screens, while hiding the ugly scrollbar */}
+//             <div className="sticky top-32 flex flex-col gap-6 max-h-[calc(100vh-8rem)] overflow-y-auto pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+              
+//               {/* Author Card */}
+//               {blog.author && (
+//                 <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+//                   <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-5">Written by</p>
+//                   <div className="flex items-center gap-4">
+//                     <div
+//                       className="w-12 h-12 rounded-xl flex items-center justify-center text-white text-base font-black flex-shrink-0 shadow-sm"
+//                       style={{ background: `linear-gradient(135deg, ${accentColor}, #06b6d4)` }}
+//                     >
+//                       {blog.author.charAt(0).toUpperCase()}
+//                     </div>
+//                     <div>
+//                       <p className="text-base font-black text-gray-900 leading-tight">{blog.author}</p>
+//                       <p className="text-xs font-medium text-gray-500 mt-1">Author</p>
+//                     </div>
+//                   </div>
+//                 </div>
+//               )}
+
+//               {/* Meta Details Card */}
+//               <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm space-y-6">
+//                 <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">Article details</p>
+
+//                 {formattedDate && (
+//                   <div className="flex items-start gap-4">
+//                     <div className="w-10 h-10 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center flex-shrink-0">
+//                       <Calendar size={16} className="text-gray-500" />
+//                     </div>
+//                     <div>
+//                       <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Published</p>
+//                       <p className="text-sm font-bold text-gray-800">{formattedDate}</p>
+//                     </div>
+//                   </div>
+//                 )}
+
+//                 {blog.readTime && (
+//                   <div className="flex items-start gap-4">
+//                     <div className="w-10 h-10 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center flex-shrink-0">
+//                       <Clock size={16} className="text-gray-500" />
+//                     </div>
+//                     <div>
+//                       <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Read time</p>
+//                       <p className="text-sm font-bold text-gray-800">{blog.readTime}</p>
+//                     </div>
+//                   </div>
+//                 )}
+
+//                 {blog.category && (
+//                   <div className="flex items-start gap-4">
+//                     <div className="w-10 h-10 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center flex-shrink-0">
+//                       <User size={16} className="text-gray-500" />
+//                     </div>
+//                     <div>
+//                       <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Category</p>
+//                       <CategoryBadge category={blog.category} />
+//                     </div>
+//                   </div>
+//                 )}
+//               </div>
+
+//               {/* Promotional CTA Card */}
+//               <div
+//                 className="rounded-2xl p-6 text-white overflow-hidden relative shadow-lg flex-shrink-0"
+//                 style={{ background: `linear-gradient(135deg, #1e40af, #0e7490)` }}
+//               >
+//                 <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-white/10 blur-3xl pointer-events-none" />
+//                 <div className="relative z-10">
+//                   <p className="text-[10px] font-black uppercase tracking-widest text-white/70 mb-3">Get started</p>
+//                   <h3 className="text-lg font-black mb-3 leading-snug">Ready to build your brand?</h3>
+//                   <p className="text-white/80 text-sm leading-relaxed mb-5">
+//                     Let&apos;s craft your narrative and grow your influence together.
+//                   </p>
+//                   <Link
+//                     href="/contact"
+//                     className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white text-xs font-black uppercase tracking-widest hover:bg-gray-50 hover:scale-[1.02] transition-all shadow-sm"
+//                     style={{ color: accentColor }}
+//                   >
+//                     Get in touch <ChevronRight size={14} strokeWidth={3} />
+//                   </Link>
+//                 </div>
+//               </div>
+
+//             </div>
+//           </aside>
+
+//         </div>
+//       </main>
+//     </div>
+//   );
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { notFound } from "next/navigation";
 import { db } from "@/lib/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import Link from "next/link";
 import { Clock, User, Calendar, ArrowLeft, ChevronRight } from "lucide-react";
 
-// ── Types ─────────────────────────────────────────────────────────────
 type Props = { params: Promise<{ slug: string }> };
 
 interface BlogPost {
-  id: string;
-  slug: string;
-  title: string;
-  status?: string;
-  excerpt?: string;
-  content?: string;
-  image?: string;
-  category?: string;
-  author?: string;
-  date?: string | number | Date;
-  readTime?: string;
+  id: string; slug: string; title: string; status?: string;
+  excerpt?: string; content?: string; image?: string;
+  category?: string; author?: string;
+  date?: string | number | Date; readTime?: string;
 }
 
-// ── Constants & Helpers ───────────────────────────────────────────────
-const CAT_COLORS: Record<string, { bg: string; text: string; border: string; dot: string }> = {
-  Leadership:      { bg: "#EEF2FF", text: "#4F46E5", border: "#C7D2FE", dot: "#6366F1" },
-  "Career Growth": { bg: "#ECFDF5", text: "#059669", border: "#A7F3D0", dot: "#10B981" },
-  Productivity:    { bg: "#FFFBEB", text: "#D97706", border: "#FDE68A", dot: "#F59E0B" },
-  Mindset:         { bg: "#FDF2F8", text: "#DB2777", border: "#FBCFE8", dot: "#EC4899" },
-  Technology:      { bg: "#EFF6FF", text: "#2563EB", border: "#BFDBFE", dot: "#3B82F6" },
-  Business:        { bg: "#F5F3FF", text: "#7C3AED", border: "#DDD6FE", dot: "#8B5CF6" },
-  Wellness:        { bg: "#F0FDFA", text: "#0D9488", border: "#99F6E4", dot: "#14B8A6" },
-  Finance:         { bg: "#FFF7ED", text: "#EA580C", border: "#FED7AA", dot: "#F97316" },
+const CAT_STYLES: Record<string, { bg: string; text: string; border: string; dot: string; glow: string }> = {
+  Leadership:      { bg: "rgba(124,58,237,.14)", text: "#a78bfa", border: "rgba(124,58,237,.3)", dot: "#7c3aed", glow: "rgba(124,58,237,.25)" },
+  "Career Growth": { bg: "rgba(16,185,129,.12)", text: "#6ee7b7", border: "rgba(16,185,129,.28)", dot: "#10b981", glow: "rgba(16,185,129,.2)" },
+  Productivity:    { bg: "rgba(245,158,11,.12)",  text: "#fbbf24", border: "rgba(245,158,11,.28)", dot: "#f59e0b", glow: "rgba(245,158,11,.2)" },
+  Mindset:         { bg: "rgba(236,72,153,.12)",  text: "#f9a8d4", border: "rgba(236,72,153,.28)", dot: "#ec4899", glow: "rgba(236,72,153,.2)" },
+  Technology:      { bg: "rgba(6,182,212,.12)",   text: "#67e8f9", border: "rgba(6,182,212,.28)", dot: "#06b6d4",  glow: "rgba(6,182,212,.2)" },
+  Business:        { bg: "rgba(167,139,250,.12)", text: "#c4b5fd", border: "rgba(167,139,250,.28)", dot: "#8b5cf6", glow: "rgba(139,92,246,.2)" },
+  Wellness:        { bg: "rgba(20,184,166,.12)",  text: "#5eead4", border: "rgba(20,184,166,.28)", dot: "#14b8a6", glow: "rgba(20,184,166,.2)" },
+  Finance:         { bg: "rgba(251,146,60,.12)",  text: "#fdba74", border: "rgba(251,146,60,.28)", dot: "#f97316", glow: "rgba(249,115,22,.2)" },
 };
+const FALLBACK_CAT = { bg: "rgba(148,163,184,.1)", text: "#94a3b8", border: "rgba(148,163,184,.25)", dot: "#64748b", glow: "rgba(100,116,139,.15)" };
 
-function formatDate(dateValue?: string | number | Date | null) {
-  if (!dateValue) return null;
-  try {
-    return new Date(dateValue).toLocaleDateString("en-US", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    });
-  } catch {
-    return String(dateValue);
-  }
+function formatDate(d?: string | number | Date | null) {
+  if (!d) return null;
+  try { return new Date(d).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }); }
+  catch { return String(d); }
 }
 
-// ── Data Fetching ─────────────────────────────────────────────────────
 async function getBlogBySlug(slug: string): Promise<BlogPost | null> {
   try {
     const q = query(collection(db, "blogs"), where("slug", "==", slug));
     const snap = await getDocs(q);
-    
     if (snap.empty) return null;
-    
     const d = snap.docs[0];
     return { id: d.id, ...d.data() } as BlogPost;
-  } catch (err) {
-    console.error("Error fetching blog:", err);
-    return null;
-  }
+  } catch { return null; }
 }
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   const blog = await getBlogBySlug(slug);
-  
   if (!blog) return { title: "Article Not Found" };
-  
   return {
     title: blog.title,
-    description: blog.excerpt || "Read this article on our blog.",
-    openGraph: {
-      title: blog.title,
-      description: blog.excerpt || "",
-      images: blog.image ? [{ url: blog.image }] : [],
-    },
+    description: blog.excerpt || "Read this article.",
+    openGraph: { title: blog.title, description: blog.excerpt || "", images: blog.image ? [{ url: blog.image }] : [] },
   };
 }
 
@@ -96,17 +433,13 @@ export async function generateStaticParams() {
   try {
     const snap = await getDocs(collection(db, "blogs"));
     return snap.docs
-      .filter((d) => d.data().status?.toLowerCase() === "published" && d.data().slug)
-      .map((d) => ({ slug: d.data().slug as string }));
-  } catch {
-    return [];
-  }
+      .filter(d => d.data().status?.toLowerCase() === "published" && d.data().slug)
+      .map(d => ({ slug: d.data().slug as string }));
+  } catch { return []; }
 }
 
-// ── Components ────────────────────────────────────────────────────────
 function CategoryBadge({ category }: { category: string }) {
-  const col = CAT_COLORS[category] ?? { bg: "#F8FAFC", text: "#475569", border: "#E2E8F0", dot: "#64748B" };
-  
+  const col = CAT_STYLES[category] ?? FALLBACK_CAT;
   return (
     <span
       className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest border"
@@ -118,76 +451,81 @@ function CategoryBadge({ category }: { category: string }) {
   );
 }
 
-// ── Main Page ─────────────────────────────────────────────────────────
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
   const blog = await getBlogBySlug(slug);
-
   if (!blog) notFound();
   if (blog.status?.toLowerCase() !== "published") notFound();
 
   const formattedDate = formatDate(blog.date);
-  const accentColor = blog.category ? (CAT_COLORS[blog.category]?.dot ?? "#2563eb") : "#2563eb";
+  const col = blog.category ? (CAT_STYLES[blog.category] ?? FALLBACK_CAT) : FALLBACK_CAT;
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC]">
-      {/* Top Accent Line */}
+    <div
+      className="min-h-screen"
+      style={{ background: "linear-gradient(160deg,#0a0e1a 0%,#0f1221 50%,#080c16 100%)" }}
+    >
+      {/* Accent line */}
       <div
         className="fixed top-0 left-0 h-[3px] w-full z-50"
-        style={{ background: `linear-gradient(90deg, ${accentColor}, #06b6d4 60%, transparent)` }}
+        style={{ background: `linear-gradient(90deg,#7c3aed,${col.dot},#06b6d4,transparent)` }}
       />
 
-      {/* Main Container - pt-32 prevents navbar collision */}
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-24">
-        
+      {/* Ambient orbs */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
+        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full"
+          style={{ background: `radial-gradient(circle,${col.glow},transparent 70%)` }} />
+        <div className="absolute -bottom-40 -left-40 w-[400px] h-[400px] rounded-full"
+          style={{ background: "radial-gradient(circle,rgba(6,182,212,.07),transparent 70%)" }} />
+      </div>
+
+      <main className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-24">
+
         {/* Breadcrumb */}
-        <nav className="pb-8" aria-label="Breadcrumb">
+        <nav className="pb-10" aria-label="Breadcrumb">
           <Link
             href="/blog"
-            className="group inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-gray-400 hover:text-gray-700 transition-colors"
+            className="group inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest transition-colors"
+            style={{ color: "#334155" }}
+            onMouseEnter={e => (e.currentTarget.style.color = "#a78bfa")}
+            onMouseLeave={e => (e.currentTarget.style.color = "#334155")}
           >
             <ArrowLeft size={12} className="group-hover:-translate-x-0.5 transition-transform" />
             All Articles
           </Link>
         </nav>
 
-        {/* ── HERO SECTION ── */}
-        <header className="max-w-4xl mb-12">
-          {blog.category && (
-            <div className="mb-5">
-              <CategoryBadge category={blog.category} />
-            </div>
-          )}
+        {/* Hero */}
+        <header className="max-w-4xl mb-14">
+          {blog.category && <div className="mb-5"><CategoryBadge category={blog.category} /></div>}
 
-          <div className="flex flex-wrap items-center gap-5 mb-6">
+          <div className="flex flex-wrap items-center gap-5 mb-7">
             {blog.author && (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
                 <div
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-white text-[11px] font-black flex-shrink-0 shadow-sm"
-                  style={{ background: `linear-gradient(135deg, ${accentColor}, #06b6d4)` }}
+                  className="w-9 h-9 rounded-xl flex items-center justify-center text-white text-[12px] font-black flex-shrink-0"
+                  style={{ background: `linear-gradient(135deg,#7c3aed,${col.dot})` }}
                 >
                   {blog.author.charAt(0).toUpperCase()}
                 </div>
-                <span className="text-sm font-semibold text-gray-600">{blog.author}</span>
+                <span className="text-sm font-semibold" style={{ color: "#94a3b8" }}>{blog.author}</span>
               </div>
             )}
-            
             {formattedDate && (
-              <span className="flex items-center gap-1.5 text-sm text-gray-400 font-medium">
-                <Calendar size={14} /> {formattedDate}
+              <span className="flex items-center gap-1.5 text-sm font-medium" style={{ color: "#475569" }}>
+                <Calendar size={14} style={{ color: "#334155" }} /> {formattedDate}
               </span>
             )}
-            
             {blog.readTime && (
-              <span className="flex items-center gap-1.5 text-sm text-gray-400 font-medium">
-                <Clock size={14} /> {blog.readTime}
+              <span className="flex items-center gap-1.5 text-sm font-medium" style={{ color: "#475569" }}>
+                <Clock size={14} style={{ color: "#334155" }} /> {blog.readTime}
               </span>
             )}
           </div>
 
           <h1
-            className="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 leading-[1.1] mb-6 text-balance"
-            style={{ letterSpacing: "-0.02em" }}
+            className="text-4xl sm:text-5xl md:text-6xl font-black leading-[1.08] mb-7"
+            style={{ color: "#f1f5f9", letterSpacing: "-0.03em" }}
           >
             {blog.title}
           </h1>
@@ -195,19 +533,22 @@ export default async function BlogPostPage({ params }: Props) {
           {blog.excerpt && (
             <div className="flex gap-4 mb-10 max-w-2xl">
               <div
-                className="w-[4px] rounded-full flex-shrink-0"
-                style={{ background: `linear-gradient(180deg, ${accentColor}, #06b6d4)` }}
+                className="w-[3px] rounded-full flex-shrink-0"
+                style={{ background: `linear-gradient(180deg,#7c3aed,${col.dot})` }}
               />
-              <p className="text-lg text-gray-500 leading-relaxed font-medium text-pretty">
+              <p className="text-lg leading-relaxed font-medium" style={{ color: "#475569" }}>
                 {blog.excerpt}
               </p>
             </div>
           )}
         </header>
 
-        {/* Hero Image - Natural Size & No Cropping */}
+        {/* Hero image */}
         {blog.image && (
-          <div className="mb-16 rounded-2xl overflow-hidden shadow-lg w-full bg-gray-100 flex items-center justify-center">
+          <div
+            className="mb-16 rounded-2xl overflow-hidden w-full flex items-center justify-center border"
+            style={{ background: "#0f1221", borderColor: "rgba(255,255,255,.07)" }}
+          >
             <img
               src={blog.image}
               alt={blog.title}
@@ -218,137 +559,164 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         )}
 
-        {/* ── BODY & SIDEBAR (Switched to CSS Grid to prevent squishing) ── */}
+        {/* Body + Sidebar */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-          
-          {/* Article Content (Spans 8 columns) */}
+
+          {/* Article */}
           <article className="lg:col-span-8 w-full min-w-0 overflow-hidden break-words">
             {blog.content ? (
               <div
                 className="
-                  prose prose-lg max-w-none prose-slate
-                  prose-headings:font-black prose-headings:tracking-tight prose-headings:text-gray-900
+                  prose prose-lg max-w-none prose-invert
+                  prose-headings:font-black prose-headings:tracking-tight
+                  prose-headings:text-slate-100
                   prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
                   prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
-                  prose-p:text-gray-700 prose-p:leading-loose prose-p:mb-6
-                  prose-a:font-semibold prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
-                  prose-strong:text-gray-900 prose-strong:font-bold
-                  prose-li:text-gray-700 prose-li:leading-relaxed
+                  prose-p:text-slate-400 prose-p:leading-loose prose-p:mb-6
+                  prose-a:font-semibold prose-a:text-violet-400 prose-a:no-underline hover:prose-a:underline
+                  prose-strong:text-slate-200 prose-strong:font-bold
+                  prose-li:text-slate-400 prose-li:leading-relaxed
                   prose-ul:space-y-2 prose-ol:space-y-2
-                  prose-blockquote:not-italic prose-blockquote:font-semibold prose-blockquote:text-gray-700
-                  prose-blockquote:border-l-[4px] prose-blockquote:border-blue-500 prose-blockquote:bg-gray-50 prose-blockquote:py-3 prose-blockquote:px-5 prose-blockquote:rounded-r-xl
-                  prose-img:rounded-xl prose-img:shadow-md
-                  prose-hr:border-gray-200 prose-hr:my-12
-                  [&>p]:mb-6 [&>p]:leading-relaxed /* Fallback just in case typography plugin fails */
+                  prose-blockquote:not-italic prose-blockquote:font-semibold prose-blockquote:text-slate-300
+                  prose-blockquote:border-l-[3px] prose-blockquote:border-violet-500
+                  prose-blockquote:bg-violet-500/5 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-xl
+                  prose-img:rounded-xl prose-hr:border-slate-800 prose-hr:my-12
                 "
                 dangerouslySetInnerHTML={{ __html: blog.content }}
               />
             ) : (
-              <p className="text-gray-400 italic text-base">No content available.</p>
+              <p className="italic text-base" style={{ color: "#334155" }}>No content available.</p>
             )}
 
             {/* Footer CTAs */}
-            <div className="mt-16 pt-10 border-t border-gray-200 flex flex-col sm:flex-row gap-4">
+            <div className="mt-16 pt-10 border-t flex flex-col sm:flex-row gap-4" style={{ borderColor: "rgba(255,255,255,.06)" }}>
               <Link
-                href="/blogs"
-                className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white border border-gray-200 text-sm text-gray-600 hover:text-gray-900 hover:border-gray-300 hover:shadow-sm transition-all font-semibold"
+                href="/blog"
+                className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold transition-all border"
+                style={{ background: "rgba(255,255,255,.04)", borderColor: "rgba(255,255,255,.08)", color: "#94a3b8" }}
               >
-                <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+                <ArrowLeft size={15} className="group-hover:-translate-x-1 transition-transform" />
                 Browse All Articles
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-white text-sm font-bold shadow-md hover:shadow-lg transition-all hover:-translate-y-0.5"
-                style={{ background: `linear-gradient(135deg, ${accentColor}, #06b6d4)` }}
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-white text-sm font-bold transition-all hover:-translate-y-0.5"
+                style={{ background: "linear-gradient(135deg,#7c3aed,#06b6d4)", boxShadow: "0 4px 20px rgba(124,58,237,.3)" }}
               >
-                Work With Us <ChevronRight size={16} />
+                Work With Us <ChevronRight size={15} />
               </Link>
             </div>
           </article>
 
-          {/* Sidebar (Spans 4 columns) */}
+          {/* Sidebar */}
           <aside className="lg:col-span-4 w-full">
-            {/* Added max-h and overflow-y-auto to prevent clipping on shorter screens, while hiding the ugly scrollbar */}
-            <div className="sticky top-32 flex flex-col gap-6 max-h-[calc(100vh-8rem)] overflow-y-auto pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
-              
-              {/* Author Card */}
+            <div
+              className="sticky top-32 flex flex-col gap-5 max-h-[calc(100vh-8rem)] overflow-y-auto pb-4"
+              style={{ scrollbarWidth: "none" }}
+            >
+
+              {/* Author card */}
               {blog.author && (
-                <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
-                  <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-5">Written by</p>
+                <div
+                  className="rounded-2xl p-6 border"
+                  style={{ background: "rgba(255,255,255,.03)", borderColor: "rgba(255,255,255,.07)" }}
+                >
+                  <p className="text-[10px] font-black uppercase tracking-widest mb-5" style={{ color: "#334155" }}>Written by</p>
                   <div className="flex items-center gap-4">
                     <div
-                      className="w-12 h-12 rounded-xl flex items-center justify-center text-white text-base font-black flex-shrink-0 shadow-sm"
-                      style={{ background: `linear-gradient(135deg, ${accentColor}, #06b6d4)` }}
+                      className="w-12 h-12 rounded-xl flex items-center justify-center text-white text-base font-black flex-shrink-0"
+                      style={{ background: `linear-gradient(135deg,#7c3aed,${col.dot})` }}
                     >
                       {blog.author.charAt(0).toUpperCase()}
                     </div>
                     <div>
-                      <p className="text-base font-black text-gray-900 leading-tight">{blog.author}</p>
-                      <p className="text-xs font-medium text-gray-500 mt-1">Author</p>
+                      <p className="text-base font-black" style={{ color: "#f1f5f9" }}>{blog.author}</p>
+                      <p className="text-xs font-medium mt-0.5" style={{ color: "#334155" }}>Author</p>
                     </div>
                   </div>
                 </div>
               )}
 
-              {/* Meta Details Card */}
-              <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm space-y-6">
-                <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">Article details</p>
+              {/* Meta card */}
+              <div
+                className="rounded-2xl p-6 border space-y-5"
+                style={{ background: "rgba(255,255,255,.03)", borderColor: "rgba(255,255,255,.07)" }}
+              >
+                <p className="text-[10px] font-black uppercase tracking-widest" style={{ color: "#334155" }}>Article details</p>
 
                 {formattedDate && (
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center flex-shrink-0">
-                      <Calendar size={16} className="text-gray-500" />
+                    <div
+                      className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 border"
+                      style={{ background: "rgba(255,255,255,.04)", borderColor: "rgba(255,255,255,.06)" }}
+                    >
+                      <Calendar size={15} style={{ color: "#475569" }} />
                     </div>
                     <div>
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Published</p>
-                      <p className="text-sm font-bold text-gray-800">{formattedDate}</p>
+                      <p className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{ color: "#334155" }}>Published</p>
+                      <p className="text-sm font-bold" style={{ color: "#94a3b8" }}>{formattedDate}</p>
                     </div>
                   </div>
                 )}
 
                 {blog.readTime && (
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center flex-shrink-0">
-                      <Clock size={16} className="text-gray-500" />
+                    <div
+                      className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 border"
+                      style={{ background: "rgba(255,255,255,.04)", borderColor: "rgba(255,255,255,.06)" }}
+                    >
+                      <Clock size={15} style={{ color: "#475569" }} />
                     </div>
                     <div>
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">Read time</p>
-                      <p className="text-sm font-bold text-gray-800">{blog.readTime}</p>
+                      <p className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{ color: "#334155" }}>Read time</p>
+                      <p className="text-sm font-bold" style={{ color: "#94a3b8" }}>{blog.readTime}</p>
                     </div>
                   </div>
                 )}
 
                 {blog.category && (
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center flex-shrink-0">
-                      <User size={16} className="text-gray-500" />
+                    <div
+                      className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 border"
+                      style={{ background: "rgba(255,255,255,.04)", borderColor: "rgba(255,255,255,.06)" }}
+                    >
+                      <User size={15} style={{ color: "#475569" }} />
                     </div>
                     <div>
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">Category</p>
+                      <p className="text-[10px] font-bold uppercase tracking-widest mb-2" style={{ color: "#334155" }}>Category</p>
                       <CategoryBadge category={blog.category} />
                     </div>
                   </div>
                 )}
               </div>
 
-              {/* Promotional CTA Card */}
+              {/* CTA card */}
               <div
-                className="rounded-2xl p-6 text-white overflow-hidden relative shadow-lg flex-shrink-0"
-                style={{ background: `linear-gradient(135deg, #1e40af, #0e7490)` }}
+                className="rounded-2xl p-6 relative overflow-hidden border"
+                style={{
+                  background:   "linear-gradient(135deg,#1e1b4b,#0c2040)",
+                  borderColor:  "rgba(124,58,237,.25)",
+                  boxShadow:    "0 4px 30px rgba(124,58,237,.15)",
+                }}
               >
-                <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-white/10 blur-3xl pointer-events-none" />
+                <div className="absolute -top-12 -right-12 w-32 h-32 rounded-full pointer-events-none"
+                  style={{ background: "radial-gradient(circle,rgba(124,58,237,.3),transparent 70%)" }} />
                 <div className="relative z-10">
-                  <p className="text-[10px] font-black uppercase tracking-widest text-white/70 mb-3">Get started</p>
-                  <h3 className="text-lg font-black mb-3 leading-snug">Ready to build your brand?</h3>
-                  <p className="text-white/80 text-sm leading-relaxed mb-5">
-                    Let&apos;s craft your narrative and grow your influence together.
+                  <p className="text-[10px] font-black uppercase tracking-widest mb-3" style={{ color: "rgba(167,139,250,.6)" }}>Get started</p>
+                  <h3 className="text-lg font-black mb-3 leading-snug" style={{ color: "#f1f5f9" }}>Ready to grow your brand?</h3>
+                  <p className="text-sm leading-relaxed mb-5" style={{ color: "#475569" }}>
+                    Let&apos;s build your marketing engine and scale what matters.
                   </p>
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white text-xs font-black uppercase tracking-widest hover:bg-gray-50 hover:scale-[1.02] transition-all shadow-sm"
-                    style={{ color: accentColor }}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all hover:-translate-y-0.5"
+                    style={{
+                      background: "linear-gradient(135deg,#7c3aed,#06b6d4)",
+                      color:      "#fff",
+                      boxShadow:  "0 4px 16px rgba(124,58,237,.4)",
+                    }}
                   >
-                    Get in touch <ChevronRight size={14} strokeWidth={3} />
+                    Get in touch <ChevronRight size={13} strokeWidth={3} />
                   </Link>
                 </div>
               </div>

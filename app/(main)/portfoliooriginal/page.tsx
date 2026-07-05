@@ -18,7 +18,7 @@ export default function ProjectsPage() {
             <VisualJourneyHero />
             <BestPostersGallery />
             <ReelsShowcase />
-            {/* <ProjectsGallery /> */}
+            <ProjectsGallery />
             <BlogsArticles />
             <InfluencerMarketing />
             <TeamCTA />

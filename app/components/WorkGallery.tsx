@@ -2497,242 +2497,1771 @@
 
 
 
+// "use client";
+
+// import { useState, useRef } from "react";
+// import Link from "next/link";
+// import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+// import {
+//   ArrowRight, ArrowUpRight, TrendingUp, Users, Star,
+//   Briefcase, Filter,
+// } from "lucide-react";
+
+// // ─── Data ──────────────────────────────────────────────────────────────────────
+
+// const CATEGORIES = ["All", "SaaS", "EdTech", "E-commerce", "Restaurant", "Healthcare", "Real Estate"];
+
+// const PROJECTS = [
+//   {
+//     id: "techvault",
+//     title: "TechVault",
+//     category: "SaaS",
+//     location: "Bengaluru, India",
+//     image: "/images/work/techvault.jpg",
+//     color: "from-blue-500 to-cyan-400",
+//     bgColor: "bg-blue-50",
+//     accentColor: "text-blue-600",
+//     accentBg: "bg-blue-50 border-blue-100",
+//     tags: ["SEO", "Paid Ads", "Content"],
+//     result: "3.1x pipeline growth",
+//     growth: "+312%",
+//     duration: "6 months",
+//     featured: true,
+//     description:
+//       "Rebuilt their entire demand-gen engine — from technical SEO to a multi-touch paid strategy across Google and LinkedIn. Organic traffic tripled in under 6 months.",
+//   },
+//   {
+//     id: "brightpath",
+//     title: "BrightPath Edu",
+//     category: "EdTech",
+//     location: "Mumbai, India",
+//     image: "/images/work/brightpath.jpg",
+//     color: "from-violet-500 to-purple-400",
+//     bgColor: "bg-violet-50",
+//     accentColor: "text-violet-600",
+//     accentBg: "bg-violet-50 border-violet-100",
+//     tags: ["Lead Gen", "Web Dev", "Branding"],
+//     result: "+60% admissions",
+//     growth: "+60%",
+//     duration: "4 months",
+//     featured: true,
+//     description:
+//       "Redesigned their conversion funnel from scratch, launched geo-targeted ad campaigns, and automated their entire lead nurturing workflow with AI.",
+//   },
+//   {
+//     id: "zenithco",
+//     title: "ZenithCo",
+//     category: "E-commerce",
+//     location: "Delhi, India",
+//     image: "/images/work/zenithco.jpg",
+//     color: "from-cyan-500 to-blue-400",
+//     bgColor: "bg-cyan-50",
+//     accentColor: "text-cyan-600",
+//     accentBg: "bg-cyan-50 border-cyan-100",
+//     tags: ["Performance Ads", "CRO", "Email"],
+//     result: "$2.4M revenue added",
+//     growth: "+187%",
+//     duration: "8 months",
+//     featured: false,
+//     description:
+//       "Full performance marketing takeover — restructured their Meta and Google Ads, introduced email sequences, and ran 40+ CRO tests to lift conversion rate from 1.9% to 5.3%.",
+//   },
+//   {
+//     id: "novabrand",
+//     title: "NovaBrand Foods",
+//     category: "Restaurant",
+//     location: "Pune, India",
+//     image: "/images/work/novabrand.jpg",
+//     color: "from-rose-500 to-orange-400",
+//     bgColor: "bg-rose-50",
+//     accentColor: "text-rose-600",
+//     accentBg: "bg-rose-50 border-rose-100",
+//     tags: ["Branding", "Social Media", "SEO"],
+//     result: "2.8x online orders",
+//     growth: "+180%",
+//     duration: "3 months",
+//     featured: false,
+//     description:
+//       "Built a brand identity from scratch, launched their social media presence, and drove online order volume through a local SEO and Google Business strategy.",
+//   },
+//   {
+//     id: "peakforge",
+//     title: "PeakForge Health",
+//     category: "Healthcare",
+//     location: "Chennai, India",
+//     image: "/images/work/peakforge.jpg",
+//     color: "from-emerald-500 to-teal-400",
+//     bgColor: "bg-emerald-50",
+//     accentColor: "text-emerald-600",
+//     accentBg: "bg-emerald-50 border-emerald-100",
+//     tags: ["Lead Gen", "SEO", "Web Dev"],
+//     result: "4.2x patient inquiries",
+//     growth: "+320%",
+//     duration: "5 months",
+//     featured: true,
+//     description:
+//       "Rebuilt their local SEO presence, launched a high-converting service page funnel, and automated follow-up sequences — driving qualified patient inquiries from day one.",
+//   },
+//   {
+//     id: "strideo",
+//     title: "StrideCo Realty",
+//     category: "Real Estate",
+//     location: "Hyderabad, India",
+//     image: "/images/work/strideo.jpg",
+//     color: "from-amber-500 to-yellow-400",
+//     bgColor: "bg-amber-50",
+//     accentColor: "text-amber-600",
+//     accentBg: "bg-amber-50 border-amber-100",
+//     tags: ["Paid Ads", "Lead Gen", "CRO"],
+//     result: "₹18Cr in sales pipeline",
+//     growth: "+240%",
+//     duration: "7 months",
+//     featured: false,
+//     description:
+//       "End-to-end lead generation infrastructure for a real estate developer — Facebook lead campaigns, WhatsApp automation, and a CRM integration that tracked every rupee.",
+//   },
+// ];
+
+// const SUMMARY_STATS = [
+//   { label: "Brands Scaled", value: "150+", icon: Briefcase },
+//   { label: "Avg. Revenue Growth", value: "↑ 200%", icon: TrendingUp },
+//   { label: "Client Rating", value: "4.9 / 5", icon: Star },
+//   { label: "Satisfaction Rate", value: "98%", icon: Users },
+// ];
+
+// // ─── Sub-components ────────────────────────────────────────────────────────────
+
+// function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: number }) {
+//   const [hovered, setHovered] = useState(false);
+
+//   return (
+//     <motion.div
+//       initial={{ opacity: 0, y: 32 }}
+//       whileInView={{ opacity: 1, y: 0 }}
+//       viewport={{ once: true, margin: "-60px" }}
+//       transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+//       onMouseEnter={() => setHovered(true)}
+//       onMouseLeave={() => setHovered(false)}
+//     >
+//       <Link href={`/portfolio/${project.id}`} className="block group h-full">
+//         <motion.div
+//           animate={{ y: hovered ? -6 : 0 }}
+//           transition={{ type: "spring", stiffness: 300, damping: 24 }}
+//           className="relative bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden h-full flex flex-col"
+//           style={{
+//             boxShadow: hovered
+//               ? "0 20px 60px -12px rgba(59,130,246,0.12), 0 0 0 1px rgba(59,130,246,0.08)"
+//               : "0 1px 3px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.03)",
+//           }}
+//         >
+//           {/* Top gradient strip */}
+//           <div className={`h-0.5 w-full bg-gradient-to-r ${project.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+
+//           {/* Image area */}
+//           <div className={`relative h-52 ${project.bgColor} overflow-hidden flex items-center justify-center`}>
+//             {/* Placeholder gradient illustration */}
+//             <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-10`} />
+//             <div className="relative flex flex-col items-center gap-2">
+//               <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${project.color} flex items-center justify-center shadow-lg`}>
+//                 <span className="text-white font-black text-xl">{project.title[0]}</span>
+//               </div>
+//               <span className="text-xs font-semibold text-gray-400">{project.location}</span>
+//             </div>
+
+//             {/* Featured badge */}
+//             {project.featured && (
+//               <div className="absolute top-3 left-3">
+//                 <span className="inline-flex items-center gap-1 text-[10px] font-bold bg-white/90 backdrop-blur px-2.5 py-1 rounded-full border border-gray-100 text-gray-700">
+//                   <Star size={9} className="fill-amber-400 text-amber-400" /> Featured
+//                 </span>
+//               </div>
+//             )}
+
+//             {/* Category */}
+//             <div className="absolute top-3 right-3">
+//               <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full border ${project.accentBg} ${project.accentColor}`}>
+//                 {project.category}
+//               </span>
+//             </div>
+
+//             {/* Hover view overlay */}
+//             <motion.div
+//               animate={{ opacity: hovered ? 1 : 0 }}
+//               transition={{ duration: 0.2 }}
+//               className="absolute inset-0 bg-gray-900/60 backdrop-blur-sm flex items-center justify-center"
+//             >
+//               <motion.div
+//                 animate={{ scale: hovered ? 1 : 0.85, opacity: hovered ? 1 : 0 }}
+//                 transition={{ duration: 0.25, delay: 0.05 }}
+//                 className="flex items-center gap-2 bg-white text-gray-900 font-semibold text-sm px-5 py-2.5 rounded-full shadow-xl"
+//               >
+//                 View Case Study <ArrowUpRight size={14} />
+//               </motion.div>
+//             </motion.div>
+//           </div>
+
+//           {/* Content */}
+//           <div className="p-5 flex flex-col flex-1">
+//             {/* Tags */}
+//             <div className="flex flex-wrap gap-1.5 mb-3">
+//               {project.tags.map((t) => (
+//                 <span key={t} className="text-[10px] font-medium text-gray-500 bg-gray-50 border border-gray-100 px-2 py-0.5 rounded-md">
+//                   {t}
+//                 </span>
+//               ))}
+//             </div>
+
+//             <h3 className={`text-lg font-bold text-gray-900 mb-1.5 transition-colors duration-200 ${hovered ? project.accentColor : ""}`}>
+//               {project.title}
+//             </h3>
+
+//             <p className="text-sm text-gray-500 leading-relaxed flex-1 line-clamp-2">
+//               {project.description}
+//             </p>
+
+//             {/* Bottom metrics */}
+//             <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
+//               <div>
+//                 <p className="text-[10px] text-gray-400 font-medium uppercase tracking-wide mb-0.5">Key Result</p>
+//                 <p className="text-sm font-semibold text-gray-800">{project.result}</p>
+//               </div>
+//               <div className="text-right">
+//                 <p className="text-[10px] text-gray-400 font-medium uppercase tracking-wide mb-0.5">Growth</p>
+//                 <p className={`text-sm font-bold ${project.accentColor}`}>{project.growth}</p>
+//               </div>
+//             </div>
+//           </div>
+//         </motion.div>
+//       </Link>
+//     </motion.div>
+//   );
+// }
+
+// // ─── Main Component ────────────────────────────────────────────────────────────
+
+// export default function WorkGallery() {
+//   const [activeFilter, setActiveFilter] = useState("All");
+//   const sectionRef = useRef<HTMLElement>(null);
+
+//   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
+//   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "6%"]);
+
+//   const filtered =
+//     activeFilter === "All"
+//       ? PROJECTS
+//       : PROJECTS.filter((p) => p.category === activeFilter);
+
+//   return (
+//     <section ref={sectionRef} id="work" className="relative py-24 lg:py-32 bg-white overflow-hidden">
+
+//       {/* ── Background ── */}
+//       <motion.div style={{ y: bgY }} className="absolute inset-0 pointer-events-none" aria-hidden="true">
+//         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
+//         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
+//         <div className="absolute -top-48 right-0 w-[700px] h-[700px] rounded-full bg-gradient-to-bl from-blue-50/70 to-transparent blur-3xl" />
+//         <div className="absolute -bottom-32 -left-32 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-violet-50/50 to-transparent blur-3xl" />
+//       </motion.div>
+
+//       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+//         {/* ── Header ── */}
+//         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-14">
+//           <motion.div
+//             initial={{ opacity: 0, y: 24 }}
+//             whileInView={{ opacity: 1, y: 0 }}
+//             viewport={{ once: true, margin: "-60px" }}
+//             transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+//             className="max-w-2xl"
+//           >
+//             <span className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 text-blue-700 text-xs font-semibold px-3.5 py-1.5 rounded-full mb-5">
+//               <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+//               Client Work
+//             </span>
+//             <h2 className="text-4xl sm:text-5xl lg:text-[52px] font-extrabold text-gray-900 leading-tight tracking-tight">
+//               Results we've built.{" "}
+//               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-violet-500">
+//                 Businesses that grew.
+//               </span>
+//             </h2>
+//             <p className="mt-4 text-lg text-gray-500 leading-relaxed">
+//               Every project below is a real business that came to us with a growth problem.
+//               Here's what happened next.
+//             </p>
+//           </motion.div>
+
+//           {/* Stats strip */}
+//           <motion.div
+//             initial={{ opacity: 0, x: 20 }}
+//             whileInView={{ opacity: 1, x: 0 }}
+//             viewport={{ once: true, margin: "-60px" }}
+//             transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+//             className="grid grid-cols-2 gap-3 lg:gap-4 shrink-0"
+//           >
+//             {SUMMARY_STATS.map((s) => (
+//               <div key={s.label} className="bg-[#F8FAFC] border border-gray-100 rounded-xl px-4 py-3 min-w-[120px]">
+//                 <div className="flex items-center gap-1.5 mb-1">
+//                   <s.icon size={12} className="text-blue-500" />
+//                   <span className="text-[10px] text-gray-400 font-medium uppercase tracking-wide">{s.label}</span>
+//                 </div>
+//                 <p className="text-lg font-bold text-gray-900">{s.value}</p>
+//               </div>
+//             ))}
+//           </motion.div>
+//         </div>
+
+//         {/* ── Filter tabs ── */}
+//         <motion.div
+//           initial={{ opacity: 0, y: 16 }}
+//           whileInView={{ opacity: 1, y: 0 }}
+//           viewport={{ once: true, margin: "-40px" }}
+//           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+//           className="flex flex-wrap items-center gap-2 mb-10"
+//         >
+//           <Filter size={13} className="text-gray-400 mr-1" />
+//           {CATEGORIES.map((cat) => (
+//             <motion.button
+//               key={cat}
+//               onClick={() => setActiveFilter(cat)}
+//               whileTap={{ scale: 0.95 }}
+//               className={`text-xs font-semibold px-4 py-2 rounded-full border transition-all duration-200 ${
+//                 activeFilter === cat
+//                   ? "bg-gray-900 text-white border-gray-900 shadow-sm"
+//                   : "bg-white text-gray-500 border-gray-200 hover:border-gray-300 hover:text-gray-700"
+//               }`}
+//             >
+//               {cat}
+//             </motion.button>
+//           ))}
+//         </motion.div>
+
+//         {/* ── Cards grid ── */}
+//         <AnimatePresence mode="wait">
+//           <motion.div
+//             key={activeFilter}
+//             initial={{ opacity: 0, y: 12 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             exit={{ opacity: 0, y: -8 }}
+//             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+//             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+//           >
+//             {filtered.map((project, i) => (
+//               <ProjectCard key={project.id} project={project} index={i} />
+//             ))}
+//           </motion.div>
+//         </AnimatePresence>
+
+//         {/* Empty state */}
+//         {filtered.length === 0 && (
+//           <motion.div
+//             initial={{ opacity: 0 }}
+//             animate={{ opacity: 1 }}
+//             className="text-center py-20 bg-gray-50 rounded-2xl border border-gray-100"
+//           >
+//             <p className="text-gray-400 text-sm font-medium">No projects in this category yet.</p>
+//             <button onClick={() => setActiveFilter("All")} className="mt-3 text-blue-600 text-sm font-semibold hover:underline">
+//               View all projects
+//             </button>
+//           </motion.div>
+//         )}
+
+//         {/* ── View all CTA ── */}
+//         <motion.div
+//           initial={{ opacity: 0, y: 20 }}
+//           whileInView={{ opacity: 1, y: 0 }}
+//           viewport={{ once: true, margin: "-40px" }}
+//           transition={{ duration: 0.55, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+//           className="mt-14 flex flex-col sm:flex-row items-center justify-between gap-6 pt-10 border-t border-gray-100"
+//         >
+//           <p className="text-gray-400 text-sm text-center sm:text-left">
+//             Showing {filtered.length} of {PROJECTS.length} projects · More case studies available
+//           </p>
+//           <div className="flex gap-3">
+//             <Link
+//               href="/portfolio"
+//               className="inline-flex items-center gap-2 text-sm font-semibold text-gray-700 border border-gray-200 hover:border-gray-300 hover:bg-gray-50 px-5 py-2.5 rounded-xl transition-all group"
+//             >
+//               View All Work
+//               <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+//             </Link>
+//             <Link
+//               href="#contact"
+//               className="inline-flex items-center gap-2 text-sm font-semibold text-white bg-gray-900 hover:bg-gradient-to-r hover:from-blue-600 hover:to-violet-600 px-5 py-2.5 rounded-xl transition-all group shadow-sm"
+//             >
+//               Start Your Project
+//               <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+//             </Link>
+//           </div>
+//         </motion.div>
+
+//       </div>
+//     </section>
+//   );
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// "use client";
+
+// import { useCallback, useRef, useState } from "react";
+// import Link from "next/link";
+// import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useScroll } from "framer-motion";
+// import {
+//   ArrowRight,
+//   ArrowUpRight,
+//   Users,
+//   Instagram,
+//   MapPin,
+//   Filter,
+//   ExternalLink,
+//   Layers,
+//   Sparkles,
+// } from "lucide-react";
+
+// // ─── Data ───────────────────────────────────────────────────────────────────
+// // Real client projects. Social stats are as-provided; no revenue/growth
+// // figures are invented since those weren't supplied or verified.
+
+// interface Project {
+//   id: string;
+//   title: string;
+//   handle?: string;
+//   category: string;
+//   location: string;
+//   tagline: string;
+//   website: string;
+//   accent: string;
+//   bgTint: string;
+//   followers?: string;
+//   posts?: string;
+//   services: string[];
+//   description: string;
+// }
+
+// const CATEGORIES = ["All", "Interior Design", "Travel", "Fitness", "Real Estate", "Food & Hospitality"];
+
+// const PROJECTS: Project[] = [
+//   {
+//     id: "pari-interiors",
+//     title: "Pari Interiors & Constructions",
+//     handle: "@pari_interiors_constructions",
+//     category: "Interior Design",
+//     location: "India",
+//     tagline: "Designing Dreams, Creating Reality",
+//     website: "https://super-selkie-883c49.netlify.app/",
+//     accent: "from-amber-500 to-orange-400",
+//     bgTint: "bg-amber-50",
+//     followers: "295",
+//     posts: "86",
+//     services: ["Website Design", "Portfolio Showcase"],
+//     description:
+//       "A registered interior design studio specializing in space planning and residential builds — given a clean, portfolio-first website to showcase completed projects.",
+//   },
+//   {
+//     id: "travel-hub-india",
+//     title: "Travel Hub India",
+//     handle: "@travelhubindia1",
+//     category: "Travel",
+//     location: "East of Kailash, Delhi",
+//     tagline: "Making Dreams Memorable",
+//     website: "https://www.travelhubindia.com/",
+//     accent: "from-blue-500 to-cyan-400",
+//     bgTint: "bg-blue-50",
+//     followers: "2.7K",
+//     posts: "1.4K",
+//     services: ["Website Design", "Booking Presence"],
+//     description:
+//       "A full-service travel agency handling flights, hotels, taxis, and visas — built a site to match their scale as an established domestic and international travel operator.",
+//   },
+//   {
+//     id: "kiro-fitness",
+//     title: "The KIRO Fitness Sangvi",
+//     handle: "@the_kiro_fitness_sangvi",
+//     category: "Fitness",
+//     location: "New Sangavi, Pune",
+//     tagline: "4,500 sq ft of premium training space",
+//     website: "https://thekirofitness.com/",
+//     accent: "from-emerald-500 to-teal-400",
+//     bgTint: "bg-emerald-50",
+//     followers: "303",
+//     posts: "235",
+//     services: ["Website Design", "Brand Presence"],
+//     description:
+//       "A premium fitness center at a prime Pune location — given a bold, energy-driven website to match its physical footprint and training programs.",
+//   },
+//   {
+//     id: "jk-real-estate",
+//     title: "JK Real Estate Agents",
+//     handle: "@jkrealestateagents",
+//     category: "Real Estate",
+//     location: "Ghatkopar East, Mumbai",
+//     tagline: "Serving buyers, sellers & investors since 1988",
+//     website: "http://jkrealestateagents.com",
+//     accent: "from-violet-500 to-purple-400",
+//     bgTint: "bg-violet-50",
+//     followers: "231",
+//     posts: "312",
+//     services: ["Website Design", "Listings Presence"],
+//     description:
+//       "A residential and commercial real estate agency with over three decades of local trust — brought online with a site built around buy, sell, rent, and investment listings.",
+//   },
+//   {
+//     id: "indian-coffee-house",
+//     title: "Indian Coffee House",
+//     category: "Food & Hospitality",
+//     location: "Thrissur, Kerala (Pan-India)",
+//     tagline: "A worker-cooperative institution with 1,200+ branches",
+//     website: "https://www.indiancoffeehouse.com/",
+//     accent: "from-rose-500 to-red-400",
+//     bgTint: "bg-rose-50",
+//     services: ["Website Design", "Multi-Branch Directory"],
+//     description:
+//       "One of India's most historic restaurant cooperatives, with a legacy spanning decades of branches nationwide — given a structured site covering branch locations, news, and enquiries.",
+//   },
+//   {
+//     id: "cacaote",
+//     title: "Cacaoté",
+//     handle: "@cacaote.india",
+//     category: "Food & Hospitality",
+//     location: "Ahmedabad & Surat",
+//     tagline: "India's Most Exquisite Chocolaterie & Pâtisserie",
+//     website: "https://www.instagram.com/cacaote.india/",
+//     accent: "from-pink-500 to-rose-400",
+//     bgTint: "bg-pink-50",
+//     followers: "30.9K",
+//     posts: "269",
+//     services: ["Digital Presence", "Brand Positioning"],
+//     description:
+//       "A premium chocolaterie helmed by a 3-Michelin-starred chef, delivering pan-India — positioned digitally with content and presence to match its luxury standing.",
+//   },
+// ];
+
+// const SUMMARY_STATS = [
+//   { label: "Live Client Sites", value: `${PROJECTS.length}`, icon: Layers },
+//   { label: "Industries Served", value: `${new Set(PROJECTS.map((p) => p.category)).size}`, icon: Sparkles },
+//   { label: "Custom Built", value: "100%", icon: ArrowUpRight },
+//   { label: "Full-Stack Delivery", value: "End-to-End", icon: Users },
+// ];
+
+// // ─── Live screenshot thumbnail ───────────────────────────────────────────────
+// // Pulled via thum.io (free, no API key). Falls back to a gradient letter tile
+// // if the screenshot fails to load or the target blocks embedding (e.g. IG).
+// // For production, replace `screenshotUrl` with a static image you've captured
+// // yourself and host under /public/images/work/ for reliability + speed.
+
+// function ProjectThumbnail({ project }: { project: Project }) {
+//   const [failed, setFailed] = useState(false);
+//   const [loaded, setLoaded] = useState(false);
+//   const screenshotUrl = `https://image.thum.io/get/width/800/crop/700/noanimate/${project.website}`;
+
+//   if (failed) {
+//     return (
+//       <div className={`absolute inset-0 bg-gradient-to-br ${project.accent} opacity-90 flex items-center justify-center`}>
+//         <span className="text-white font-black text-3xl">{project.title[0]}</span>
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <>
+//       {/* Skeleton shimmer while the screenshot loads */}
+//       {!loaded && (
+//         <div className={`absolute inset-0 ${project.bgTint} animate-pulse flex items-center justify-center`}>
+//           <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${project.accent} opacity-40`} />
+//         </div>
+//       )}
+//       <img
+//         src={screenshotUrl}
+//         alt={`${project.title} website preview`}
+//         onError={() => setFailed(true)}
+//         onLoad={() => setLoaded(true)}
+//         loading="lazy"
+//         className={`absolute inset-0 w-full h-full object-cover object-top transition-all duration-500 group-hover:scale-105 ${
+//           loaded ? "opacity-100" : "opacity-0"
+//         }`}
+//       />
+//     </>
+//   );
+// }
+
+// // ─── 3D tilt project card ────────────────────────────────────────────────────
+
+// function ProjectCard({ project, index }: { project: Project; index: number }) {
+//   const ref = useRef<HTMLDivElement>(null);
+//   const mouseX = useMotionValue(0);
+//   const mouseY = useMotionValue(0);
+//   const springConfig = { stiffness: 220, damping: 22, mass: 0.5 };
+//   const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [8, -8]), springConfig);
+//   const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-8, 8]), springConfig);
+//   const [hovered, setHovered] = useState(false);
+
+//   const handleMouseMove = useCallback(
+//     (e: React.MouseEvent<HTMLDivElement>) => {
+//       const rect = ref.current?.getBoundingClientRect();
+//       if (!rect) return;
+//       mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
+//       mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
+//     },
+//     [mouseX, mouseY]
+//   );
+//   const handleMouseLeave = useCallback(() => {
+//     mouseX.set(0);
+//     mouseY.set(0);
+//     setHovered(false);
+//   }, [mouseX, mouseY]);
+
+//   return (
+//     <motion.div
+//       initial={{ opacity: 0, y: 32 }}
+//       whileInView={{ opacity: 1, y: 0 }}
+//       viewport={{ once: true, margin: "-60px" }}
+//       transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+//       style={{ perspective: 1200 }}
+//     >
+//       <motion.div
+//         ref={ref}
+//         onMouseMove={handleMouseMove}
+//         onMouseEnter={() => setHovered(true)}
+//         onMouseLeave={handleMouseLeave}
+//         whileHover={{ scale: 1.015 }}
+//         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+//         className="group relative h-full"
+//       >
+//         {/* Ambient glow */}
+//         <div
+//           className={`absolute -inset-1 rounded-3xl bg-gradient-to-br ${project.accent} opacity-0 group-hover:opacity-25 blur-xl transition-opacity duration-500`}
+//           style={{ transform: "translateZ(-40px)" }}
+//         />
+
+//         <div className="relative bg-white rounded-2xl border border-gray-100 shadow-sm group-hover:shadow-2xl group-hover:shadow-blue-500/10 overflow-hidden h-full flex flex-col transition-shadow duration-500">
+//           {/* Top gradient strip */}
+//           <div className={`h-1 w-full bg-gradient-to-r ${project.accent}`} />
+
+//           {/* Visual header — live screenshot */}
+//           <div className={`relative h-44 sm:h-48 ${project.bgTint} overflow-hidden`}>
+//             <ProjectThumbnail project={project} />
+
+//             {/* Bottom fade so the location pill stays legible over any screenshot */}
+//             <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
+
+//             {/* Location pill */}
+//             <div
+//               className="absolute bottom-3 left-3 flex items-center gap-1 text-[11px] font-semibold text-white bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-full"
+//               style={{ transform: "translateZ(20px)" }}
+//             >
+//               <MapPin size={10} />
+//               {project.location}
+//             </div>
+
+//             {/* Category badge */}
+//             <div
+//               className={`absolute top-3 right-3 text-[10px] font-bold px-2.5 py-1 rounded-full bg-gradient-to-r ${project.accent} text-white shadow-sm`}
+//               style={{ transform: "translateZ(30px)" }}
+//             >
+//               {project.category}
+//             </div>
+
+//             {/* Hover overlay -> real link */}
+//             <motion.div
+//               animate={{ opacity: hovered ? 1 : 0 }}
+//               transition={{ duration: 0.2 }}
+//               className="absolute inset-0 bg-gray-900/65 backdrop-blur-[2px] flex items-center justify-center"
+//             >
+//               <motion.a
+//                 href={project.website}
+//                 target="_blank"
+//                 rel="noopener noreferrer"
+//                 animate={{ scale: hovered ? 1 : 0.85, opacity: hovered ? 1 : 0 }}
+//                 transition={{ duration: 0.25, delay: 0.05 }}
+//                 className="flex items-center gap-2 bg-white text-gray-900 font-semibold text-sm px-5 py-2.5 rounded-full shadow-xl"
+//               >
+//                 Visit Live Site <ExternalLink size={14} />
+//               </motion.a>
+//             </motion.div>
+//           </div>
+
+//           {/* Content */}
+//           <div className="p-5 flex flex-col flex-1" style={{ transform: "translateZ(10px)" }}>
+//             <div className="flex flex-wrap gap-1.5 mb-3">
+//               {project.services.map((s) => (
+//                 <span
+//                   key={s}
+//                   className="text-[10px] font-medium text-gray-500 bg-gray-50 border border-gray-100 px-2 py-0.5 rounded-md"
+//                 >
+//                   {s}
+//                 </span>
+//               ))}
+//             </div>
+
+//             <h3 className="text-lg font-bold text-gray-900 mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-violet-600 transition-all duration-300">
+//               {project.title}
+//             </h3>
+//             {project.handle && (
+//               <p className="text-xs text-gray-400 font-medium mb-2">{project.handle}</p>
+//             )}
+//             <p className="text-sm text-gray-500 leading-relaxed flex-1 line-clamp-2 mb-4">
+//               {project.description}
+//             </p>
+
+//             {/* Social proof + link */}
+//             <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+//               {project.followers ? (
+//                 <div className="flex items-center gap-1.5 text-gray-500">
+//                   <Instagram size={13} />
+//                   <span className="text-sm font-semibold text-gray-800">{project.followers}</span>
+//                   <span className="text-[11px] text-gray-400">followers</span>
+//                 </div>
+//               ) : (
+//                 <span className="text-[11px] text-gray-400 font-medium">{project.tagline}</span>
+//               )}
+//               <a
+//                 href={project.website}
+//                 target="_blank"
+//                 rel="noopener noreferrer"
+//                 className={`inline-flex items-center gap-1 text-xs font-semibold bg-clip-text text-transparent bg-gradient-to-r ${project.accent} group-hover:gap-1.5 transition-all`}
+//               >
+//                 Visit <ArrowUpRight size={12} className="text-gray-400" />
+//               </a>
+//             </div>
+//           </div>
+//         </div>
+//       </motion.div>
+//     </motion.div>
+//   );
+// }
+
+// // ─── Main Component ────────────────────────────────────────────────────────────
+
+// export default function WorkGallery() {
+//   const [activeFilter, setActiveFilter] = useState("All");
+//   const sectionRef = useRef<HTMLElement>(null);
+
+//   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
+//   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "6%"]);
+
+//   const filtered = activeFilter === "All" ? PROJECTS : PROJECTS.filter((p) => p.category === activeFilter);
+
+//   return (
+//     <section ref={sectionRef} id="work" className="relative py-24 lg:py-32 bg-white overflow-hidden">
+//       {/* Background */}
+//       <motion.div style={{ y: bgY }} className="absolute inset-0 pointer-events-none" aria-hidden="true">
+//         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
+//         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
+//         <div className="absolute -top-48 right-0 w-[700px] h-[700px] rounded-full bg-gradient-to-bl from-blue-50/70 to-transparent blur-3xl" />
+//         <div className="absolute -bottom-32 -left-32 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-violet-50/50 to-transparent blur-3xl" />
+//       </motion.div>
+
+//       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+//         {/* Header */}
+//         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-14">
+//           <motion.div
+//             initial={{ opacity: 0, y: 24 }}
+//             whileInView={{ opacity: 1, y: 0 }}
+//             viewport={{ once: true, margin: "-60px" }}
+//             transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+//             className="max-w-2xl"
+//           >
+//             <span className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 text-blue-700 text-xs font-semibold px-3.5 py-1.5 rounded-full mb-5">
+//               <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+//               Client Work
+//             </span>
+//             <h2 className="text-4xl sm:text-5xl lg:text-[52px] font-extrabold text-gray-900 leading-tight tracking-tight">
+//               Real businesses.{" "}
+//               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-violet-500">
+//                 Real websites.
+//               </span>
+//             </h2>
+//             <p className="mt-4 text-lg text-gray-500 leading-relaxed">
+//               Across interiors, travel, fitness, real estate, and hospitality — here's a look
+//               at the brands we've brought online.
+//             </p>
+//           </motion.div>
+
+//           <motion.div
+//             initial={{ opacity: 0, x: 20 }}
+//             whileInView={{ opacity: 1, x: 0 }}
+//             viewport={{ once: true, margin: "-60px" }}
+//             transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+//             className="grid grid-cols-2 gap-3 lg:gap-4 shrink-0"
+//           >
+//             {SUMMARY_STATS.map((s) => (
+//               <div key={s.label} className="bg-[#F8FAFC] border border-gray-100 rounded-xl px-4 py-3 min-w-[120px]">
+//                 <div className="flex items-center gap-1.5 mb-1">
+//                   <s.icon size={12} className="text-blue-500" />
+//                   <span className="text-[10px] text-gray-400 font-medium uppercase tracking-wide">{s.label}</span>
+//                 </div>
+//                 <p className="text-lg font-bold text-gray-900">{s.value}</p>
+//               </div>
+//             ))}
+//           </motion.div>
+//         </div>
+
+//         {/* Filter tabs */}
+//         <motion.div
+//           initial={{ opacity: 0, y: 16 }}
+//           whileInView={{ opacity: 1, y: 0 }}
+//           viewport={{ once: true, margin: "-40px" }}
+//           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+//           className="flex flex-wrap items-center gap-2 mb-10"
+//         >
+//           <Filter size={13} className="text-gray-400 mr-1" />
+//           {CATEGORIES.map((cat) => (
+//             <motion.button
+//               key={cat}
+//               onClick={() => setActiveFilter(cat)}
+//               whileTap={{ scale: 0.95 }}
+//               className={`relative text-xs font-semibold px-4 py-2 rounded-full border transition-colors duration-200 overflow-hidden ${
+//                 activeFilter === cat ? "text-white border-transparent" : "bg-white text-gray-500 border-gray-200 hover:border-gray-300 hover:text-gray-700"
+//               }`}
+//             >
+//               {activeFilter === cat && (
+//                 <motion.span
+//                   layoutId="work-filter-bg"
+//                   className="absolute inset-0 bg-gray-900"
+//                   transition={{ type: "spring", stiffness: 350, damping: 30 }}
+//                 />
+//               )}
+//               <span className="relative z-10">{cat}</span>
+//             </motion.button>
+//           ))}
+//         </motion.div>
+
+//         {/* Cards grid */}
+//         <AnimatePresence mode="wait">
+//           <motion.div
+//             key={activeFilter}
+//             initial={{ opacity: 0, y: 12 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             exit={{ opacity: 0, y: -8 }}
+//             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+//             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+//           >
+//             {filtered.map((project, i) => (
+//               <ProjectCard key={project.id} project={project} index={i} />
+//             ))}
+//           </motion.div>
+//         </AnimatePresence>
+
+//         {filtered.length === 0 && (
+//           <motion.div
+//             initial={{ opacity: 0 }}
+//             animate={{ opacity: 1 }}
+//             className="text-center py-20 bg-gray-50 rounded-2xl border border-gray-100"
+//           >
+//             <p className="text-gray-400 text-sm font-medium">No projects in this category yet.</p>
+//             <button onClick={() => setActiveFilter("All")} className="mt-3 text-blue-600 text-sm font-semibold hover:underline">
+//               View all projects
+//             </button>
+//           </motion.div>
+//         )}
+
+//         {/* Bottom CTA */}
+//         <motion.div
+//           initial={{ opacity: 0, y: 20 }}
+//           whileInView={{ opacity: 1, y: 0 }}
+//           viewport={{ once: true, margin: "-40px" }}
+//           transition={{ duration: 0.55, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+//           className="mt-14 flex flex-col sm:flex-row items-center justify-between gap-6 pt-10 border-t border-gray-100"
+//         >
+//           <p className="text-gray-400 text-sm text-center sm:text-left">
+//             Showing {filtered.length} of {PROJECTS.length} projects
+//           </p>
+//           <div className="flex gap-3">
+//             <Link
+//               href="/portfolio"
+//               className="inline-flex items-center gap-2 text-sm font-semibold text-gray-700 border border-gray-200 hover:border-gray-300 hover:bg-gray-50 px-5 py-2.5 rounded-xl transition-all group"
+//             >
+//               View All Work
+//               <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+//             </Link>
+//             <Link
+//               href="#contact"
+//               className="inline-flex items-center gap-2 text-sm font-semibold text-white bg-gray-900 hover:bg-gradient-to-r hover:from-blue-600 hover:to-violet-600 px-5 py-2.5 rounded-xl transition-all group shadow-sm"
+//             >
+//               Start Your Project
+//               <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+//             </Link>
+//           </div>
+//         </motion.div>
+//       </div>
+//     </section>
+//   );
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// "use client";
+
+// import { useCallback, useEffect, useRef, useState } from "react";
+// import Link from "next/link";
+// import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useScroll } from "framer-motion";
+// import {
+//   ArrowRight,
+//   ArrowUpRight,
+//   Users,
+//   Instagram,
+//   MapPin,
+//   Filter,
+//   ExternalLink,
+//   Layers,
+//   Sparkles,
+// } from "lucide-react";
+
+// // ─── Data ───────────────────────────────────────────────────────────────────
+
+// interface Project {
+//   id: string;
+//   title: string;
+//   handle?: string;
+//   category: string;
+//   location: string;
+//   tagline: string;
+//   website: string;
+//   accent: string;
+//   bgTint: string;
+//   followers?: string;
+//   posts?: string;
+//   services: string[];
+//   description: string;
+// }
+
+// const CATEGORIES = ["All", "Interior Design", "Travel", "Fitness", "Real Estate", "Food & Hospitality"];
+
+// const PROJECTS: Project[] = [
+//   {
+//     id: "pari-interiors",
+//     title: "Pari Interiors & Constructions",
+//     handle: "@pari_interiors_constructions",
+//     category: "Interior Design",
+//     location: "India",
+//     tagline: "Designing Dreams, Creating Reality",
+//     website: "https://super-selkie-883c49.netlify.app/",
+//     accent: "from-amber-500 to-orange-400",
+//     bgTint: "bg-amber-50",
+//     followers: "295",
+//     posts: "86",
+//     services: ["Website Design", "Portfolio Showcase"],
+//     description:
+//       "A registered interior design studio specializing in space planning and residential builds — given a clean, portfolio-first website to showcase completed projects.",
+//   },
+//   {
+//     id: "travel-hub-india",
+//     title: "Travel Hub India",
+//     handle: "@travelhubindia1",
+//     category: "Travel",
+//     location: "East of Kailash, Delhi",
+//     tagline: "Making Dreams Memorable",
+//     website: "https://www.travelhubindia.com/",
+//     accent: "from-blue-500 to-cyan-400",
+//     bgTint: "bg-blue-50",
+//     followers: "2.7K",
+//     posts: "1.4K",
+//     services: ["Website Design", "Booking Presence"],
+//     description:
+//       "A full-service travel agency handling flights, hotels, taxis, and visas — built a site to match their scale as an established domestic and international travel operator.",
+//   },
+//   {
+//     id: "kiro-fitness",
+//     title: "The KIRO Fitness Sangvi",
+//     handle: "@the_kiro_fitness_sangvi",
+//     category: "Fitness",
+//     location: "New Sangavi, Pune",
+//     tagline: "4,500 sq ft of premium training space",
+//     website: "https://thekirofitness.com/",
+//     accent: "from-emerald-500 to-teal-400",
+//     bgTint: "bg-emerald-50",
+//     followers: "303",
+//     posts: "235",
+//     services: ["Website Design", "Brand Presence"],
+//     description:
+//       "A premium fitness center at a prime Pune location — given a bold, energy-driven website to match its physical footprint and training programs.",
+//   },
+//   {
+//     id: "jk-real-estate",
+//     title: "JK Real Estate Agents",
+//     handle: "@jkrealestateagents",
+//     category: "Real Estate",
+//     location: "Ghatkopar East, Mumbai",
+//     tagline: "Serving buyers, sellers & investors since 1988",
+//     website: "http://jkrealestateagents.com",
+//     accent: "from-violet-500 to-purple-400",
+//     bgTint: "bg-violet-50",
+//     followers: "231",
+//     posts: "312",
+//     services: ["Website Design", "Listings Presence"],
+//     description:
+//       "A residential and commercial real estate agency with over three decades of local trust — brought online with a site built around buy, sell, rent, and investment listings.",
+//   },
+//   {
+//     id: "indian-coffee-house",
+//     title: "Indian Coffee House",
+//     category: "Food & Hospitality",
+//     location: "Thrissur, Kerala (Pan-India)",
+//     tagline: "A worker-cooperative institution with 1,200+ branches",
+//     website: "https://www.indiancoffeehouse.com/",
+//     accent: "from-rose-500 to-red-400",
+//     bgTint: "bg-rose-50",
+//     services: ["Website Design", "Multi-Branch Directory"],
+//     description:
+//       "One of India's most historic restaurant cooperatives, with a legacy spanning decades of branches nationwide — given a structured site covering branch locations, news, and enquiries.",
+//   },
+//   {
+//   id: "rentora",
+//   title: "Rentora",
+//   handle: "@rentora",
+//   category: "Technology",
+//   location: "India",
+//   tagline: "Rent Anything. Own Less.",
+//   website: "https://rentora-coral.vercel.app/",
+//   accent: "from-indigo-500 via-blue-500 to-cyan-400",
+//   bgTint: "bg-indigo-50",
+//   services: [
+//     "UI/UX Design",
+//     "Full-Stack Development",
+//     "Rental Marketplace",
+//     "Responsive Website"
+//   ],
+//   description:
+//     "Rentora is a modern peer-to-peer rental marketplace that enables users to rent premium cameras, drones, laptops, bikes, gaming gear, audio equipment, lighting, and professional tools. Built with a sleek user experience, secure rental workflow, responsive design, and scalable marketplace architecture for modern explorers and equipment owners.",
+// },
+// ];
+
+// const SUMMARY_STATS = [
+//   { label: "Live Client Sites", value: `${PROJECTS.length}`, icon: Layers },
+//   { label: "Industries Served", value: `${new Set(PROJECTS.map((p) => p.category)).size}`, icon: Sparkles },
+//   { label: "Custom Built", value: "100%", icon: ArrowUpRight },
+//   { label: "Full-Stack Delivery", value: "End-to-End", icon: Users },
+// ];
+
+// // ─── Live screenshot thumbnail ───────────────────────────────────────────────
+// // Uses WordPress's free mShots service — no API key needed. On the very first
+// // request for a URL it can return a "generating…" placeholder before the real
+// // capture is ready, so this retries a couple of times with a short delay.
+// // For guaranteed reliability in production, replace with a static image you
+// // capture yourself and host under /public/images/work/.
+
+// function ProjectThumbnail({ project }: { project: Project }) {
+//   const [failed, setFailed] = useState(false);
+//   const [loaded, setLoaded] = useState(false);
+//   const [attempt, setAttempt] = useState(0);
+//   const maxAttempts = 3;
+
+//   const baseUrl = `https://s.wordpress.com/mshots/v1/${encodeURIComponent(project.website)}?w=900&h=700`;
+//   const screenshotUrl = attempt === 0 ? baseUrl : `${baseUrl}&retry=${attempt}`;
+
+//   useEffect(() => {
+//     setLoaded(false);
+//     setAttempt(0);
+//     setFailed(false);
+//   }, [project.website]);
+
+//   useEffect(() => {
+//     if (loaded && attempt < maxAttempts) {
+//       // mShots' first response is often a placeholder — nudge it to refresh
+//       // the real capture a couple of times after short delays.
+//       const timer = setTimeout(() => {
+//         setLoaded(false);
+//         setAttempt((a) => a + 1);
+//       }, 3500);
+//       return () => clearTimeout(timer);
+//     }
+//   }, [loaded, attempt]);
+
+//   if (failed) {
+//     return (
+//       <div className={`absolute inset-0 bg-gradient-to-br ${project.accent} opacity-90 flex items-center justify-center`}>
+//         <span className="text-white font-black text-3xl">{project.title[0]}</span>
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <>
+//       {!loaded && (
+//         <div className={`absolute inset-0 ${project.bgTint} animate-pulse flex items-center justify-center`}>
+//           <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${project.accent} opacity-40`} />
+//         </div>
+//       )}
+//       <img
+//         key={screenshotUrl}
+//         src={screenshotUrl}
+//         alt={`${project.title} website preview`}
+//         onError={() => setFailed(true)}
+//         onLoad={() => setLoaded(true)}
+//         loading="lazy"
+//         className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500 group-hover:scale-105 ${
+//           loaded ? "opacity-100" : "opacity-0"
+//         }`}
+//       />
+//     </>
+//   );
+// }
+
+// // ─── 3D tilt project card ────────────────────────────────────────────────────
+
+// function ProjectCard({ project, index }: { project: Project; index: number }) {
+//   const ref = useRef<HTMLDivElement>(null);
+//   const mouseX = useMotionValue(0);
+//   const mouseY = useMotionValue(0);
+//   const springConfig = { stiffness: 220, damping: 22, mass: 0.5 };
+//   const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [8, -8]), springConfig);
+//   const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-8, 8]), springConfig);
+//   const [hovered, setHovered] = useState(false);
+
+//   const handleMouseMove = useCallback(
+//     (e: React.MouseEvent<HTMLDivElement>) => {
+//       const rect = ref.current?.getBoundingClientRect();
+//       if (!rect) return;
+//       mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
+//       mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
+//     },
+//     [mouseX, mouseY]
+//   );
+//   const handleMouseLeave = useCallback(() => {
+//     mouseX.set(0);
+//     mouseY.set(0);
+//     setHovered(false);
+//   }, [mouseX, mouseY]);
+
+//   return (
+//     <motion.div
+//       initial={{ opacity: 0, y: 32 }}
+//       whileInView={{ opacity: 1, y: 0 }}
+//       viewport={{ once: true, margin: "-60px" }}
+//       transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+//       style={{ perspective: 1200 }}
+//     >
+//       <motion.div
+//         ref={ref}
+//         onMouseMove={handleMouseMove}
+//         onMouseEnter={() => setHovered(true)}
+//         onMouseLeave={handleMouseLeave}
+//         whileHover={{ scale: 1.015 }}
+//         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+//         className="group relative h-full"
+//       >
+//         {/* Ambient glow */}
+//         <div
+//           className={`absolute -inset-1 rounded-3xl bg-gradient-to-br ${project.accent} opacity-0 group-hover:opacity-25 blur-xl transition-opacity duration-500`}
+//           style={{ transform: "translateZ(-40px)" }}
+//         />
+
+//         <div className="relative bg-white rounded-2xl border border-gray-100 shadow-sm group-hover:shadow-2xl group-hover:shadow-blue-500/10 overflow-hidden h-full flex flex-col transition-shadow duration-500">
+//           {/* Top gradient strip */}
+//           <div className={`h-1 w-full bg-gradient-to-r ${project.accent}`} />
+
+//           {/* Visual header — live screenshot */}
+//           <div className={`relative h-44 sm:h-48 ${project.bgTint} overflow-hidden`}>
+//             <ProjectThumbnail project={project} />
+
+//             {/* Bottom fade so the location pill stays legible over any screenshot */}
+//             <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
+
+//             {/* Location pill */}
+//             <div
+//               className="absolute bottom-3 left-3 flex items-center gap-1 text-[11px] font-semibold text-white bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-full"
+//               style={{ transform: "translateZ(20px)" }}
+//             >
+//               <MapPin size={10} />
+//               {project.location}
+//             </div>
+
+//             {/* Category badge */}
+//             <div
+//               className={`absolute top-3 right-3 text-[10px] font-bold px-2.5 py-1 rounded-full bg-gradient-to-r ${project.accent} text-white shadow-sm`}
+//               style={{ transform: "translateZ(30px)" }}
+//             >
+//               {project.category}
+//             </div>
+
+//             {/* Hover overlay -> real link */}
+//             <motion.div
+//               animate={{ opacity: hovered ? 1 : 0 }}
+//               transition={{ duration: 0.2 }}
+//               className="absolute inset-0 bg-gray-900/65 backdrop-blur-[2px] flex items-center justify-center"
+//             >
+//               <motion.a
+//                 href={project.website}
+//                 target="_blank"
+//                 rel="noopener noreferrer"
+//                 animate={{ scale: hovered ? 1 : 0.85, opacity: hovered ? 1 : 0 }}
+//                 transition={{ duration: 0.25, delay: 0.05 }}
+//                 className="flex items-center gap-2 bg-white text-gray-900 font-semibold text-sm px-5 py-2.5 rounded-full shadow-xl"
+//               >
+//                 Visit Live Site <ExternalLink size={14} />
+//               </motion.a>
+//             </motion.div>
+//           </div>
+
+//           {/* Content */}
+//           <div className="p-5 flex flex-col flex-1" style={{ transform: "translateZ(10px)" }}>
+//             <div className="flex flex-wrap gap-1.5 mb-3">
+//               {project.services.map((s) => (
+//                 <span
+//                   key={s}
+//                   className="text-[10px] font-medium text-gray-500 bg-gray-50 border border-gray-100 px-2 py-0.5 rounded-md"
+//                 >
+//                   {s}
+//                 </span>
+//               ))}
+//             </div>
+
+//             <h3 className="text-lg font-bold text-gray-900 mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-violet-600 transition-all duration-300">
+//               {project.title}
+//             </h3>
+//             {project.handle && (
+//               <p className="text-xs text-gray-400 font-medium mb-2">{project.handle}</p>
+//             )}
+//             <p className="text-sm text-gray-500 leading-relaxed flex-1 line-clamp-2 mb-4">
+//               {project.description}
+//             </p>
+
+//             {/* Social proof + link */}
+//             <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+//               {project.followers ? (
+//                 <div className="flex items-center gap-1.5 text-gray-500">
+//                   <Instagram size={13} />
+//                   <span className="text-sm font-semibold text-gray-800">{project.followers}</span>
+//                   <span className="text-[11px] text-gray-400">followers</span>
+//                 </div>
+//               ) : (
+//                 <span className="text-[11px] text-gray-400 font-medium">{project.tagline}</span>
+//               )}
+//               <a
+//                 href={project.website}
+//                 target="_blank"
+//                 rel="noopener noreferrer"
+//                 className={`inline-flex items-center gap-1 text-xs font-semibold bg-clip-text text-transparent bg-gradient-to-r ${project.accent} group-hover:gap-1.5 transition-all`}
+//               >
+//                 Visit <ArrowUpRight size={12} className="text-gray-400" />
+//               </a>
+//             </div>
+//           </div>
+//         </div>
+//       </motion.div>
+//     </motion.div>
+//   );
+// }
+
+// // ─── Main Component ────────────────────────────────────────────────────────────
+
+// export default function WorkGallery() {
+//   const [activeFilter, setActiveFilter] = useState("All");
+//   const sectionRef = useRef<HTMLElement>(null);
+
+//   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
+//   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "6%"]);
+
+//   const filtered = activeFilter === "All" ? PROJECTS : PROJECTS.filter((p) => p.category === activeFilter);
+
+//   return (
+//     <section ref={sectionRef} id="work" className="relative py-24 lg:py-32 bg-white overflow-hidden">
+//       <motion.div style={{ y: bgY }} className="absolute inset-0 pointer-events-none" aria-hidden="true">
+//         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
+//         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
+//         <div className="absolute -top-48 right-0 w-[700px] h-[700px] rounded-full bg-gradient-to-bl from-blue-50/70 to-transparent blur-3xl" />
+//         <div className="absolute -bottom-32 -left-32 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-violet-50/50 to-transparent blur-3xl" />
+//       </motion.div>
+
+//       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+//         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-14">
+//           <motion.div
+//             initial={{ opacity: 0, y: 24 }}
+//             whileInView={{ opacity: 1, y: 0 }}
+//             viewport={{ once: true, margin: "-60px" }}
+//             transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+//             className="max-w-2xl"
+//           >
+//             <span className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 text-blue-700 text-xs font-semibold px-3.5 py-1.5 rounded-full mb-5">
+//               <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+//               Client Work
+//             </span>
+//             <h2 className="text-4xl sm:text-5xl lg:text-[52px] font-extrabold text-gray-900 leading-tight tracking-tight">
+//               Real businesses.{" "}
+//               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-violet-500">
+//                 Real websites.
+//               </span>
+//             </h2>
+//             <p className="mt-4 text-lg text-gray-500 leading-relaxed">
+//               Across interiors, travel, fitness, real estate, and hospitality — here's a look
+//               at the brands we've brought online.
+//             </p>
+//           </motion.div>
+
+//           <motion.div
+//             initial={{ opacity: 0, x: 20 }}
+//             whileInView={{ opacity: 1, x: 0 }}
+//             viewport={{ once: true, margin: "-60px" }}
+//             transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+//             className="grid grid-cols-2 gap-3 lg:gap-4 shrink-0"
+//           >
+//             {SUMMARY_STATS.map((s) => (
+//               <div key={s.label} className="bg-[#F8FAFC] border border-gray-100 rounded-xl px-4 py-3 min-w-[120px]">
+//                 <div className="flex items-center gap-1.5 mb-1">
+//                   <s.icon size={12} className="text-blue-500" />
+//                   <span className="text-[10px] text-gray-400 font-medium uppercase tracking-wide">{s.label}</span>
+//                 </div>
+//                 <p className="text-lg font-bold text-gray-900">{s.value}</p>
+//               </div>
+//             ))}
+//           </motion.div>
+//         </div>
+
+//         <motion.div
+//           initial={{ opacity: 0, y: 16 }}
+//           whileInView={{ opacity: 1, y: 0 }}
+//           viewport={{ once: true, margin: "-40px" }}
+//           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+//           className="flex flex-wrap items-center gap-2 mb-10"
+//         >
+//           <Filter size={13} className="text-gray-400 mr-1" />
+//           {CATEGORIES.map((cat) => (
+//             <motion.button
+//               key={cat}
+//               onClick={() => setActiveFilter(cat)}
+//               whileTap={{ scale: 0.95 }}
+//               className={`relative text-xs font-semibold px-4 py-2 rounded-full border transition-colors duration-200 overflow-hidden ${
+//                 activeFilter === cat ? "text-white border-transparent" : "bg-white text-gray-500 border-gray-200 hover:border-gray-300 hover:text-gray-700"
+//               }`}
+//             >
+//               {activeFilter === cat && (
+//                 <motion.span
+//                   layoutId="work-filter-bg"
+//                   className="absolute inset-0 bg-gray-900"
+//                   transition={{ type: "spring", stiffness: 350, damping: 30 }}
+//                 />
+//               )}
+//               <span className="relative z-10">{cat}</span>
+//             </motion.button>
+//           ))}
+//         </motion.div>
+
+//         <AnimatePresence mode="wait">
+//           <motion.div
+//             key={activeFilter}
+//             initial={{ opacity: 0, y: 12 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             exit={{ opacity: 0, y: -8 }}
+//             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+//             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+//           >
+//             {filtered.map((project, i) => (
+//               <ProjectCard key={project.id} project={project} index={i} />
+//             ))}
+//           </motion.div>
+//         </AnimatePresence>
+
+//         {filtered.length === 0 && (
+//           <motion.div
+//             initial={{ opacity: 0 }}
+//             animate={{ opacity: 1 }}
+//             className="text-center py-20 bg-gray-50 rounded-2xl border border-gray-100"
+//           >
+//             <p className="text-gray-400 text-sm font-medium">No projects in this category yet.</p>
+//             <button onClick={() => setActiveFilter("All")} className="mt-3 text-blue-600 text-sm font-semibold hover:underline">
+//               View all projects
+//             </button>
+//           </motion.div>
+//         )}
+
+//         <motion.div
+//           initial={{ opacity: 0, y: 20 }}
+//           whileInView={{ opacity: 1, y: 0 }}
+//           viewport={{ once: true, margin: "-40px" }}
+//           transition={{ duration: 0.55, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+//           className="mt-14 flex flex-col sm:flex-row items-center justify-between gap-6 pt-10 border-t border-gray-100"
+//         >
+//           <p className="text-gray-400 text-sm text-center sm:text-left">
+//             Showing {filtered.length} of {PROJECTS.length} projects
+//           </p>
+//           <div className="flex gap-3">
+//             <Link
+//               href="/portfolio"
+//               className="inline-flex items-center gap-2 text-sm font-semibold text-gray-700 border border-gray-200 hover:border-gray-300 hover:bg-gray-50 px-5 py-2.5 rounded-xl transition-all group"
+//             >
+//               View All Work
+//               <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+//             </Link>
+//             <Link
+//               href="#contact"
+//               className="inline-flex items-center gap-2 text-sm font-semibold text-white bg-gray-900 hover:bg-gradient-to-r hover:from-blue-600 hover:to-violet-600 px-5 py-2.5 rounded-xl transition-all group shadow-sm"
+//             >
+//               Start Your Project
+//               <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+//             </Link>
+//           </div>
+//         </motion.div>
+//       </div>
+//     </section>
+//   );
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 "use client";
 
-import { useState, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useScroll } from "framer-motion";
 import {
-  ArrowRight, ArrowUpRight, TrendingUp, Users, Star,
-  Briefcase, Filter,
+  ArrowRight,
+  ArrowUpRight,
+  Users,
+  Instagram,
+  MapPin,
+  Filter,
+  ExternalLink,
+  Layers,
+  Sparkles,
 } from "lucide-react";
 
-// ─── Data ──────────────────────────────────────────────────────────────────────
+// ─── Data ───────────────────────────────────────────────────────────────────
 
-const CATEGORIES = ["All", "SaaS", "EdTech", "E-commerce", "Restaurant", "Healthcare", "Real Estate"];
+interface Project {
+  id: string;
+  title: string;
+  handle?: string;
+  category: string;
+  location: string;
+  tagline: string;
+  website: string;
+  image: string; // static screenshot path in /public/websiteimages
+  accent: string;
+  bgTint: string;
+  followers?: string;
+  posts?: string;
+  services: string[];
+  description: string;
+}
 
-const PROJECTS = [
+const CATEGORIES = ["All", "Interior Design", "Travel", "Fitness", "Real Estate", "Food & Hospitality", "Technology"];
+
+const PROJECTS: Project[] = [
   {
-    id: "techvault",
-    title: "TechVault",
-    category: "SaaS",
-    location: "Bengaluru, India",
-    image: "/images/work/techvault.jpg",
-    color: "from-blue-500 to-cyan-400",
-    bgColor: "bg-blue-50",
-    accentColor: "text-blue-600",
-    accentBg: "bg-blue-50 border-blue-100",
-    tags: ["SEO", "Paid Ads", "Content"],
-    result: "3.1x pipeline growth",
-    growth: "+312%",
-    duration: "6 months",
-    featured: true,
+    id: "pari-interiors",
+    title: "Pari Interiors & Constructions",
+    handle: "@pari_interiors_constructions",
+    category: "Interior Design",
+    location: "India",
+    tagline: "Designing Dreams, Creating Reality",
+    website: "https://super-selkie-883c49.netlify.app/",
+    image: "/websiteimages/interiorwebisteimage.jpeg",
+    accent: "from-amber-500 to-orange-400",
+    bgTint: "bg-amber-50",
+    followers: "295",
+    posts: "86",
+    services: ["Website Design", "Portfolio Showcase"],
     description:
-      "Rebuilt their entire demand-gen engine — from technical SEO to a multi-touch paid strategy across Google and LinkedIn. Organic traffic tripled in under 6 months.",
+      "A registered interior design studio specializing in space planning and residential builds — given a clean, portfolio-first website to showcase completed projects.",
   },
   {
-    id: "brightpath",
-    title: "BrightPath Edu",
-    category: "EdTech",
-    location: "Mumbai, India",
-    image: "/images/work/brightpath.jpg",
-    color: "from-violet-500 to-purple-400",
-    bgColor: "bg-violet-50",
-    accentColor: "text-violet-600",
-    accentBg: "bg-violet-50 border-violet-100",
-    tags: ["Lead Gen", "Web Dev", "Branding"],
-    result: "+60% admissions",
-    growth: "+60%",
-    duration: "4 months",
-    featured: true,
+    id: "travel-hub-india",
+    title: "Travel Hub India",
+    handle: "@travelhubindia1",
+    category: "Travel",
+    location: "East of Kailash, Delhi",
+    tagline: "Making Dreams Memorable",
+    website: "https://www.travelhubindia.com/",
+    image: "/websiteimages/travelwebisteimage.jpg",
+    accent: "from-blue-500 to-cyan-400",
+    bgTint: "bg-blue-50",
+    followers: "2.7K",
+    posts: "1.4K",
+    services: ["Website Design", "Booking Presence"],
     description:
-      "Redesigned their conversion funnel from scratch, launched geo-targeted ad campaigns, and automated their entire lead nurturing workflow with AI.",
+      "A full-service travel agency handling flights, hotels, taxis, and visas — built a site to match their scale as an established domestic and international travel operator.",
   },
   {
-    id: "zenithco",
-    title: "ZenithCo",
-    category: "E-commerce",
-    location: "Delhi, India",
-    image: "/images/work/zenithco.jpg",
-    color: "from-cyan-500 to-blue-400",
-    bgColor: "bg-cyan-50",
-    accentColor: "text-cyan-600",
-    accentBg: "bg-cyan-50 border-cyan-100",
-    tags: ["Performance Ads", "CRO", "Email"],
-    result: "$2.4M revenue added",
-    growth: "+187%",
-    duration: "8 months",
-    featured: false,
+    id: "kiro-fitness",
+    title: "The KIRO Fitness Sangvi",
+    handle: "@the_kiro_fitness_sangvi",
+    category: "Fitness",
+    location: "New Sangavi, Pune",
+    tagline: "4,500 sq ft of premium training space",
+    website: "https://thekirofitness.com/",
+    image: "/websiteimages/Gymwebsiteimage.jpg",
+    accent: "from-emerald-500 to-teal-400",
+    bgTint: "bg-emerald-50",
+    followers: "303",
+    posts: "235",
+    services: ["Website Design", "Brand Presence"],
     description:
-      "Full performance marketing takeover — restructured their Meta and Google Ads, introduced email sequences, and ran 40+ CRO tests to lift conversion rate from 1.9% to 5.3%.",
+      "A premium fitness center at a prime Pune location — given a bold, energy-driven website to match its physical footprint and training programs.",
   },
   {
-    id: "novabrand",
-    title: "NovaBrand Foods",
-    category: "Restaurant",
-    location: "Pune, India",
-    image: "/images/work/novabrand.jpg",
-    color: "from-rose-500 to-orange-400",
-    bgColor: "bg-rose-50",
-    accentColor: "text-rose-600",
-    accentBg: "bg-rose-50 border-rose-100",
-    tags: ["Branding", "Social Media", "SEO"],
-    result: "2.8x online orders",
-    growth: "+180%",
-    duration: "3 months",
-    featured: false,
-    description:
-      "Built a brand identity from scratch, launched their social media presence, and drove online order volume through a local SEO and Google Business strategy.",
-  },
-  {
-    id: "peakforge",
-    title: "PeakForge Health",
-    category: "Healthcare",
-    location: "Chennai, India",
-    image: "/images/work/peakforge.jpg",
-    color: "from-emerald-500 to-teal-400",
-    bgColor: "bg-emerald-50",
-    accentColor: "text-emerald-600",
-    accentBg: "bg-emerald-50 border-emerald-100",
-    tags: ["Lead Gen", "SEO", "Web Dev"],
-    result: "4.2x patient inquiries",
-    growth: "+320%",
-    duration: "5 months",
-    featured: true,
-    description:
-      "Rebuilt their local SEO presence, launched a high-converting service page funnel, and automated follow-up sequences — driving qualified patient inquiries from day one.",
-  },
-  {
-    id: "strideo",
-    title: "StrideCo Realty",
+    id: "jk-real-estate",
+    title: "JK Real Estate Agents",
+    handle: "@jkrealestateagents",
     category: "Real Estate",
-    location: "Hyderabad, India",
-    image: "/images/work/strideo.jpg",
-    color: "from-amber-500 to-yellow-400",
-    bgColor: "bg-amber-50",
-    accentColor: "text-amber-600",
-    accentBg: "bg-amber-50 border-amber-100",
-    tags: ["Paid Ads", "Lead Gen", "CRO"],
-    result: "₹18Cr in sales pipeline",
-    growth: "+240%",
-    duration: "7 months",
-    featured: false,
+    location: "Ghatkopar East, Mumbai",
+    tagline: "Serving buyers, sellers & investors since 1988",
+    website: "http://jkrealestateagents.com",
+    image: "/websiteimages/realstateimage.jpg",
+    accent: "from-violet-500 to-purple-400",
+    bgTint: "bg-violet-50",
+    followers: "231",
+    posts: "312",
+    services: ["Website Design", "Listings Presence"],
     description:
-      "End-to-end lead generation infrastructure for a real estate developer — Facebook lead campaigns, WhatsApp automation, and a CRM integration that tracked every rupee.",
+      "A residential and commercial real estate agency with over three decades of local trust — brought online with a site built around buy, sell, rent, and investment listings.",
+  },
+  {
+    id: "indian-coffee-house",
+    title: "Indian Coffee House",
+    category: "Food & Hospitality",
+    location: "Thrissur, Kerala (Pan-India)",
+    tagline: "A worker-cooperative institution with 1,200+ branches",
+    website: "https://www.indiancoffeehouse.com/",
+    image: "/websiteimages/cofeehouseimage.jpg",
+    accent: "from-rose-500 to-red-400",
+    bgTint: "bg-rose-50",
+    services: ["Website Design", "Multi-Branch Directory"],
+    description:
+      "One of India's most historic restaurant cooperatives, with a legacy spanning decades of branches nationwide — given a structured site covering branch locations, news, and enquiries.",
+  },
+  {
+    id: "rentora",
+    title: "Rentora",
+    handle: "@rentora",
+    category: "Technology",
+    location: "India",
+    tagline: "Rent Anything. Own Less.",
+    website: "https://rentora-coral.vercel.app/",
+    image: "/websiteimages/Rentoraimage.jpeg",
+    accent: "from-indigo-500 via-blue-500 to-cyan-400",
+    bgTint: "bg-indigo-50",
+    services: [
+      "UI/UX Design",
+      "Full-Stack Development",
+      "Rental Marketplace",
+      "Responsive Website",
+    ],
+    description:
+      "A modern peer-to-peer rental marketplace enabling users to rent premium cameras, drones, laptops, bikes, gaming gear, audio equipment, lighting, and professional tools — built with a secure rental workflow and scalable marketplace architecture.",
   },
 ];
 
 const SUMMARY_STATS = [
-  { label: "Brands Scaled", value: "150+", icon: Briefcase },
-  { label: "Avg. Revenue Growth", value: "↑ 200%", icon: TrendingUp },
-  { label: "Client Rating", value: "4.9 / 5", icon: Star },
-  { label: "Satisfaction Rate", value: "98%", icon: Users },
+  { label: "Live Client Sites", value: `${PROJECTS.length}`, icon: Layers },
+  { label: "Industries Served", value: `${new Set(PROJECTS.map((p) => p.category)).size}`, icon: Sparkles },
+  { label: "Custom Built", value: "100%", icon: ArrowUpRight },
+  { label: "Full-Stack Delivery", value: "End-to-End", icon: Users },
 ];
 
-// ─── Sub-components ────────────────────────────────────────────────────────────
+// ─── Static thumbnail — real captured screenshots, no external service ─────
 
-function ProjectCard({ project, index }: { project: typeof PROJECTS[0]; index: number }) {
+function ProjectThumbnail({ project }: { project: Project }) {
+  return (
+    <Image
+      src={project.image}
+      alt={`${project.title} website preview`}
+      fill
+      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+      priority={false}
+    />
+  );
+}
+
+// ─── 3D tilt project card ────────────────────────────────────────────────────
+
+function ProjectCard({ project, index }: { project: Project; index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const springConfig = { stiffness: 220, damping: 22, mass: 0.5 };
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [8, -8]), springConfig);
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-8, 8]), springConfig);
   const [hovered, setHovered] = useState(false);
+
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      const rect = ref.current?.getBoundingClientRect();
+      if (!rect) return;
+      mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
+      mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
+    },
+    [mouseX, mouseY]
+  );
+  const handleMouseLeave = useCallback(() => {
+    mouseX.set(0);
+    mouseY.set(0);
+    setHovered(false);
+  }, [mouseX, mouseY]);
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      transition={{ duration: 0.6, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
+      style={{ perspective: 1200 }}
     >
-      <Link href={`/portfolio/${project.id}`} className="block group h-full">
-        <motion.div
-          animate={{ y: hovered ? -6 : 0 }}
-          transition={{ type: "spring", stiffness: 300, damping: 24 }}
-          className="relative bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden h-full flex flex-col"
-          style={{
-            boxShadow: hovered
-              ? "0 20px 60px -12px rgba(59,130,246,0.12), 0 0 0 1px rgba(59,130,246,0.08)"
-              : "0 1px 3px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.03)",
-          }}
-        >
+      <motion.div
+        ref={ref}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={handleMouseLeave}
+        whileHover={{ scale: 1.015 }}
+        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+        className="group relative h-full touch-manipulation"
+      >
+        {/* Ambient glow — desktop hover only, skipped visually on touch via opacity-0 default */}
+        <div
+          className={`absolute -inset-1 rounded-3xl bg-gradient-to-br ${project.accent} opacity-0 group-hover:opacity-25 blur-xl transition-opacity duration-500 hidden sm:block`}
+          style={{ transform: "translateZ(-40px)" }}
+        />
+
+        <div className="relative bg-white rounded-2xl border border-gray-100 shadow-sm group-hover:shadow-2xl group-hover:shadow-blue-500/10 overflow-hidden h-full flex flex-col transition-shadow duration-500">
           {/* Top gradient strip */}
-          <div className={`h-0.5 w-full bg-gradient-to-r ${project.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+          <div className={`h-1 w-full bg-gradient-to-r ${project.accent}`} />
 
-          {/* Image area */}
-          <div className={`relative h-52 ${project.bgColor} overflow-hidden flex items-center justify-center`}>
-            {/* Placeholder gradient illustration */}
-            <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-10`} />
-            <div className="relative flex flex-col items-center gap-2">
-              <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${project.color} flex items-center justify-center shadow-lg`}>
-                <span className="text-white font-black text-xl">{project.title[0]}</span>
-              </div>
-              <span className="text-xs font-semibold text-gray-400">{project.location}</span>
+          {/* Visual header — static screenshot */}
+          <div className={`relative h-40 sm:h-44 md:h-48 ${project.bgTint} overflow-hidden`}>
+            <ProjectThumbnail project={project} />
+
+            <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
+
+            <div
+              className="absolute bottom-3 left-3 flex items-center gap-1 text-[10px] sm:text-[11px] font-semibold text-white bg-black/30 backdrop-blur-sm px-2 sm:px-2.5 py-1 rounded-full"
+              style={{ transform: "translateZ(20px)" }}
+            >
+              <MapPin size={10} />
+              <span className="truncate max-w-[140px] sm:max-w-none">{project.location}</span>
             </div>
 
-            {/* Featured badge */}
-            {project.featured && (
-              <div className="absolute top-3 left-3">
-                <span className="inline-flex items-center gap-1 text-[10px] font-bold bg-white/90 backdrop-blur px-2.5 py-1 rounded-full border border-gray-100 text-gray-700">
-                  <Star size={9} className="fill-amber-400 text-amber-400" /> Featured
-                </span>
-              </div>
-            )}
-
-            {/* Category */}
-            <div className="absolute top-3 right-3">
-              <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full border ${project.accentBg} ${project.accentColor}`}>
-                {project.category}
-              </span>
+            <div
+              className={`absolute top-3 right-3 text-[9px] sm:text-[10px] font-bold px-2 sm:px-2.5 py-1 rounded-full bg-gradient-to-r ${project.accent} text-white shadow-sm`}
+              style={{ transform: "translateZ(30px)" }}
+            >
+              {project.category}
             </div>
 
-            {/* Hover view overlay */}
+            {/* Hover overlay -> real link (also tappable on mobile) */}
             <motion.div
               animate={{ opacity: hovered ? 1 : 0 }}
               transition={{ duration: 0.2 }}
-              className="absolute inset-0 bg-gray-900/60 backdrop-blur-sm flex items-center justify-center"
+              className="absolute inset-0 bg-gray-900/65 backdrop-blur-[2px] flex items-center justify-center opacity-0 sm:group-hover:opacity-100 sm:opacity-0"
             >
-              <motion.div
+              <motion.a
+                href={project.website}
+                target="_blank"
+                rel="noopener noreferrer"
                 animate={{ scale: hovered ? 1 : 0.85, opacity: hovered ? 1 : 0 }}
                 transition={{ duration: 0.25, delay: 0.05 }}
-                className="flex items-center gap-2 bg-white text-gray-900 font-semibold text-sm px-5 py-2.5 rounded-full shadow-xl"
+                className="flex items-center gap-2 bg-white text-gray-900 font-semibold text-xs sm:text-sm px-4 sm:px-5 py-2 sm:py-2.5 rounded-full shadow-xl"
               >
-                View Case Study <ArrowUpRight size={14} />
-              </motion.div>
+                Visit Live Site <ExternalLink size={13} />
+              </motion.a>
             </motion.div>
           </div>
 
           {/* Content */}
-          <div className="p-5 flex flex-col flex-1">
-            {/* Tags */}
-            <div className="flex flex-wrap gap-1.5 mb-3">
-              {project.tags.map((t) => (
-                <span key={t} className="text-[10px] font-medium text-gray-500 bg-gray-50 border border-gray-100 px-2 py-0.5 rounded-md">
-                  {t}
+          <div className="p-4 sm:p-5 flex flex-col flex-1" style={{ transform: "translateZ(10px)" }}>
+            <div className="flex flex-wrap gap-1.5 mb-2.5 sm:mb-3">
+              {project.services.slice(0, 3).map((s) => (
+                <span
+                  key={s}
+                  className="text-[9px] sm:text-[10px] font-medium text-gray-500 bg-gray-50 border border-gray-100 px-1.5 sm:px-2 py-0.5 rounded-md"
+                >
+                  {s}
                 </span>
               ))}
             </div>
 
-            <h3 className={`text-lg font-bold text-gray-900 mb-1.5 transition-colors duration-200 ${hovered ? project.accentColor : ""}`}>
+            <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-violet-600 transition-all duration-300">
               {project.title}
             </h3>
-
-            <p className="text-sm text-gray-500 leading-relaxed flex-1 line-clamp-2">
+            {project.handle && (
+              <p className="text-[11px] sm:text-xs text-gray-400 font-medium mb-2">{project.handle}</p>
+            )}
+            <p className="text-xs sm:text-sm text-gray-500 leading-relaxed flex-1 line-clamp-2 mb-3 sm:mb-4">
               {project.description}
             </p>
 
-            {/* Bottom metrics */}
-            <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
-              <div>
-                <p className="text-[10px] text-gray-400 font-medium uppercase tracking-wide mb-0.5">Key Result</p>
-                <p className="text-sm font-semibold text-gray-800">{project.result}</p>
-              </div>
-              <div className="text-right">
-                <p className="text-[10px] text-gray-400 font-medium uppercase tracking-wide mb-0.5">Growth</p>
-                <p className={`text-sm font-bold ${project.accentColor}`}>{project.growth}</p>
-              </div>
+            {/* Social proof + link */}
+            <div className="flex items-center justify-between pt-3 sm:pt-4 border-t border-gray-100">
+              {project.followers ? (
+                <div className="flex items-center gap-1.5 text-gray-500">
+                  <Instagram size={12} />
+                  <span className="text-xs sm:text-sm font-semibold text-gray-800">{project.followers}</span>
+                  <span className="text-[10px] sm:text-[11px] text-gray-400">followers</span>
+                </div>
+              ) : (
+                <span className="text-[10px] sm:text-[11px] text-gray-400 font-medium truncate max-w-[140px]">
+                  {project.tagline}
+                </span>
+              )}
+              <a
+                href={project.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold bg-clip-text text-transparent bg-gradient-to-r ${project.accent} group-hover:gap-1.5 transition-all shrink-0`}
+              >
+                Visit <ArrowUpRight size={12} className="text-gray-400" />
+              </a>
             </div>
           </div>
-        </motion.div>
-      </Link>
+        </div>
+      </motion.div>
     </motion.div>
   );
 }
@@ -2746,26 +4275,20 @@ export default function WorkGallery() {
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "6%"]);
 
-  const filtered =
-    activeFilter === "All"
-      ? PROJECTS
-      : PROJECTS.filter((p) => p.category === activeFilter);
+  const filtered = activeFilter === "All" ? PROJECTS : PROJECTS.filter((p) => p.category === activeFilter);
 
   return (
-    <section ref={sectionRef} id="work" className="relative py-24 lg:py-32 bg-white overflow-hidden">
-
-      {/* ── Background ── */}
+    <section ref={sectionRef} id="work" className="relative py-16 sm:py-24 lg:py-32 bg-white overflow-hidden">
       <motion.div style={{ y: bgY }} className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
-        <div className="absolute -top-48 right-0 w-[700px] h-[700px] rounded-full bg-gradient-to-bl from-blue-50/70 to-transparent blur-3xl" />
-        <div className="absolute -bottom-32 -left-32 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-violet-50/50 to-transparent blur-3xl" />
+        <div className="absolute -top-48 right-0 w-[400px] sm:w-[700px] h-[400px] sm:h-[700px] rounded-full bg-gradient-to-bl from-blue-50/70 to-transparent blur-3xl" />
+        <div className="absolute -bottom-32 -left-32 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] rounded-full bg-gradient-to-tr from-violet-50/50 to-transparent blur-3xl" />
       </motion.div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        {/* ── Header ── */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-14">
+        {/* Header */}
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 sm:gap-8 mb-10 sm:mb-14">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -2773,68 +4296,73 @@ export default function WorkGallery() {
             transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-2xl"
           >
-            <span className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 text-blue-700 text-xs font-semibold px-3.5 py-1.5 rounded-full mb-5">
+            <span className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 text-blue-700 text-[11px] sm:text-xs font-semibold px-3 sm:px-3.5 py-1.5 rounded-full mb-4 sm:mb-5">
               <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
               Client Work
             </span>
-            <h2 className="text-4xl sm:text-5xl lg:text-[52px] font-extrabold text-gray-900 leading-tight tracking-tight">
-              Results we've built.{" "}
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-extrabold text-gray-900 leading-tight tracking-tight">
+              Real businesses.{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-violet-500">
-                Businesses that grew.
+                Real websites.
               </span>
             </h2>
-            <p className="mt-4 text-lg text-gray-500 leading-relaxed">
-              Every project below is a real business that came to us with a growth problem.
-              Here's what happened next.
+            <p className="mt-3 sm:mt-4 text-base sm:text-lg text-gray-500 leading-relaxed">
+              Across interiors, travel, fitness, real estate, and technology — here's a look
+              at the brands we've brought online.
             </p>
           </motion.div>
 
-          {/* Stats strip */}
+          {/* Stats strip — 2 cols on mobile too, just tighter */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="grid grid-cols-2 gap-3 lg:gap-4 shrink-0"
+            className="grid grid-cols-2 gap-2.5 sm:gap-3 lg:gap-4 shrink-0"
           >
             {SUMMARY_STATS.map((s) => (
-              <div key={s.label} className="bg-[#F8FAFC] border border-gray-100 rounded-xl px-4 py-3 min-w-[120px]">
+              <div key={s.label} className="bg-[#F8FAFC] border border-gray-100 rounded-xl px-3 sm:px-4 py-2.5 sm:py-3 min-w-[100px] sm:min-w-[120px]">
                 <div className="flex items-center gap-1.5 mb-1">
-                  <s.icon size={12} className="text-blue-500" />
-                  <span className="text-[10px] text-gray-400 font-medium uppercase tracking-wide">{s.label}</span>
+                  <s.icon size={11} className="text-blue-500 shrink-0" />
+                  <span className="text-[9px] sm:text-[10px] text-gray-400 font-medium uppercase tracking-wide">{s.label}</span>
                 </div>
-                <p className="text-lg font-bold text-gray-900">{s.value}</p>
+                <p className="text-base sm:text-lg font-bold text-gray-900">{s.value}</p>
               </div>
             ))}
           </motion.div>
         </div>
 
-        {/* ── Filter tabs ── */}
+        {/* Filter tabs — horizontally scrollable on mobile */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-wrap items-center gap-2 mb-10"
+          className="flex items-center gap-2 mb-8 sm:mb-10 overflow-x-auto pb-1 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
-          <Filter size={13} className="text-gray-400 mr-1" />
+          <Filter size={13} className="text-gray-400 mr-1 shrink-0" />
           {CATEGORIES.map((cat) => (
             <motion.button
               key={cat}
               onClick={() => setActiveFilter(cat)}
               whileTap={{ scale: 0.95 }}
-              className={`text-xs font-semibold px-4 py-2 rounded-full border transition-all duration-200 ${
-                activeFilter === cat
-                  ? "bg-gray-900 text-white border-gray-900 shadow-sm"
-                  : "bg-white text-gray-500 border-gray-200 hover:border-gray-300 hover:text-gray-700"
+              className={`relative text-xs font-semibold px-3.5 sm:px-4 py-2 rounded-full border transition-colors duration-200 overflow-hidden shrink-0 whitespace-nowrap ${
+                activeFilter === cat ? "text-white border-transparent" : "bg-white text-gray-500 border-gray-200 hover:border-gray-300 hover:text-gray-700"
               }`}
             >
-              {cat}
+              {activeFilter === cat && (
+                <motion.span
+                  layoutId="work-filter-bg"
+                  className="absolute inset-0 bg-gray-900"
+                  transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                />
+              )}
+              <span className="relative z-10">{cat}</span>
             </motion.button>
           ))}
         </motion.div>
 
-        {/* ── Cards grid ── */}
+        {/* Cards grid — 1 col mobile, 2 col tablet, 3 col desktop */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeFilter}
@@ -2842,7 +4370,7 @@ export default function WorkGallery() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6"
           >
             {filtered.map((project, i) => (
               <ProjectCard key={project.id} project={project} index={i} />
@@ -2850,12 +4378,11 @@ export default function WorkGallery() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Empty state */}
         {filtered.length === 0 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-center py-20 bg-gray-50 rounded-2xl border border-gray-100"
+            className="text-center py-16 sm:py-20 bg-gray-50 rounded-2xl border border-gray-100"
           >
             <p className="text-gray-400 text-sm font-medium">No projects in this category yet.</p>
             <button onClick={() => setActiveFilter("All")} className="mt-3 text-blue-600 text-sm font-semibold hover:underline">
@@ -2864,35 +4391,34 @@ export default function WorkGallery() {
           </motion.div>
         )}
 
-        {/* ── View all CTA ── */}
+        {/* Bottom CTA — stacks on mobile */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.55, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-14 flex flex-col sm:flex-row items-center justify-between gap-6 pt-10 border-t border-gray-100"
+          className="mt-10 sm:mt-14 flex flex-col sm:flex-row items-center justify-between gap-5 sm:gap-6 pt-8 sm:pt-10 border-t border-gray-100"
         >
           <p className="text-gray-400 text-sm text-center sm:text-left">
-            Showing {filtered.length} of {PROJECTS.length} projects · More case studies available
+            Showing {filtered.length} of {PROJECTS.length} projects
           </p>
-          <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
             <Link
               href="/portfolio"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-gray-700 border border-gray-200 hover:border-gray-300 hover:bg-gray-50 px-5 py-2.5 rounded-xl transition-all group"
+              className="inline-flex items-center justify-center gap-2 text-sm font-semibold text-gray-700 border border-gray-200 hover:border-gray-300 hover:bg-gray-50 px-5 py-2.5 rounded-xl transition-all group"
             >
               View All Work
               <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
             </Link>
             <Link
               href="#contact"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-white bg-gray-900 hover:bg-gradient-to-r hover:from-blue-600 hover:to-violet-600 px-5 py-2.5 rounded-xl transition-all group shadow-sm"
+              className="inline-flex items-center justify-center gap-2 text-sm font-semibold text-white bg-gray-900 hover:bg-gradient-to-r hover:from-blue-600 hover:to-violet-600 px-5 py-2.5 rounded-xl transition-all group shadow-sm"
             >
               Start Your Project
               <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
           </div>
         </motion.div>
-
       </div>
     </section>
   );
