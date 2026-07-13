@@ -7,11 +7,11 @@
 
 // app/(main)/layout.tsx
 
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import BehavioralPopups from "@/components/BehavioralPopups";
-import WhatsAppFloat from "@/components/WhatsAppFloat";
-import ChatMascot from "@/components/WhatsAppMascot";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import BehavioralPopups from "../components/BehavioralPopups";
+import WhatsAppFloat from "../components/WhatsAppFloat";
+import ChatMascot from "../components/WhatsAppMascot";
 
 export default function MainLayout({
   children,
