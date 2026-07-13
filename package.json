@@ -1,8 +1,8 @@
 {
-  "name": "marktale",
+  "name": "aerovince",
   "version": "0.1.0",
-  "description": "A premium B2B marketing agency website built with Next.js 15, React 19, and TailwindCSS.",
-  "author": "Kishann",
+  "description": "Aerovince — a digital marketing agency website built with Next.js 16, React 19, and TailwindCSS. Websites, SEO, social media marketing, WhatsApp/email marketing, ad campaigns, and brand identity.",
+  "author": "Aerovince",
   "license": "MIT",
   "private": true,
   "scripts": {
