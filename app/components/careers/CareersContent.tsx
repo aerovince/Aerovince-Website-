@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
@@ -30,7 +29,6 @@ import {
 } from 'lucide-react';
 
 // ─── Animation Variants ────────────────────────────────────────────────────
-// AFTER ✅
 import type { Variants } from 'framer-motion';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -263,8 +261,7 @@ function ApplyModal({ isOpen, onClose, jobTitle }: { isOpen: boolean; onClose: (
                                     <p className="text-xs text-blue-400 font-bold uppercase tracking-widest">Applying for</p>
                                 </div>
                                 <h3 className="text-white text-xl font-extrabold leading-tight">{jobTitle}</h3>
-                                <p className="text-gray-400 text-sm mt-1">We&apos;ll get back within 24 hours
-                                </p>
+                                <p className="text-gray-400 text-sm mt-1">We&apos;ll get back within 24 hours</p>
                             </div>
                             <button onClick={handleClose} className="text-white/50 hover:text-white transition-colors mt-1">
                                 <X size={22} />
@@ -409,7 +406,7 @@ export default function CareersContent() {
                             <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0}
                                 className="inline-flex items-center gap-2 border border-white/15 bg-white/5 backdrop-blur-sm text-white text-xs font-bold px-5 py-2 rounded-full mb-8 uppercase tracking-widest">
                                 <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-                                MarkTale is Hiring-
+                                Aerovince is Hiring
                             </motion.div>
 
                             <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={1}
@@ -425,7 +422,7 @@ export default function CareersContent() {
 
                             <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={2}
                                 className="text-gray-400 text-lg leading-relaxed max-w-lg mb-10">
-                                We&apos;re MarkTale — an AI-powered creative agency. Remote-first, growth-obsessed, and looking for designers, developers, and creators who build things that actually matter.
+                                We&apos;re Aerovince — an AI-powered creative agency. Remote-first, growth-obsessed, and looking for designers, developers, and creators who build things that actually matter.
                             </motion.p>
 
                             <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={3}
@@ -560,7 +557,7 @@ export default function CareersContent() {
                                     </svg>
                                 </span>
                             </h2>
-                            <p className="text-gray-500 max-w-xs leading-relaxed">Click any role to expand and see what you&apos;ll, be working on.</p>
+                            <p className="text-gray-500 max-w-xs leading-relaxed">Click any role to expand and see what you&apos;ll be working on.</p>
                         </div>
                     </motion.div>
 

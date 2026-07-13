@@ -44,7 +44,7 @@ function ValentineLoader() {
 
     const textSteps = [
         "Fall in love with results.",
-        "Fall in love with MarkTale ❤️",
+        "Fall in love with Aerovince ❤️",
     ];
 
     useEffect(() => {

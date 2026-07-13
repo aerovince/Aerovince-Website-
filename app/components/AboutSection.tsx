@@ -1,3 +1,6 @@
+
+
+
 "use client";
 
 import React, { useState } from "react";
@@ -18,6 +21,7 @@ import {
   Rocket,
   Target,
   Lightbulb,
+  Briefcase,
 } from "lucide-react";
 
 const stats = [
@@ -78,9 +82,6 @@ const achievements = [
   { value: "98%", label: "Success Rate", icon: Award },
 ];
 
-// Import Briefcase
-import { Briefcase } from "lucide-react";
-
 export default function AboutSection() {
   const [hoveredStat, setHoveredStat] = useState<number | null>(null);
   const [hoveredValue, setHoveredValue] = useState<number | null>(null);
@@ -132,7 +133,7 @@ export default function AboutSection() {
             {/* Description */}
             <div className="space-y-4 mb-8">
               <p className="text-gray-600 leading-relaxed">
-                MarkTale – Powered by AI is a full-service startup building,
+                Aerovince – Powered by AI is a full-service startup building,
                 branding, marketing, and technology company. We work as a growth
                 partner, not a vendor — combining AI tools, human creativity,
                 and execution clarity to deliver real business outcomes.

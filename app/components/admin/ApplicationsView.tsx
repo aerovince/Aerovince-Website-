@@ -1,4 +1,4 @@
-//C:\New-Marktale-website\app\components\admin\ApplicationsView.tsx
+// app\components\admin\ApplicationsView.tsx
 "use client";
 
 import { useState, useEffect, useCallback } from "react";

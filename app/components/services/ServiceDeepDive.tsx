@@ -34,7 +34,7 @@ export default function ServiceDeepDive() {
         <section className="py-24 bg-neutral-50">
             <div className="container mx-auto px-6">
                 <div className="max-w-4xl mx-auto mb-16 text-center">
-                    <h2 className="text-4xl font-heading font-bold mb-6 text-kestone-black">Why Choose MarkTale?</h2>
+                    <h2 className="text-4xl font-heading font-bold mb-6 text-gray-900">Why Choose Aerovince?</h2>
                     <p className="text-gray-600 leading-relaxed font-body">
                         We go deeper than surface-level deliverables. We understand the business mechanics behind marketing and technology.
                     </p>
@@ -51,10 +51,10 @@ export default function ServiceDeepDive() {
                             className={`flex flex-col ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-10 lg:gap-16`}
                         >
                             <div className="flex-1">
-                                <span className="text-kestone-red font-bold tracking-widest uppercase text-sm mb-4 block">
+                                <span className="text-blue-600 font-bold tracking-widest uppercase text-sm mb-4 block">
                                     {dive.subtitle}
                                 </span>
-                                <h3 className="text-3xl font-heading font-bold mb-6 text-kestone-black">
+                                <h3 className="text-3xl font-heading font-bold mb-6 text-gray-900">
                                     {dive.title}
                                 </h3>
                                 <p className="text-gray-600 leading-relaxed font-body mb-8 whitespace-pre-line text-lg">
@@ -62,8 +62,8 @@ export default function ServiceDeepDive() {
                                 </p>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     {dive.benefits.map((benefit, i) => (
-                                        <div key={i} className="flex items-center text-kestone-black font-medium">
-                                            <div className="w-6 h-6 rounded-full bg-blue-50 flex items-center justify-center mr-3 text-kestone-red">
+                                        <div key={i} className="flex items-center text-gray-900 font-medium">
+                                            <div className="w-6 h-6 rounded-full bg-blue-50 flex items-center justify-center mr-3 text-blue-600">
                                                 <Check size={14} />
                                             </div>
                                             {benefit}

@@ -1,156 +1,3 @@
-// "use client";
-
-// import { useState } from "react";
-// import { S, Icons } from "./Common";
-
-// export default function Settings() {
-//   const [settings, setSettings] = useState({
-//     siteName: "MarkTale",
-//     tagline: "Powered by AI",
-//     email: "hello@marktaleworld.com",
-//     phone: "+91-8587870707",
-//     address: "Plot no. 141, Sec. 14, Dwarka, New Delhi – 110078",
-//     growth: "10x",
-//     brands: "150+",
-//     success: "98%",
-//   });
-//   const [saved, setSaved] = useState(false);
-
-//   const updateSetting = (key, value) => {
-//     setSettings({ ...settings, [key]: value });
-//   };
-
-//   const saveSettings = () => {
-//     setSaved(true);
-//     setTimeout(() => setSaved(false), 2000);
-//   };
-
-//   return (
-//     <div>
-//       <div style={{ marginBottom: 24 }}>
-//         <div style={S.sectionTitle}>Site Settings</div>
-//         <div style={S.sectionSub}>
-//           Update your website info and contact details.
-//         </div>
-//       </div>
-
-//       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
-//         <div style={S.card}>
-//           <div style={S.cardHeader}>
-//             <span style={S.cardTitle}>Brand Info</span>
-//           </div>
-//           <div style={{ padding: "20px" }}>
-//             {[
-//               ["Site Name", "siteName"],
-//               ["Tagline", "tagline"],
-//             ].map(([label, key]) => (
-//               <div key={key} style={S.formGroup}>
-//                 <label style={S.label}>{label}</label>
-//                 <input
-//                   style={S.input}
-//                   value={settings[key]}
-//                   onChange={(e) => updateSetting(key, e.target.value)}
-//                 />
-//               </div>
-//             ))}
-//           </div>
-//         </div>
-
-//         <div style={S.card}>
-//           <div style={S.cardHeader}>
-//             <span style={S.cardTitle}>Contact Details</span>
-//           </div>
-//           <div style={{ padding: "20px" }}>
-//             {[
-//               ["Email", "email"],
-//               ["Phone", "phone"],
-//             ].map(([label, key]) => (
-//               <div key={key} style={S.formGroup}>
-//                 <label style={S.label}>{label}</label>
-//                 <input
-//                   style={S.input}
-//                   value={settings[key]}
-//                   onChange={(e) => updateSetting(key, e.target.value)}
-//                 />
-//               </div>
-//             ))}
-//           </div>
-//         </div>
-
-//         <div style={{ ...S.card, gridColumn: "1 / -1" }}>
-//           <div style={S.cardHeader}>
-//             <span style={S.cardTitle}>Office Address</span>
-//           </div>
-//           <div style={{ padding: "20px" }}>
-//             <textarea
-//               style={{ ...S.input, minHeight: 72 }}
-//               value={settings.address}
-//               onChange={(e) => updateSetting("address", e.target.value)}
-//             />
-//           </div>
-//         </div>
-
-//         <div style={{ ...S.card, gridColumn: "1 / -1" }}>
-//           <div style={S.cardHeader}>
-//             <span style={S.cardTitle}>Hero Stats</span>
-//           </div>
-//           <div
-//             style={{
-//               padding: "20px",
-//               display: "grid",
-//               gridTemplateColumns: "repeat(3, 1fr)",
-//               gap: 14,
-//             }}
-//           >
-//             {[
-//               ["Growth (e.g. 10x)", "growth"],
-//               ["Brands (e.g. 150+)", "brands"],
-//               ["Success % (e.g. 98%)", "success"],
-//             ].map(([label, key]) => (
-//               <div key={key} style={S.formGroup}>
-//                 <label style={S.label}>{label}</label>
-//                 <input
-//                   style={S.input}
-//                   value={settings[key]}
-//                   onChange={(e) => updateSetting(key, e.target.value)}
-//                 />
-//               </div>
-//             ))}
-//           </div>
-//         </div>
-//       </div>
-
-//       <div
-//         style={{
-//           marginTop: 20,
-//           display: "flex",
-//           alignItems: "center",
-//           gap: 14,
-//         }}
-//       >
-//         <button style={S.btn("primary")} onClick={saveSettings}>
-//           <Icons.Save /> Save Settings
-//         </button>
-//         {saved && (
-//           <span style={{ color: "#10B981", fontSize: 13, fontWeight: 600 }}>
-//             <Icons.Check /> Saved successfully!
-//           </span>
-//         )}
-//       </div>
-//     </div>
-//   );
-// }
-
-
-
-
-
-
-
-
-
-
-
 "use client";
 
 import { useState } from "react";
@@ -160,7 +7,6 @@ type SettingsState = {
   siteName: string;
   tagline: string;
   email: string;
-  // phone: string;
   address: string;
   growth: string;
   brands: string;
@@ -169,22 +15,33 @@ type SettingsState = {
 
 export default function Settings() {
   const [settings, setSettings] = useState<SettingsState>({
-    siteName: "MarkTale (Marktale World Private Limited)",
-    tagline: "Turning Your Tale into Sales",
-    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "teammarktaleworld@gmail.com",
-    // phone: "",
-    address: "Plot no. 141, Sec. 14, Dwarka, New Delhi – 110078",
-    growth: "10x",
+    siteName: "Aerovince",
+    tagline: "Elevating Brands. Accelerating Growth.",
+    email:
+      process.env.NEXT_PUBLIC_CONTACT_EMAIL ??
+      "hello@aerovince.com",
+    address:
+      "Plot No. 141, Sector 14, Dwarka, New Delhi – 110078",
+    growth: "10X",
     brands: "150+",
     success: "98%",
   });
+
   const [saved, setSaved] = useState(false);
 
-  const updateSetting = (key: keyof SettingsState, value: string) => {
-    setSettings({ ...settings, [key]: value });
+  const updateSetting = (
+    key: keyof SettingsState,
+    value: string
+  ) => {
+    setSettings((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
   };
 
   const saveSettings = () => {
+    // TODO:
+    // Save these settings to your backend/database.
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
   };
@@ -192,78 +49,146 @@ export default function Settings() {
   return (
     <div>
       <div style={{ marginBottom: 24 }}>
-        <div style={S.sectionTitle}>Site Settings</div>
+        <div style={S.sectionTitle}>Website Settings</div>
         <div style={S.sectionSub}>
-          Update your website info and contact details.
+          Manage your Aerovince website branding, contact details,
+          and homepage statistics.
         </div>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: 20,
+        }}
+      >
+        {/* Brand Information */}
         <div style={S.card}>
           <div style={S.cardHeader}>
-            <span style={S.cardTitle}>Brand Info</span>
+            <span style={S.cardTitle}>Brand Information</span>
           </div>
+
           <div style={{ padding: "20px" }}>
             {(["siteName", "tagline"] as const).map((key) => (
               <div key={key} style={S.formGroup}>
-                <label style={S.label}>{key === "siteName" ? "Site Name" : "Tagline"}</label>
+                <label style={S.label}>
+                  {key === "siteName"
+                    ? "Website Name"
+                    : "Tagline"}
+                </label>
+
                 <input
                   style={S.input}
                   value={settings[key]}
-                  onChange={(e) => updateSetting(key, e.target.value)}
+                  onChange={(e) =>
+                    updateSetting(key, e.target.value)
+                  }
                 />
               </div>
             ))}
           </div>
         </div>
 
+        {/* Contact */}
         <div style={S.card}>
           <div style={S.cardHeader}>
-            <span style={S.cardTitle}>Contact Details</span>
+            <span style={S.cardTitle}>Contact Information</span>
           </div>
+
           <div style={{ padding: "20px" }}>
-            {(["email"] as const).map((key) => (
-              <div key={key} style={S.formGroup}>
-                <label style={S.label}>{key === "email" ? "Email" : "Phone"}</label>
-                <input
-                  style={S.input}
-                  value={settings[key]}
-                  onChange={(e) => updateSetting(key, e.target.value)}
-                />
-              </div>
-            ))}
+            <div style={S.formGroup}>
+              <label style={S.label}>Email Address</label>
+
+              <input
+                style={S.input}
+                value={settings.email}
+                onChange={(e) =>
+                  updateSetting("email", e.target.value)
+                }
+              />
+            </div>
           </div>
         </div>
 
-        <div style={{ ...S.card, gridColumn: "1 / -1" }}>
+        {/* Address */}
+        <div
+          style={{
+            ...S.card,
+            gridColumn: "1 / -1",
+          }}
+        >
           <div style={S.cardHeader}>
-            <span style={S.cardTitle}>Office Address</span>
+            <span style={S.cardTitle}>
+              Office Address
+            </span>
           </div>
+
           <div style={{ padding: "20px" }}>
             <textarea
-              style={{ ...S.input, minHeight: 72 }}
+              style={{
+                ...S.input,
+                minHeight: 80,
+              }}
               value={settings.address}
-              onChange={(e) => updateSetting("address", e.target.value)}
+              onChange={(e) =>
+                updateSetting(
+                  "address",
+                  e.target.value
+                )
+              }
             />
           </div>
         </div>
 
-        <div style={{ ...S.card, gridColumn: "1 / -1" }}>
+        {/* Hero Stats */}
+        <div
+          style={{
+            ...S.card,
+            gridColumn: "1 / -1",
+          }}
+        >
           <div style={S.cardHeader}>
-            <span style={S.cardTitle}>Hero Stats</span>
+            <span style={S.cardTitle}>
+              Homepage Statistics
+            </span>
           </div>
-          <div style={{ padding: "20px", display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14 }}>
-            {([
-              ["Growth (e.g. 10x)", "growth"],
-              ["Brands (e.g. 150+)", "brands"],
-              ["Success % (e.g. 98%)", "success"],
-            ] as [string, keyof SettingsState][]).map(([label, key]) => (
-              <div key={key} style={S.formGroup}>
-                <label style={S.label}>{label}</label>
+
+          <div
+            style={{
+              padding: "20px",
+              display: "grid",
+              gridTemplateColumns:
+                "repeat(3,1fr)",
+              gap: 16,
+            }}
+          >
+            {[
+              ["Growth (10X)", "growth"],
+              ["Brands Served", "brands"],
+              ["Client Success", "success"],
+            ].map(([label, key]) => (
+              <div
+                key={key}
+                style={S.formGroup}
+              >
+                <label style={S.label}>
+                  {label}
+                </label>
+
                 <input
                   style={S.input}
-                  value={settings[key]}
-                  onChange={(e) => updateSetting(key, e.target.value)}
+                  value={
+                    settings[
+                      key as keyof SettingsState
+                    ]
+                  }
+                  onChange={(e) =>
+                    updateSetting(
+                      key as keyof SettingsState,
+                      e.target.value
+                    )
+                  }
                 />
               </div>
             ))}
@@ -271,13 +196,32 @@ export default function Settings() {
         </div>
       </div>
 
-      <div style={{ marginTop: 20, display: "flex", alignItems: "center", gap: 14 }}>
-        <button style={S.btn("primary")} onClick={saveSettings}>
-          <Icons.Save /> Save Settings
+      <div
+        style={{
+          marginTop: 24,
+          display: "flex",
+          alignItems: "center",
+          gap: 14,
+        }}
+      >
+        <button
+          style={S.btn("primary")}
+          onClick={saveSettings}
+        >
+          <Icons.Save />
+          &nbsp;Save Settings
         </button>
+
         {saved && (
-          <span style={{ color: "#10B981", fontSize: 13, fontWeight: 600 }}>
-            <Icons.Check /> Saved successfully!
+          <span
+            style={{
+              color: "#10B981",
+              fontSize: 13,
+              fontWeight: 600,
+            }}
+          >
+            <Icons.Check />
+            &nbsp;Settings saved successfully!
           </span>
         )}
       </div>

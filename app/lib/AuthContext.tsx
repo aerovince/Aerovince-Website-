@@ -4,7 +4,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 
-const ADMIN_EMAILS = ['admin@marktale.in']; // ← add your admin emails
+const ADMIN_EMAILS = ['aerovincetechnologies@gmail.com']; // ← add your admin emails
 
 interface AuthContextValue {
   user: User | null;

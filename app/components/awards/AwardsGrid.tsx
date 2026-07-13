@@ -25,7 +25,7 @@ const achievements = [
   {
     icon: Star,
     title: "Founder & Scale",
-    desc: "Successfully founded and scaled MarkTale, launching multiple brands including Delhi059 by Chef Kanishk, TripTale, Dee Cee Pearls, and Down Ridge.",
+    desc: "Successfully founded and scaled Aerovince, launching multiple brands including Delhi059 by Chef Kanishk, TripTale, Dee Cee Pearls, and Down Ridge.",
     year: "2024",
     impact: "4 Brands",
     color: "blue",
@@ -371,7 +371,7 @@ export default function AwardsGrid() {
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-blue-600 font-semibold rounded-lg hover:shadow-xl transition-all text-sm"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-blue-600 font--semibold rounded-lg hover:shadow-xl transition-all text-sm"
                 >
                   Start Your Journey
                   <ArrowRight className="w-3.5 h-3.5" />

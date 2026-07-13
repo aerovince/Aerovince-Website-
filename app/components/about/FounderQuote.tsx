@@ -45,7 +45,7 @@ export default function FounderQuote() {
                             The future of marketing isn&apos;t about shouting louder. It&apos;s about whispering the right message to the right person at the exact right time. <span className="text-kestone-red">AI makes that possible at scale.</span>
                         </blockquote>
                         <p className="text-lg text-neutral-500 font-body leading-relaxed">
-                            With 13+ years transforming brands across real estate, SaaS, and automotive, I founded MarkTale to bridge the gap between creative ambition and data reality. We are the partners I always wished I had.
+                            With 13+ years transforming brands across real estate, SaaS, and automotive, I founded Aerovince to bridge the gap between creative ambition and data reality. We are the partners I always wished I had.
                         </p>
                     </motion.div>
                 </div>

@@ -8,7 +8,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { X, ArrowRight, TrendingUp } from "lucide-react";
 import Link from "next/link";
 
-const LS_KEY = "marktale_growth_popup_seen";
+const LS_KEY = "aerovince_growth_popup_seen";
 
 export default function GrowthPopup() {
   const [show, setShow] = useState(false);
@@ -73,7 +73,7 @@ export default function GrowthPopup() {
 
             {/* Copy */}
             <p className="text-[11px] font-bold uppercase tracking-widest text-blue-600 mb-1">
-              Marktale World
+              Aerovince
             </p>
             <h3 className="text-xl font-black text-gray-900 mb-2 leading-snug">
               Want to grow your brand?

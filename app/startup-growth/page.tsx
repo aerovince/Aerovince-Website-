@@ -1,4 +1,3 @@
-
 "use client";
 
 // app/startup-growth-lp/page.tsx
@@ -26,20 +25,20 @@ import {
 // ─── ENV ──────────────────────────────────────────────────────────────────────
 // ─── ENV ─────────────────────────────────────────────────────
 const CONTACT_EMAIL =
-  process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "marktaleworld@gmail.com";
+  process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "aerovincetechnologies@gmail.com";
 
 const CONTACT_PHONE =
-  process.env.NEXT_PUBLIC_CONTACT_PHONE ?? "+91-8587870707";
+  process.env.NEXT_PUBLIC_CONTACT_PHONE ?? "+91-7489951514";
 
 const CONTACT_PHONE_RAW =
-  process.env.NEXT_PUBLIC_CONTACT_PHONE_RAW ?? "918587870707";
+  process.env.NEXT_PUBLIC_CONTACT_PHONE_RAW ?? "917489951514";
 
 const WHATSAPP_NUMBER =
-  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "918587870707";
+  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "917489951514";
 
 const WHATSAPP_MESSAGE =
   process.env.NEXT_PUBLIC_WHATSAPP_MESSAGE ??
-  "Hi MarkTale, I want to know more about startup growth services.";
+  "Hi Aerovince, I want to know more about startup growth services.";
 
 // ─── Animated Counter ─────────────────────────────────────────────────────────
 function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
@@ -78,7 +77,7 @@ const PROBLEMS = [
 
 const SERVICES = [
   { icon: Palette, title: "Brand Identity", desc: "Build a memorable brand that customers trust — logo, colors, voice, and positioning that sets you apart.", tag: "Foundation", accent: "blue" },
-  { icon: Code, title: "Website Development", desc: "Fast, scalable, conversion-focused websites. Built on Next.js — the same stack powering MarkTale itself.", tag: "Essential", accent: "white" },
+  { icon: Code, title: "Website Development", desc: "Fast, scalable, conversion-focused websites. Built on Next.js — the same stack powering Aerovince itself.", tag: "Essential", accent: "white" },
   { icon: Share2, title: "Social Media Growth", desc: "Build awareness, community, and loyalty across Instagram, LinkedIn, YouTube, and beyond.", tag: "Visibility", accent: "blue" },
   { icon: Search, title: "SEO", desc: "Rank higher on Google, generate consistent organic traffic, and reduce your dependence on paid ads.", tag: "Long-term", accent: "white" },
   { icon: BarChart2, title: "Performance Marketing", desc: "ROI-focused campaigns on Meta and Google. Every rupee tracked, every campaign optimised for returns.", tag: "High Impact", accent: "blue" },
@@ -99,6 +98,12 @@ const BRANDS = [
   { id: "biryani-bar", name: "Biryani Bar", image: "/Feature_logos/biryanibar.jpg", growth: "450%" },
 ];
 
+// NOTE: the quotes below that reference "MarkTale" by name are real
+// testimonials from real clients (Delhi059, BG Foods) given under the
+// agency's previous name. Left as-is intentionally — rewriting a client's
+// actual words to reference a different company name would misattribute
+// what they said. Update these once you have fresh Aerovince-branded quotes
+// from these clients, or swap in different testimonials.
 const CASE_STUDIES = [
   {
     id: "delhi059", name: "Delhi059", industry: "Restaurant · Canada", image: "/delhi059-logo.jpg",
@@ -136,11 +141,11 @@ const TIMELINE = [
 ];
 
 const COMPARISONS = [
-  { agency: "Sells services, not outcomes", marktale: "Builds complete growth systems" },
-  { agency: "Focuses on deliverables only", marktale: "Focuses on real business outcomes" },
-  { agency: "Works project to project", marktale: "Acts as your long-term growth partner" },
-  { agency: "One-size-fits-all packages", marktale: "Custom strategy for each startup" },
-  { agency: "Reports vanity metrics", marktale: "Reports revenue impact and ROI" },
+  { agency: "Sells services, not outcomes", us: "Builds complete growth systems" },
+  { agency: "Focuses on deliverables only", us: "Focuses on real business outcomes" },
+  { agency: "Works project to project", us: "Acts as your long-term growth partner" },
+  { agency: "One-size-fits-all packages", us: "Custom strategy for each startup" },
+  { agency: "Reports vanity metrics", us: "Reports revenue impact and ROI" },
 ];
 
 const FAQS = [
@@ -151,6 +156,8 @@ const FAQS = [
   { q: "How do we get started?", a: "Book a free 30-minute strategy call. We'll audit your current digital presence, identify your biggest growth levers, and give you a clear next step — whether you work with us or not." },
 ];
 
+// NOTE: the first and third testimonials below reference "MarkTale" by name
+// — same real-client-quote situation as the case studies above. Left as-is.
 const TESTIMONIALS = [
   { name: "Owner, Delhi059 Canada", role: "Restaurant · Canada", initials: "D0", achievement: "650+ Reviews", quote: "MarkTale didn't just market our restaurant — they made us the go-to place for the entire Indian community in our city. 650+ reviews with zero ad spend." },
   { name: "Founder, MentorLeap", role: "EdTech · India", initials: "ML", achievement: "400% Growth", quote: "They rebuilt our entire brand narrative and built an SEO engine that reduced our paid CAC by 60%. Our growth went from stagnant to 400% YoY — incredible results." },
@@ -253,8 +260,8 @@ export default function StartupGrowthLandingPage() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
             <div className="relative w-50 h-8">
-              {/* <Image src="/images/logo.png" alt="MarkTale" fill className="object-contain" /> */}
-              <Image src="/images/image.png" alt="MarkTale" fill className="object-contain" />
+              {/* <Image src="/images/logo.png" alt="Aerovince" fill className="object-contain" /> */}
+              <Image src="/images/image.png" alt="Aerovince" fill className="object-contain" />
             </div>
             <span className="text-white font-bold font-heading text-lg tracking-tight"></span>
           </Link>
@@ -272,7 +279,7 @@ export default function StartupGrowthLandingPage() {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/5 text-white/80 hover:bg-white hover:text-black text-xs font-semibold transition-all duration-200"
             >
               <Home className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Back to MarkTale</span>
+              <span className="hidden sm:inline">Back to Aerovince</span>
               <span className="sm:hidden">Home</span>
             </Link>
           </div>
@@ -331,7 +338,7 @@ export default function StartupGrowthLandingPage() {
 
                             <div className="space-y-3">
                                 <a
-                                    href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi%20MarkTale%2C%20I%20want%20the%20free%20strategy%20call`}
+                                    href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi%20Aerovince%2C%20I%20want%20the%20free%20strategy%20call`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     onClick={() => setShowExitPopup(false)}
@@ -494,7 +501,7 @@ export default function StartupGrowthLandingPage() {
 
           <motion.div {...fadeUp} className="mt-16 relative rounded-3xl overflow-hidden border-2 border-blue-100 bg-gradient-to-r from-blue-50 via-white to-cyan-50 p-10 text-center">
             <Sparkles className="w-8 h-8 text-blue-600 mx-auto mb-4" />
-            <h3 className="text-2xl md:text-3xl font-bold font-heading text-black mb-3">MarkTale is the answer to all of this.</h3>
+            <h3 className="text-2xl md:text-3xl font-bold font-heading text-black mb-3">Aerovince is the answer to all of this.</h3>
             <p className="text-gray-500 text-base max-w-xl mx-auto">One growth partner. Every function covered. Built specifically for startups who want to move fast and grow sustainably.</p>
             <motion.a href="#contact" whileHover={{ scale: 1.04 }}
               className="inline-flex items-center gap-2 mt-6 px-6 py-3 bg-blue-600 text-white font-bold rounded-full text-sm hover:bg-blue-700 transition-all shadow-md"
@@ -744,7 +751,7 @@ export default function StartupGrowthLandingPage() {
         <div className="container mx-auto px-6 max-w-5xl relative z-10">
           <motion.div {...fadeUp} className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 mb-6">
-              <span className="text-white/60 text-xs font-bold uppercase tracking-widest">Why MarkTale</span>
+              <span className="text-white/60 text-xs font-bold uppercase tracking-widest">Why Aerovince</span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold font-heading text-white">
               More Than
@@ -754,7 +761,7 @@ export default function StartupGrowthLandingPage() {
 
           <div className="grid grid-cols-2 gap-4 mb-4 px-4">
             <div className="text-center text-xs uppercase tracking-[0.2em] text-white/20 font-semibold pb-3 border-b border-white/10">Most Agencies</div>
-            <div className="text-center text-xs uppercase tracking-[0.2em] text-blue-400 font-semibold pb-3 border-b border-blue-500/40">MarkTale</div>
+            <div className="text-center text-xs uppercase tracking-[0.2em] text-blue-400 font-semibold pb-3 border-b border-blue-500/40">Aerovince</div>
           </div>
           <div className="space-y-3">
             {COMPARISONS.map((c, i) => (
@@ -768,7 +775,7 @@ export default function StartupGrowthLandingPage() {
                 </div>
                 <div className="p-4 rounded-2xl bg-blue-600 border border-blue-500 flex items-center gap-3">
                   <CheckCircle className="w-4 h-4 text-white flex-shrink-0" />
-                  <span className="text-white text-sm font-medium">{c.marktale}</span>
+                  <span className="text-white text-sm font-medium">{c.us}</span>
                 </div>
               </motion.div>
             ))}
@@ -872,14 +879,14 @@ export default function StartupGrowthLandingPage() {
                 <span className="block text-black mt-2">Than Just Marketing</span>
               </h2>
               <p className="text-gray-500 text-base leading-relaxed mb-10 max-w-md">
-                Whether you&apos;re validating an idea, launching a product, or scaling an existing business — MarkTale helps you build a brand customers trust and remember.
+                Whether you&apos;re validating an idea, launching a product, or scaling an existing business — Aerovince helps you build a brand customers trust and remember.
               </p>
 
               <div className="space-y-4 mb-10">
                 {[
                   { icon: Phone, label: "Call / WhatsApp", value: CONTACT_PHONE, href: `tel:${CONTACT_PHONE_RAW}` },
                   { icon: Mail, label: "Email", value: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}` },
-                  { icon: Globe, label: "Website", value: "marktaleworld.com", href: "https://marktaleworld.com" },
+                  { icon: Globe, label: "Website", value: "aerovince.com", href: "https://aerovince.com" }, // TODO: confirm real domain
                 ].map((c, i) => {
                   const Icon = c.icon;
                   return (
@@ -999,7 +1006,7 @@ export default function StartupGrowthLandingPage() {
               <span className="block text-white/80 mt-2">Than Just Marketing</span>
             </h2>
             <p className="text-white/40 text-lg max-w-xl mx-auto mb-12 leading-relaxed">
-              Whether you&apos;re validating an idea, launching a product, or scaling — MarkTale helps you build a brand people trust and remember.
+              Whether you&apos;re validating an idea, launching a product, or scaling — Aerovince helps you build a brand people trust and remember.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.a href="#contact" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
@@ -1019,7 +1026,7 @@ export default function StartupGrowthLandingPage() {
             {/* Back to main site */}
             <div className="mt-12 pt-8 border-t border-white/10">
               <Link href="/" className="inline-flex items-center gap-2 text-white/30 hover:text-white/60 text-sm transition-colors">
-                <Home className="w-4 h-4" /> Back to MarkTale World
+                <Home className="w-4 h-4" /> Back to Aerovince
               </Link>
             </div>
           </motion.div>

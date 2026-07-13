@@ -63,7 +63,7 @@ export default function DashboardView() {
           Good morning, Admin 👋
         </div>
         <div style={{ fontSize: 12, color: c.faint }}>
-          Here's what's happening with Marktale today.
+          Here's what's happening with Aerovince today.
         </div>
       </div>
 
