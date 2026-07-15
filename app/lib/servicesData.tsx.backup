@@ -109,7 +109,7 @@ export const services: ServiceData[] = [
                     image: '/images/services/web_development_1768164760639.png',
                         tagline: 'Your Partner For High-Performing Web Development',
                             heroDescription: 'We deliver web development services engineered for performance, scalability, and long-term business growth. Our approach blends technical excellence, conversion-focused design, and strategic architecture to create digital experiences that attract, engage, and convert.',
-                                metaDescription: 'Custom, high-performing web development services by MarkTale. We build scalable, SEO-ready websites designed to drive growth and conversions.',
+                                metaDescription: 'Custom, high-performing web development services by Aerovince. We build scalable, SEO-ready websites designed to drive growth and conversions.',
                                     desc: "Building robust, scalable, and high-performance websites that serve as the foundation of your digital presence.",
                                         features: ["Responsive Design", "Custom Solutions", "Seamless Integration"],
                                             sections: [
@@ -171,7 +171,7 @@ export const services: ServiceData[] = [
                                                 {
                                                     type: 'list',
                                                     subtitle: 'Our conversion strategy includes:',
-                                                    content: 'This blueprint ensures your website functions as a reliable revenue and lead-generation asset. If you are a mid-sized or enterprise-level company looking for an effective and adaptable e-commerce solution, Magento and MarkTale’s expertise are the ideal combination for success.',
+                                                    content: 'This blueprint ensures your website functions as a reliable revenue and lead-generation asset. If you are a mid-sized or enterprise-level company looking for an effective and adaptable e-commerce solution, Magento and Aerovince’s expertise are the ideal combination for success.',
                                                     list: [
                                                         'Intuitive navigation and content hierarchy',
                                                         'Persuasive messaging aligned with user intent',

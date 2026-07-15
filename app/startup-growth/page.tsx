@@ -98,7 +98,7 @@ const BRANDS = [
   { id: "biryani-bar", name: "Biryani Bar", image: "/Feature_logos/biryanibar.jpg", growth: "450%" },
 ];
 
-// NOTE: the quotes below that reference "MarkTale" by name are real
+// NOTE: the quotes below that reference "Aerovince" by name are real
 // testimonials from real clients (Delhi059, BG Foods) given under the
 // agency's previous name. Left as-is intentionally — rewriting a client's
 // actual words to reference a different company name would misattribute
@@ -111,7 +111,7 @@ const CASE_STUDIES = [
     challenge: "New restaurant in a saturated Canadian market. Zero reviews, zero digital presence, zero ad budget.",
     work: ["Local SEO", "Google Business", "UGC Strategy", "Community Marketing", "Photography"],
     stats: [{ value: "650+", label: "Google Reviews" }, { value: "4.7★", label: "Avg Rating" }, { value: "#1", label: "Local Map Rank" }],
-    quote: "MarkTale didn't just market our restaurant — they made us the go-to place for the entire Indian community.", quoteAuthor: "Owner, Delhi059 Canada",
+    quote: "Aerovince didn't just market our restaurant — they made us the go-to place for the entire Indian community.", quoteAuthor: "Owner, Delhi059 Canada",
   },
   {
     id: "local-ride", name: "Local Ride", industry: "Transportation · Canada", image: "/Feature_logos/localride.jpg",
@@ -127,7 +127,7 @@ const CASE_STUDIES = [
     challenge: "From home-kitchen idea to multi-country operation with no digital infrastructure, no supply chain, no audience.",
     work: ["Brand Identity", "Shopify Store", "Amazon Listings", "Influencer Marketing", "Email Growth"],
     stats: [{ value: "50k+", label: "Orders Fulfilled" }, { value: "40+", label: "Retail Stores" }, { value: "1000%", label: "Revenue Growth" }],
-    quote: "From zero to 50,000 orders. MarkTale built everything — brand, store, listings, marketing. Genuinely a full-stack growth team.", quoteAuthor: "CEO, BG Foods",
+    quote: "From zero to 50,000 orders. Aerovince built everything — brand, store, listings, marketing. Genuinely a full-stack growth team.", quoteAuthor: "CEO, BG Foods",
   },
 ];
 
@@ -156,12 +156,12 @@ const FAQS = [
   { q: "How do we get started?", a: "Book a free 30-minute strategy call. We'll audit your current digital presence, identify your biggest growth levers, and give you a clear next step — whether you work with us or not." },
 ];
 
-// NOTE: the first and third testimonials below reference "MarkTale" by name
+// NOTE: the first and third testimonials below reference "Aerovince" by name
 // — same real-client-quote situation as the case studies above. Left as-is.
 const TESTIMONIALS = [
-  { name: "Owner, Delhi059 Canada", role: "Restaurant · Canada", initials: "D0", achievement: "650+ Reviews", quote: "MarkTale didn't just market our restaurant — they made us the go-to place for the entire Indian community in our city. 650+ reviews with zero ad spend." },
+  { name: "Owner, Delhi059 Canada", role: "Restaurant · Canada", initials: "D0", achievement: "650+ Reviews", quote: "Aerovince didn't just market our restaurant — they made us the go-to place for the entire Indian community in our city. 650+ reviews with zero ad spend." },
   { name: "Founder, MentorLeap", role: "EdTech · India", initials: "ML", achievement: "400% Growth", quote: "They rebuilt our entire brand narrative and built an SEO engine that reduced our paid CAC by 60%. Our growth went from stagnant to 400% YoY — incredible results." },
-  { name: "CEO, BG Foods", role: "E-commerce · Canada", initials: "BG", achievement: "50k+ Orders", quote: "From zero to 50,000 orders. MarkTale built everything — brand, store, listings, marketing. They are genuinely a full-stack growth team that delivers." },
+  { name: "CEO, BG Foods", role: "E-commerce · Canada", initials: "BG", achievement: "50k+ Orders", quote: "From zero to 50,000 orders. Aerovince built everything — brand, store, listings, marketing. They are genuinely a full-stack growth team that delivers." },
 ];
 
 // ─── Main Page ────────────────────────────────────────────────────────────────

@@ -1,8 +1,8 @@
-# Contributing to MarkTale
+# Contributing to Aerovince
 
 First off, thanks for taking the time to contribute! 🎉
 
-The following is a set of guidelines for contributing to MarkTale. These are mostly guidelines, not rules. Use your best judgment and feel free to propose changes to this document in a pull request.
+The following is a set of guidelines for contributing to Aerovince. These are mostly guidelines, not rules. Use your best judgment and feel free to propose changes to this document in a pull request.
 
 ## Code of Conduct
 
@@ -12,7 +12,7 @@ This project and everyone participating in it is governed by a Code of Conduct. 
 
 ### Reporting Bugs
 
-This section guides you through submitting a bug report for MarkTale. Following these guidelines helps maintainers and the community understand your report, reproduce the behavior, and find related reports.
+This section guides you through submitting a bug report for Aerovince. Following these guidelines helps maintainers and the community understand your report, reproduce the behavior, and find related reports.
 
 - **Use a clear and descriptive title** for the issue to identify the problem.
 - **Describe the exact steps which reproduce the problem** in as many details as possible.

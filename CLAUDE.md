@@ -30,7 +30,7 @@ npm test         # Vitest (test suite is minimal)
 - **Client components:** Most components use `'use client'` for Framer Motion animations and interactivity.
 - **Animations:** Framer Motion for entrance/scroll/hover animations. Custom CSS keyframes in `globals.css` for marquees, floats, and pulses.
 - **Fonts:** Montserrat (headings) and Roboto (body), loaded via `next/font/google` in `layout.tsx`.
-- **Images:** Next.js `<Image>` with remote patterns configured for marktaleworld.com, unsplash.com, and Instagram CDN.
+- **Images:** Next.js `<Image>` with remote patterns configured for Aerovinceworld.com, unsplash.com, and Instagram CDN.
 
 ### Adding content
 
